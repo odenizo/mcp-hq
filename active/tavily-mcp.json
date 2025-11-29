@@ -1,0 +1,59 @@
+{
+  "metadata": {
+    "server_id": "tavily",
+    "display_name": "Tavily MCP Server",
+    "namespace": "local",
+    "package": "tavily-mcp",
+    "version": "0.2.3",
+    "description": "MCP server for Tavily AI search engine",
+    "use_cases": [
+      "Perform web searches",
+      "Extract content from URLs",
+      "Crawl websites"
+    ],
+    "tools": [],
+    "resources": [],
+    "requirements": {
+      "authentication": "api_key",
+      "api_keys_needed": ["TAVILY_API_KEY"],
+      "external_dependencies": ["Tavily AI"],
+      "network_access": true,
+      "file_system_access": false,
+      "database_access": false
+    },
+    "performance": {
+      "response_time": "fast",
+      "resource_usage": "low",
+      "concurrent_requests": 10,
+      "rate_limits": "Tavily API rate limits apply"
+    },
+    "maturity": {
+      "stability": "stable",
+      "maintenance": "active",
+      "community": "medium",
+      "documentation": "good"
+    },
+    "planned_agent": {
+      "assigned": false
+    },
+    "priority_deployment": "local",
+    "tags": ["tavily", "search", "ai", "web-search"]
+  },
+  "deployment": {
+    "local": {
+      "available": true,
+      "command": "npx",
+      "args": [
+        "-y",
+        "tavily-mcp@0.2.3"
+      ],
+      "env": {
+        "TAVILY_API_KEY": "${TAVILY_API_KEY}"
+      },
+      "disabled": false,
+      "autoApprove": [
+        "*"
+      ]
+    }
+  }
+}

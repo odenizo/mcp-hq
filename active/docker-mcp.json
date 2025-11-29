@@ -1,0 +1,57 @@
+{
+  "metadata": {
+    "server_id": "docker",
+    "display_name": "Docker MCP Server",
+    "namespace": "local",
+    "package": "docker-mcp-server",
+    "version": "1.0.0",
+    "description": "MCP server for Docker operations",
+    "use_cases": [
+      "Manage Docker containers",
+      "Build and run Docker images",
+      "Manage Docker networks and volumes"
+    ],
+    "tools": [],
+    "resources": [],
+    "requirements": {
+      "authentication": "none",
+      "api_keys_needed": [],
+      "external_dependencies": ["Docker"],
+      "network_access": false,
+      "file_system_access": false,
+      "database_access": false
+    },
+    "performance": {
+      "response_time": "fast",
+      "resource_usage": "low",
+      "concurrent_requests": 10,
+      "rate_limits": ""
+    },
+    "maturity": {
+      "stability": "stable",
+      "maintenance": "active",
+      "community": "large",
+      "documentation": "good"
+    },
+    "planned_agent": {
+      "assigned": false
+    },
+    "priority_deployment": "local",
+    "tags": ["docker", "containers", "devops"]
+  },
+  "deployment": {
+    "local": {
+      "available": true,
+      "command": "npx",
+      "args": [
+        "-y",
+        "docker-mcp-server"
+      ],
+      "env": {},
+      "disabled": false,
+      "autoApprove": [
+        "*"
+      ]
+    }
+  }
+}

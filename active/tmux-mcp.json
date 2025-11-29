@@ -1,0 +1,57 @@
+{
+  "metadata": {
+    "server_id": "tmux",
+    "display_name": "Tmux MCP Server",
+    "namespace": "local",
+    "package": "tmux-mcp",
+    "version": "1.0.0",
+    "description": "MCP server for Tmux session management",
+    "use_cases": [
+      "Create and manage Tmux sessions, windows, and panes",
+      "Execute commands in Tmux panes",
+      "Capture pane content"
+    ],
+    "tools": [],
+    "resources": [],
+    "requirements": {
+      "authentication": "none",
+      "api_keys_needed": [],
+      "external_dependencies": ["Tmux"],
+      "network_access": false,
+      "file_system_access": false,
+      "database_access": false
+    },
+    "performance": {
+      "response_time": "fast",
+      "resource_usage": "low",
+      "concurrent_requests": 10,
+      "rate_limits": ""
+    },
+    "maturity": {
+      "stability": "stable",
+      "maintenance": "active",
+      "community": "large",
+      "documentation": "good"
+    },
+    "planned_agent": {
+      "assigned": false
+    },
+    "priority_deployment": "local",
+    "tags": ["tmux", "terminal", "session-management"]
+  },
+  "deployment": {
+    "local": {
+      "available": true,
+      "command": "npx",
+      "args": [
+        "-y",
+        "tmux-mcp"
+      ],
+      "env": {},
+      "disabled": false,
+      "autoApprove": [
+        "*"
+      ]
+    }
+  }
+}

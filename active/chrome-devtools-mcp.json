@@ -1,0 +1,57 @@
+{
+  "metadata": {
+    "server_id": "chrome-devtools",
+    "display_name": "Chrome DevTools MCP Server",
+    "namespace": "local",
+    "package": "chrome-devtools-mcp",
+    "version": "1.0.0",
+    "description": "MCP server for interacting with Chrome DevTools",
+    "use_cases": [
+      "Automate browser tasks",
+      "Inspect and debug web pages",
+      "Capture screenshots and PDFs"
+    ],
+    "tools": [],
+    "resources": [],
+    "requirements": {
+      "authentication": "none",
+      "api_keys_needed": [],
+      "external_dependencies": ["Chrome browser"],
+      "network_access": true,
+      "file_system_access": false,
+      "database_access": false
+    },
+    "performance": {
+      "response_time": "fast",
+      "resource_usage": "medium",
+      "concurrent_requests": 1,
+      "rate_limits": ""
+    },
+    "maturity": {
+      "stability": "stable",
+      "maintenance": "active",
+      "community": "medium",
+      "documentation": "good"
+    },
+    "planned_agent": {
+      "assigned": false
+    },
+    "priority_deployment": "local",
+    "tags": ["chrome", "devtools", "browser-automation"]
+  },
+  "deployment": {
+    "local": {
+      "available": true,
+      "command": "npx",
+      "args": [
+        "-y",
+        "chrome-devtools-mcp@latest"
+      ],
+      "env": {},
+      "disabled": false,
+      "autoApprove": [
+        "*"
+      ]
+    }
+  }
+}

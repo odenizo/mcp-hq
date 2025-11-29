@@ -1,0 +1,393 @@
+{
+  "metadata": {
+    "server_id": "supabase-community-supabase-mcp",
+    "display_name": "Supabase MCP Server",
+    "namespace": "supabase-community",
+    "package": "supabase-mcp",
+    "version": "1.0.0",
+    "description": "Comprehensive Supabase database operations, branch management, and development workflow automation",
+    "use_cases": [
+      "Database schema management and migrations",
+      "Development branch creation and management",
+      "SQL query execution and data operations",
+      "Edge Function deployment and management",
+      "Real-time monitoring and logging",
+      "TypeScript type generation and API configuration"
+    ],
+    "tools": [
+      {
+        "name": "create_branch",
+        "description": "Create development branch with fresh database",
+        "parameters": ["confirm_cost_id", "name?"],
+        "use_case": "Development environment setup and testing"
+      },
+      {
+        "name": "list_branches",
+        "description": "List all development branches with status",
+        "parameters": [],
+        "use_case": "Branch management and status monitoring"
+      },
+      {
+        "name": "merge_branch",
+        "description": "Merge branch migrations to production",
+        "parameters": ["branch_id"],
+        "use_case": "Promoting development changes to production"
+      },
+      {
+        "name": "execute_sql",
+        "description": "Execute raw SQL queries in database",
+        "parameters": ["query"],
+        "use_case": "Data operations and database queries"
+      },
+      {
+        "name": "apply_migration",
+        "description": "Apply DDL migration to database",
+        "parameters": ["name", "query"],
+        "use_case": "Schema changes and database evolution"
+      },
+      {
+        "name": "list_tables",
+        "description": "List tables in specified schemas",
+        "parameters": ["schemas?"],
+        "use_case": "Database schema exploration"
+      },
+      {
+        "name": "deploy_edge_function",
+        "description": "Deploy Edge Function to Supabase",
+        "parameters": ["name", "files", "entrypoint_path?", "import_map_path?"],
+        "use_case": "Serverless function deployment"
+      },
+      {
+        "name": "get_logs",
+        "description": "Get service logs for debugging",
+        "parameters": ["service"],
+        "use_case": "Debugging and monitoring applications"
+      },
+      {
+        "name": "get_advisors",
+        "description": "Get security and performance advisories",
+        "parameters": ["type"],
+        "use_case": "Security auditing and performance optimization"
+      },
+      {
+        "name": "generate_typescript_types",
+        "description": "Generate TypeScript types for database schema",
+        "parameters": [],
+        "use_case": "Type-safe database interactions"
+      }
+    ],
+    "resources": [],
+    "requirements": {
+      "authentication": "api_key",
+      "api_keys_needed": ["SUPABASE_ACCESS_TOKEN", "SUPABASE_PROJECT_REF"],
+      "external_dependencies": ["Supabase Platform"],
+      "network_access": true,
+      "file_system_access": false,
+      "database_access": true
+    },
+    "performance": {
+      "response_time": "fast",
+      "resource_usage": "medium",
+      "concurrent_requests": 5,
+      "rate_limits": "Supabase API rate limits apply"
+    },
+    "maturity": {
+      "stability": "stable",
+      "maintenance": "active",
+      "community": "large",
+      "documentation": "excellent"
+    },
+    "planned_agent": {
+      "assigned": true,
+      "agent_name": "Database Operations Manager",
+      "agent_role": "Automated database lifecycle management and development workflow orchestration",
+      "automation_level": "semi-automated"
+    },
+    "priority_deployment": "smithery",
+    "tags": ["database", "postgresql", "migrations", "edge-functions", "backend", "supabase"]
+  },
+  "deployment": {
+    "smithery": {
+      "available": true,
+      "profile": "junior-roadrunner-9CJKFU",
+      "url": "https://server.smithery.ai/@supabase-community/supabase-mcp/mcp",
+      "install_command": "claude mcp add @supabase-community/supabase-mcp",
+      "direct_url": "https://server.smithery.ai/@supabase-community/supabase-mcp/mcp?api_key=82ef78f4-b4d4-413d-b0b8-704c14327b1a&profile=junior-roadrunner-9CJKFU",
+      "requirements": {
+        "api_key": true,
+        "profile": true,
+        "additional_config": true
+      },
+      "instructions": {
+        "setup": [
+          "Obtain Supabase access token from Supabase dashboard",
+          "Get project reference ID from Supabase project settings",
+          "Set environment variables: SUPABASE_ACCESS_TOKEN and SUPABASE_PROJECT_REF",
+          "Add server via Claude Code CLI: claude mcp add @supabase-community/supabase-mcp",
+          "Verify connection and test basic operations"
+        ],
+        "configuration": {
+          "environment_variables": {
+            "SUPABASE_ACCESS_TOKEN": "Personal access token from Supabase dashboard",
+            "SUPABASE_PROJECT_REF": "Project reference ID from Supabase project settings",
+            "SMITHERY_API_KEY": "Required for Smithery server access",
+            "SMITHERY_PROFILE": "Required for profile-based server access"
+          },
+          "config_files": []
+        },
+        "verification": [
+          "claude mcp list | grep supabase-community-supabase-mcp",
+          "Test connection with list_tables command",
+          "Verify branch operations with list_branches"
+        ]
+      },
+      "installation_script": "#!/bin/bash\\nset -e\\necho 'Installing Supabase MCP via Smithery...'\\nif [ -z \"$SMITHERY_API_KEY\" ]; then\\n  echo 'Error: SMITHERY_API_KEY not set'\\n  exit 1\\nfi\\nif [ -z \"$SMITHERY_PROFILE\" ]; then\\n  echo 'Error: SMITHERY_PROFILE not set'\\n  exit 1\\nfi\\nif [ -z \"$SUPABASE_ACCESS_TOKEN\" ]; then\\n  echo 'Error: SUPABASE_ACCESS_TOKEN not set'\\n  exit 1\\nfi\\nif [ -z \"$SUPABASE_PROJECT_REF\" ]; then\\n  echo 'Error: SUPABASE_PROJECT_REF not set'\\n  exit 1\\nfi\\nclaude mcp add @supabase-community/supabase-mcp\\necho 'Supabase MCP installation complete'"
+    },
+    "local": {
+      "available": true,
+      "requirements": {
+        "node_version": ">=18.0.0",
+        "npm": true,
+        "python": false,
+        "docker": false,
+        "system_dependencies": ["git"]
+      },
+      "instructions": {
+        "setup": [
+          "Clone repository: git clone https://github.com/supabase-community/supabase-mcp",
+          "Install dependencies: npm install",
+          "Build project: npm run build",
+          "Configure environment variables",
+          "Add to Claude configuration"
+        ],
+        "configuration": {
+          "environment_variables": {
+            "SUPABASE_ACCESS_TOKEN": "Personal access token from Supabase dashboard",
+            "SUPABASE_PROJECT_REF": "Project reference ID from Supabase project settings"
+          },
+          "claude_config": {
+            "mcpServers": {
+              "supabase-mcp": {
+                "command": "node",
+                "args": ["/path/to/supabase-mcp/dist/index.js"],
+                "env": {
+                  "SUPABASE_ACCESS_TOKEN": "your_token",
+                  "SUPABASE_PROJECT_REF": "your_project_ref"
+                }
+              }
+            }
+          }
+        },
+        "verification": [
+          "npm test",
+          "node dist/index.js --version",
+          "Test basic database connection"
+        ]
+      },
+      "installation_script": "#!/bin/bash\\nset -e\\necho 'Installing Supabase MCP locally...'\\ngit clone https://github.com/supabase-community/supabase-mcp.git\\ncd supabase-mcp\\nnpm install\\nnpm run build\\necho 'Local installation complete - configure environment variables'"
+    },
+    "docker": {
+      "available": false,
+      "requirements": {},
+      "instructions": {
+        "setup": ["Docker deployment not yet available for this server"],
+        "configuration": {},
+        "verification": []
+      },
+      "installation_script": "#!/bin/bash\\necho 'Docker installation not yet available for Supabase MCP'"
+    },
+    "npm": {
+      "available": false,
+      "requirements": {},
+      "instructions": {
+        "setup": ["NPM package not yet available for this server"],
+        "configuration": {},
+        "verification": []
+      },
+      "installation_script": "#!/bin/bash\\necho 'NPM installation not yet available for Supabase MCP'"
+    }
+  },
+  "automation": {
+    "global_instructions": {
+      "enabled": true,
+      "instructions": [
+        "ALWAYS check Supabase advisors after database schema changes for security and performance issues",
+        "Use development branches for all database schema modifications before production",
+        "Automatically generate TypeScript types after schema changes",
+        "Store credentials in Supabase credentials table for centralized management",
+        "Use execute_sql for data queries and apply_migration for schema changes"
+      ],
+      "triggers": [
+        "database: Automatically connect to Supabase operations",
+        "migration: Use apply_migration for schema changes",
+        "branch: Create development branches for testing",
+        "credentials: Store and retrieve from Supabase credentials table",
+        "edge function: Deploy serverless functions to Supabase"
+      ],
+      "workflows": [
+        {
+          "name": "database_development_cycle",
+          "description": "Complete database development and deployment workflow",
+          "trigger": "Database schema changes needed",
+          "steps": [
+            "Step 1: Create development branch for testing",
+            "Step 2: Apply migrations to development branch",
+            "Step 3: Test changes and run advisors",
+            "Step 4: Generate TypeScript types",
+            "Step 5: Merge to production after verification"
+          ]
+        },
+        {
+          "name": "credentials_management",
+          "description": "Centralized credential storage and retrieval",
+          "trigger": "Need to store or retrieve service credentials",
+          "steps": [
+            "Step 1: Query credentials table for existing entries",
+            "Step 2: Store new credentials with proper metadata",
+            "Step 3: Update credential rotation schedules",
+            "Step 4: Audit credential usage and access"
+          ]
+        }
+      ]
+    },
+    "agent_instructions": {
+      "enabled": true,
+      "agent_type": "specialized",
+      "agent_config": {
+        "persona": "Database Operations Manager - Expert in Supabase platform, PostgreSQL, and database lifecycle management",
+        "capabilities": [
+          "Database schema design and migration management",
+          "Development branch orchestration and testing",
+          "Edge Function development and deployment",
+          "Database performance monitoring and optimization",
+          "Security auditing and compliance checking"
+        ],
+        "automation_rules": [
+          "Rule 1: Always create development branches for schema changes",
+          "Rule 2: Run security advisors after any database modifications",
+          "Rule 3: Generate TypeScript types automatically after schema updates",
+          "Rule 4: Store all service credentials in centralized credentials table",
+          "Rule 5: Monitor logs and performance metrics continuously"
+        ],
+        "integration_points": [
+          "Atlas MCP: Create database tasks and track migration progress",
+          "Memento MCP: Store database schema knowledge and change history",
+          "GitIngest MCP: Analyze database-related repository changes"
+        ]
+      }
+    },
+    "hooks": {
+      "session_start": {
+        "enabled": true,
+        "script": "mcp-servers/scripts/supabase_session_start.sh",
+        "description": "Check database health and branch status at session start"
+      },
+      "session_end": {
+        "enabled": true,
+        "script": "mcp-servers/scripts/supabase_session_end.sh",
+        "description": "Run advisors and backup critical data at session end"
+      },
+      "tool_usage": {
+        "enabled": true,
+        "pre_execution": "mcp-servers/scripts/supabase_pre_hook.sh",
+        "post_execution": "mcp-servers/scripts/supabase_post_hook.sh",
+        "description": "Validation before operations and logging/monitoring after"
+      }
+    }
+  },
+  "integration": {
+    "mcp_servers": [
+      {
+        "server": "memento-mcp",
+        "relationship": "enhances",
+        "description": "Stores database schema knowledge and migration history"
+      },
+      {
+        "server": "atlas-mcp",
+        "relationship": "enhances",
+        "description": "Manages database development projects and tasks"
+      },
+      {
+        "server": "gitingest-mcp",
+        "relationship": "enhances",
+        "description": "Analyzes database-related code changes in repositories"
+      }
+    ],
+    "external_systems": [
+      {
+        "system": "Supabase Platform",
+        "type": "database",
+        "integration": "direct",
+        "description": "Direct integration with Supabase PostgreSQL database and platform services"
+      },
+      {
+        "system": "PostgreSQL",
+        "type": "database",
+        "integration": "direct",
+        "description": "Direct SQL execution and schema management"
+      }
+    ],
+    "data_flow": {
+      "inputs": ["SQL queries", "Migration scripts", "Edge Function code", "Configuration parameters"],
+      "outputs": ["Query results", "Migration status", "Function logs", "Performance metrics"],
+      "storage": ["Supabase database", "Edge Function runtime", "Platform logs and metrics"]
+    }
+  },
+  "security": {
+    "authentication": {
+      "methods": ["api_key"],
+      "credential_storage": "environment",
+      "rotation_required": true,
+      "encryption": "both"
+    },
+    "permissions": {
+      "required": ["database_admin", "edge_functions", "platform_access"],
+      "optional": ["analytics_read"],
+      "sensitive_data": true,
+      "data_retention": "Database operations logged for audit, credentials stored securely"
+    },
+    "network": {
+      "outbound_connections": ["*.supabase.co:443", "server.smithery.ai:443"],
+      "inbound_connections": [],
+      "proxy_support": true,
+      "firewall_requirements": []
+    }
+  },
+  "monitoring": {
+    "health_check": {
+      "endpoint": "/health",
+      "method": "GET",
+      "expected_response": "200",
+      "timeout": 5000
+    },
+    "metrics": {
+      "response_time": true,
+      "error_rate": true,
+      "request_count": true,
+      "custom_metrics": ["query_execution_time", "migration_success_rate", "branch_count", "advisor_alerts"]
+    },
+    "logging": {
+      "level": "info",
+      "format": "json",
+      "destination": "supabase_logs",
+      "retention": "30 days"
+    },
+    "alerting": {
+      "enabled": true,
+      "conditions": ["migration_failure", "security_advisor_alert", "performance_degradation"],
+      "notifications": ["platform_notifications"]
+    }
+  },
+  "maintenance": {
+    "update_frequency": "weekly",
+    "backup_required": true,
+    "backup_schedule": "daily",
+    "downtime_tolerance": "none",
+    "rollback_procedure": [
+      "Step 1: Create emergency branch from last known good state",
+      "Step 2: Restore database from backup if necessary",
+      "Step 3: Roll back migrations in reverse order",
+      "Step 4: Verify data integrity and application functionality"
+    ]
+  }
+}

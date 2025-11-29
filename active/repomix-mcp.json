@@ -1,0 +1,58 @@
+{
+  "metadata": {
+    "server_id": "repomix",
+    "display_name": "Repomix MCP Server",
+    "namespace": "local",
+    "package": "repomix",
+    "version": "1.0.0",
+    "description": "MCP server for packing codebases for AI analysis",
+    "use_cases": [
+      "Package local and remote repositories",
+      "Generate AI-friendly output formats",
+      "Analyze codebase metrics"
+    ],
+    "tools": [],
+    "resources": [],
+    "requirements": {
+      "authentication": "none",
+      "api_keys_needed": [],
+      "external_dependencies": ["Git"],
+      "network_access": true,
+      "file_system_access": true,
+      "database_access": false
+    },
+    "performance": {
+      "response_time": "medium",
+      "resource_usage": "high",
+      "concurrent_requests": 1,
+      "rate_limits": ""
+    },
+    "maturity": {
+      "stability": "stable",
+      "maintenance": "active",
+      "community": "medium",
+      "documentation": "good"
+    },
+    "planned_agent": {
+      "assigned": false
+    },
+    "priority_deployment": "local",
+    "tags": ["repomix", "code-analysis", "ai"]
+  },
+  "deployment": {
+    "local": {
+      "available": true,
+      "command": "npx",
+      "args": [
+        "-y",
+        "repomix",
+        "--mcp"
+      ],
+      "env": {},
+      "disabled": false,
+      "autoApprove": [
+        "*"
+      ]
+    }
+  }
+}

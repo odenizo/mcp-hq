@@ -1,0 +1,58 @@
+{
+  "metadata": {
+    "server_id": "e2b",
+    "display_name": "E2B MCP Server",
+    "namespace": "local",
+    "package": "e2b-mcp-server",
+    "version": "1.0.0",
+    "description": "MCP server for running code in a sandboxed environment",
+    "use_cases": [
+      "Execute code in a secure sandbox",
+      "Run untrusted code safely"
+    ],
+    "tools": [],
+    "resources": [],
+    "requirements": {
+      "authentication": "api_key",
+      "api_keys_needed": ["E2B_API_KEY"],
+      "external_dependencies": ["E2B"],
+      "network_access": true,
+      "file_system_access": false,
+      "database_access": false
+    },
+    "performance": {
+      "response_time": "fast",
+      "resource_usage": "medium",
+      "concurrent_requests": 5,
+      "rate_limits": "E2B API rate limits apply"
+    },
+    "maturity": {
+      "stability": "stable",
+      "maintenance": "active",
+      "community": "medium",
+      "documentation": "good"
+    },
+    "planned_agent": {
+      "assigned": false
+    },
+    "priority_deployment": "local",
+    "tags": ["e2b", "sandbox", "code-execution"]
+  },
+  "deployment": {
+    "local": {
+      "available": true,
+      "command": "npx",
+      "args": [
+        "-y",
+        "e2b-mcp-server"
+      ],
+      "env": {
+        "E2B_API_KEY": "${E2B_API_KEY}"
+      },
+      "disabled": false,
+      "autoApprove": [
+        "*"
+      ]
+    }
+  }
+}

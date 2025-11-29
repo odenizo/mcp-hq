@@ -1,0 +1,56 @@
+{
+  "metadata": {
+    "server_id": "context7",
+    "display_name": "Context7 MCP Server",
+    "namespace": "local",
+    "package": "@upstash/context7-mcp",
+    "version": "1.0.0",
+    "description": "MCP server for Context7 documentation retrieval and context management",
+    "use_cases": [
+      "Fetch documentation for libraries",
+      "Manage context for AI models"
+    ],
+    "tools": [],
+    "resources": [],
+    "requirements": {
+      "authentication": "none",
+      "api_keys_needed": [],
+      "external_dependencies": ["Upstash"],
+      "network_access": true,
+      "file_system_access": false,
+      "database_access": false
+    },
+    "performance": {
+      "response_time": "fast",
+      "resource_usage": "low",
+      "concurrent_requests": 10,
+      "rate_limits": ""
+    },
+    "maturity": {
+      "stability": "stable",
+      "maintenance": "active",
+      "community": "medium",
+      "documentation": "good"
+    },
+    "planned_agent": {
+      "assigned": false
+    },
+    "priority_deployment": "local",
+    "tags": ["context7", "documentation", "context-management"]
+  },
+  "deployment": {
+    "local": {
+      "available": true,
+      "command": "npx",
+      "args": [
+        "-y",
+        "@upstash/context7-mcp"
+      ],
+      "env": {},
+      "disabled": false,
+      "autoApprove": [
+        "*"
+      ]
+    }
+  }
+}

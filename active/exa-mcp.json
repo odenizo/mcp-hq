@@ -1,0 +1,58 @@
+{
+  "metadata": {
+    "server_id": "exa",
+    "display_name": "Exa MCP Server",
+    "namespace": "local",
+    "package": "exa-mcp-server",
+    "version": "1.0.0",
+    "description": "MCP server for Exa AI search engine",
+    "use_cases": [
+      "Perform web searches",
+      "Find and extract information from the web"
+    ],
+    "tools": [],
+    "resources": [],
+    "requirements": {
+      "authentication": "api_key",
+      "api_keys_needed": ["EXA_API_KEY"],
+      "external_dependencies": ["Exa AI"],
+      "network_access": true,
+      "file_system_access": false,
+      "database_access": false
+    },
+    "performance": {
+      "response_time": "fast",
+      "resource_usage": "low",
+      "concurrent_requests": 10,
+      "rate_limits": "Exa API rate limits apply"
+    },
+    "maturity": {
+      "stability": "stable",
+      "maintenance": "active",
+      "community": "medium",
+      "documentation": "good"
+    },
+    "planned_agent": {
+      "assigned": false
+    },
+    "priority_deployment": "local",
+    "tags": ["exa", "search", "ai", "web-search"]
+  },
+  "deployment": {
+    "local": {
+      "available": true,
+      "command": "npx",
+      "args": [
+        "-y",
+        "exa-mcp-server"
+      ],
+      "env": {
+        "EXA_API_KEY": "${EXA_API_KEY}"
+      },
+      "disabled": false,
+      "autoApprove": [
+        "*"
+      ]
+    }
+  }
+}

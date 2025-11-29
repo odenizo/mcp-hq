@@ -1,0 +1,59 @@
+{
+  "metadata": {
+    "server_id": "github",
+    "display_name": "GitHub MCP Server",
+    "namespace": "local",
+    "package": "github-mcp-server",
+    "version": "1.0.0",
+    "description": "MCP server for GitHub operations",
+    "use_cases": [
+      "Manage repositories, issues, and pull requests",
+      "Interact with GitHub Actions and Gists",
+      "Search for code, users, and repositories"
+    ],
+    "tools": [],
+    "resources": [],
+    "requirements": {
+      "authentication": "api_key",
+      "api_keys_needed": ["GITHUB_TOKEN"],
+      "external_dependencies": ["GitHub API"],
+      "network_access": true,
+      "file_system_access": false,
+      "database_access": false
+    },
+    "performance": {
+      "response_time": "fast",
+      "resource_usage": "low",
+      "concurrent_requests": 10,
+      "rate_limits": "GitHub API rate limits apply"
+    },
+    "maturity": {
+      "stability": "stable",
+      "maintenance": "active",
+      "community": "large",
+      "documentation": "good"
+    },
+    "planned_agent": {
+      "assigned": false
+    },
+    "priority_deployment": "local",
+    "tags": ["github", "git", "vcs", "devops"]
+  },
+  "deployment": {
+    "local": {
+      "available": true,
+      "command": "npx",
+      "args": [
+        "-y",
+        "github-mcp-server"
+      ],
+      "env": {
+        "GITHUB_TOKEN": "${GITHUB_TOKEN}"
+      },
+      "disabled": false,
+      "autoApprove": [
+        "*"
+      ]
+    }
+  }
+}

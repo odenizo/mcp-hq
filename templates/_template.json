@@ -1,0 +1,345 @@
+{
+  "metadata": {
+    "server_id": "template-server",
+    "display_name": "Template MCP Server",
+    "namespace": "vendor",
+    "package": "package-name",
+    "version": "1.0.0",
+    "description": "Comprehensive description of server capabilities and purpose",
+    "use_cases": [
+      "Primary use case",
+      "Secondary use case",
+      "Additional capabilities"
+    ],
+    "tools": [
+      {
+        "name": "tool_name",
+        "description": "Tool description",
+        "parameters": ["param1", "param2"],
+        "use_case": "When to use this tool"
+      }
+    ],
+    "resources": [
+      {
+        "name": "resource_name",
+        "uri_template": "resource://path/{id}",
+        "description": "Resource description",
+        "mime_type": "application/json"
+      }
+    ],
+    "requirements": {
+      "authentication": "none|api_key|oauth|custom",
+      "api_keys_needed": ["SERVICE_API_KEY"],
+      "external_dependencies": ["service1", "service2"],
+      "network_access": true,
+      "file_system_access": false,
+      "database_access": false
+    },
+    "performance": {
+      "response_time": "fast|medium|slow",
+      "resource_usage": "low|medium|high",
+      "concurrent_requests": 10,
+      "rate_limits": "description of rate limits"
+    },
+    "maturity": {
+      "stability": "experimental|beta|stable",
+      "maintenance": "active|maintained|deprecated",
+      "community": "small|medium|large",
+      "documentation": "poor|good|excellent"
+    },
+    "planned_agent": {
+      "assigned": false,
+      "agent_name": "AgentName",
+      "agent_role": "Role description",
+      "automation_level": "manual|semi-automated|fully-automated"
+    },
+    "priority_deployment": "smithery|local|docker|npm",
+    "tags": ["category1", "category2", "feature"]
+  },
+  "deployment": {
+    "smithery": {
+      "available": true,
+      "profile": "junior-roadrunner-9CJKFU",
+      "url": "https://server.smithery.ai/@vendor/package-name/mcp",
+      "install_command": "claude mcp add @vendor/package-name",
+      "direct_url": "https://server.smithery.ai/@vendor/package-name/mcp?api_key=API_KEY&profile=PROFILE",
+      "requirements": {
+        "api_key": true,
+        "profile": true,
+        "additional_config": false
+      },
+      "instructions": {
+        "setup": [
+          "Step 1: Setup instructions",
+          "Step 2: Configuration steps",
+          "Step 3: Verification steps"
+        ],
+        "configuration": {
+          "environment_variables": {
+            "VAR_NAME": "description of variable"
+          },
+          "config_files": [
+            {
+              "path": "~/.config/service/config.json",
+              "required": true,
+              "template": {"key": "value"}
+            }
+          ]
+        },
+        "verification": [
+          "claude mcp list | grep package-name",
+          "Test command to verify functionality"
+        ]
+      },
+      "installation_script": "#!/bin/bash\n# Smithery installation script\necho 'Installing via Smithery...'\nclaude mcp add @vendor/package-name\necho 'Installation complete'"
+    },
+    "local": {
+      "available": true,
+      "requirements": {
+        "node_version": ">=18.0.0",
+        "npm": true,
+        "python": false,
+        "docker": false,
+        "system_dependencies": ["git"]
+      },
+      "instructions": {
+        "setup": [
+          "Clone repository: git clone https://github.com/vendor/package-name",
+          "Install dependencies: npm install",
+          "Build if necessary: npm run build",
+          "Configure environment variables"
+        ],
+        "configuration": {
+          "environment_variables": {
+            "VAR_NAME": "description"
+          },
+          "claude_config": {
+            "mcpServers": {
+              "package-name": {
+                "command": "node",
+                "args": ["/path/to/dist/index.js"],
+                "env": {
+                  "VAR_NAME": "value"
+                }
+              }
+            }
+          }
+        },
+        "verification": [
+          "npm test",
+          "node dist/index.js --version"
+        ]
+      },
+      "installation_script": "#!/bin/bash\n# Local installation script\necho 'Installing locally...'\n# Add installation steps\necho 'Installation complete'"
+    },
+    "docker": {
+      "available": false,
+      "image": "vendor/package-name:latest",
+      "requirements": {
+        "docker": true,
+        "docker_compose": false,
+        "volumes": [],
+        "ports": ["8080:8080"],
+        "environment": ["VAR_NAME=value"]
+      },
+      "instructions": {
+        "setup": [
+          "Pull image: docker pull vendor/package-name:latest",
+          "Run container with proper configuration"
+        ],
+        "configuration": {
+          "docker_run": "docker run -d --name package-name -p 8080:8080 -e VAR_NAME=value vendor/package-name:latest",
+          "docker_compose": {
+            "version": "3.8",
+            "services": {
+              "package-name": {
+                "image": "vendor/package-name:latest",
+                "ports": ["8080:8080"],
+                "environment": ["VAR_NAME=value"],
+                "volumes": []
+              }
+            }
+          }
+        },
+        "verification": [
+          "docker ps | grep package-name",
+          "curl http://localhost:8080/health"
+        ]
+      },
+      "installation_script": "#!/bin/bash\n# Docker installation script\necho 'Installing via Docker...'\n# Add docker commands\necho 'Installation complete'"
+    },
+    "npm": {
+      "available": false,
+      "package": "@vendor/package-name",
+      "requirements": {
+        "node_version": ">=18.0.0",
+        "npm": true,
+        "global_install": true
+      },
+      "instructions": {
+        "setup": [
+          "Install globally: npm install -g @vendor/package-name",
+          "Configure environment variables",
+          "Initialize configuration"
+        ],
+        "configuration": {
+          "environment_variables": {
+            "VAR_NAME": "description"
+          },
+          "claude_config": {
+            "mcpServers": {
+              "package-name": {
+                "command": "package-name-cli",
+                "args": ["--mcp"],
+                "env": {
+                  "VAR_NAME": "value"
+                }
+              }
+            }
+          }
+        },
+        "verification": [
+          "package-name-cli --version",
+          "package-name-cli --test-connection"
+        ]
+      },
+      "installation_script": "#!/bin/bash\n# NPM installation script\necho 'Installing via NPM...'\nnpm install -g @vendor/package-name\necho 'Installation complete'"
+    }
+  },
+  "automation": {
+    "global_instructions": {
+      "enabled": false,
+      "instructions": [
+        "Add to global CLAUDE.md for automatic tool usage",
+        "Define trigger patterns and automation workflows",
+        "Specify integration points with other systems"
+      ],
+      "triggers": [
+        "keyword: trigger automatic tool usage",
+        "context: when to activate automation"
+      ],
+      "workflows": [
+        {
+          "name": "workflow_name",
+          "description": "Workflow description",
+          "trigger": "trigger condition",
+          "steps": [
+            "Step 1: Action description",
+            "Step 2: Next action"
+          ]
+        }
+      ]
+    },
+    "agent_instructions": {
+      "enabled": false,
+      "agent_type": "specialized|general",
+      "agent_config": {
+        "persona": "Agent persona description",
+        "capabilities": ["capability1", "capability2"],
+        "automation_rules": [
+          "Rule 1: When to act autonomously",
+          "Rule 2: When to ask for confirmation"
+        ],
+        "integration_points": [
+          "System 1: Integration description",
+          "System 2: Integration description"
+        ]
+      }
+    },
+    "hooks": {
+      "session_start": {
+        "enabled": false,
+        "script": "path/to/session_start_hook.sh",
+        "description": "Actions to perform at session start"
+      },
+      "session_end": {
+        "enabled": false,
+        "script": "path/to/session_end_hook.sh",
+        "description": "Actions to perform at session end"
+      },
+      "tool_usage": {
+        "enabled": false,
+        "pre_execution": "path/to/pre_hook.sh",
+        "post_execution": "path/to/post_hook.sh",
+        "description": "Actions to perform before/after tool usage"
+      }
+    }
+  },
+  "integration": {
+    "mcp_servers": [
+      {
+        "server": "complementary-server",
+        "relationship": "enhances|depends|conflicts",
+        "description": "How this server relates to others"
+      }
+    ],
+    "external_systems": [
+      {
+        "system": "system_name",
+        "type": "database|api|service",
+        "integration": "direct|webhook|polling",
+        "description": "Integration description"
+      }
+    ],
+    "data_flow": {
+      "inputs": ["Data sources this server consumes"],
+      "outputs": ["Data this server produces"],
+      "storage": ["Where data is stored or cached"]
+    }
+  },
+  "security": {
+    "authentication": {
+      "methods": ["api_key", "oauth", "none"],
+      "credential_storage": "environment|file|service",
+      "rotation_required": false,
+      "encryption": "in_transit|at_rest|both"
+    },
+    "permissions": {
+      "required": ["permission1", "permission2"],
+      "optional": ["optional_permission"],
+      "sensitive_data": true,
+      "data_retention": "description of data retention policy"
+    },
+    "network": {
+      "outbound_connections": ["api.service.com:443"],
+      "inbound_connections": [],
+      "proxy_support": true,
+      "firewall_requirements": []
+    }
+  },
+  "monitoring": {
+    "health_check": {
+      "endpoint": "/health",
+      "method": "GET",
+      "expected_response": "200",
+      "timeout": 5000
+    },
+    "metrics": {
+      "response_time": true,
+      "error_rate": true,
+      "request_count": true,
+      "custom_metrics": []
+    },
+    "logging": {
+      "level": "info",
+      "format": "json",
+      "destination": "stdout|file|service",
+      "retention": "7 days"
+    },
+    "alerting": {
+      "enabled": false,
+      "conditions": ["condition1", "condition2"],
+      "notifications": ["email", "webhook"]
+    }
+  },
+  "maintenance": {
+    "update_frequency": "weekly|monthly|as_needed",
+    "backup_required": false,
+    "backup_schedule": "daily|weekly|monthly",
+    "downtime_tolerance": "none|low|medium|high",
+    "rollback_procedure": [
+      "Step 1: Rollback instructions",
+      "Step 2: Verification steps"
+    ]
+  }
+}

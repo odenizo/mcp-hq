@@ -1,0 +1,306 @@
+{
+  "metadata": {
+    "server_id": "puravparab-gitingest-mcp",
+    "display_name": "GitIngest MCP Server",
+    "namespace": "puravparab",
+    "package": "gitingest-mcp",
+    "version": "1.0.0",
+    "description": "Repository analysis and source code ingestion server for comprehensive codebase understanding",
+    "use_cases": [
+      "Repository structure analysis and tree visualization",
+      "Source code ingestion and content extraction",
+      "Multi-repository batch processing and analysis",
+      "Codebase summarization and documentation generation",
+      "Repository metadata extraction and profiling"
+    ],
+    "tools": [
+      {
+        "name": "git_summary",
+        "description": "Get repository summary including name, files, token count, and README content",
+        "parameters": ["owner", "repo", "branch?"],
+        "use_case": "Initial repository assessment and overview"
+      },
+      {
+        "name": "git_tree",
+        "description": "Get the tree structure of a GitHub repository",
+        "parameters": ["owner", "repo", "branch?"],
+        "use_case": "Understanding repository organization and file structure"
+      },
+      {
+        "name": "git_files",
+        "description": "Get content of specific files from a GitHub repository",
+        "parameters": ["owner", "repo", "file_paths[]", "branch?"],
+        "use_case": "Extracting specific file contents for analysis"
+      }
+    ],
+    "resources": [],
+    "requirements": {
+      "authentication": "none",
+      "api_keys_needed": [],
+      "external_dependencies": ["GitHub API"],
+      "network_access": true,
+      "file_system_access": false,
+      "database_access": false
+    },
+    "performance": {
+      "response_time": "fast",
+      "resource_usage": "low",
+      "concurrent_requests": 10,
+      "rate_limits": "GitHub API rate limits apply"
+    },
+    "maturity": {
+      "stability": "stable",
+      "maintenance": "active",
+      "community": "medium",
+      "documentation": "good"
+    },
+    "planned_agent": {
+      "assigned": true,
+      "agent_name": "Repository Analyst",
+      "agent_role": "Automated repository analysis and codebase intelligence",
+      "automation_level": "fully-automated"
+    },
+    "priority_deployment": "smithery",
+    "tags": ["repository", "analysis", "github", "source-code", "intelligence"]
+  },
+  "deployment": {
+    "smithery": {
+      "available": true,
+      "profile": "junior-roadrunner-9CJKFU",
+      "url": "https://server.smithery.ai/@puravparab/gitingest-mcp/mcp",
+      "install_command": "claude mcp add @puravparab/gitingest-mcp",
+      "direct_url": "https://server.smithery.ai/@puravparab/gitingest-mcp/mcp?api_key=82ef78f4-b4d4-413d-b0b8-704c14327b1a&profile=junior-roadrunner-9CJKFU",
+      "requirements": {
+        "api_key": true,
+        "profile": true,
+        "additional_config": false
+      },
+      "instructions": {
+        "setup": [
+          "Ensure Smithery API key is configured: SMITHERY_API_KEY=82ef78f4-b4d4-413d-b0b8-704c14327b1a",
+          "Ensure Smithery profile is set: SMITHERY_PROFILE=junior-roadrunner-9CJKFU",
+          "Add server via Claude Code CLI: claude mcp add @puravparab/gitingest-mcp",
+          "Verify connection: claude mcp list | grep gitingest"
+        ],
+        "configuration": {
+          "environment_variables": {
+            "SMITHERY_API_KEY": "Required for Smithery server access",
+            "SMITHERY_PROFILE": "Required for profile-based server access"
+          },
+          "config_files": []
+        },
+        "verification": [
+          "claude mcp list | grep puravparab-gitingest-mcp",
+          "Test repository analysis with a public GitHub repository"
+        ]
+      },
+      "installation_script": "#!/bin/bash\\nset -e\\necho 'Installing GitIngest MCP via Smithery...'\\nif [ -z \"$SMITHERY_API_KEY\" ]; then\\n  echo 'Error: SMITHERY_API_KEY not set'\\n  exit 1\\nfi\\nif [ -z \"$SMITHERY_PROFILE\" ]; then\\n  echo 'Error: SMITHERY_PROFILE not set'\\n  exit 1\\nfi\\nclaude mcp add @puravparab/gitingest-mcp\\necho 'GitIngest MCP installation complete'"
+    },
+    "local": {
+      "available": false,
+      "requirements": {},
+      "instructions": {
+        "setup": ["Local deployment not available for this server"],
+        "configuration": {},
+        "verification": []
+      },
+      "installation_script": "#!/bin/bash\\necho 'Local installation not available for GitIngest MCP'"
+    },
+    "docker": {
+      "available": false,
+      "requirements": {},
+      "instructions": {
+        "setup": ["Docker deployment not available for this server"],
+        "configuration": {},
+        "verification": []
+      },
+      "installation_script": "#!/bin/bash\\necho 'Docker installation not available for GitIngest MCP'"
+    },
+    "npm": {
+      "available": false,
+      "requirements": {},
+      "instructions": {
+        "setup": ["NPM installation not available for this server"],
+        "configuration": {},
+        "verification": []
+      },
+      "installation_script": "#!/bin/bash\\necho 'NPM installation not available for GitIngest MCP'"
+    }
+  },
+  "automation": {
+    "global_instructions": {
+      "enabled": true,
+      "instructions": [
+        "ALWAYS use GitIngest MCP for ANY repository analysis before making changes",
+        "Use git_summary for initial repository assessment and overview",
+        "Use git_tree to understand repository structure before file operations",
+        "Use git_files to extract specific file contents for detailed analysis",
+        "Automatically trigger repository analysis when working with GitHub URLs"
+      ],
+      "triggers": [
+        "github.com: Automatically analyze repository structure",
+        "repository analysis: Use GitIngest for comprehensive assessment",
+        "codebase understanding: Generate repository summary and tree",
+        "file extraction: Use git_files for specific content retrieval"
+      ],
+      "workflows": [
+        {
+          "name": "repository_discovery",
+          "description": "Comprehensive repository analysis workflow",
+          "trigger": "GitHub repository URL mentioned",
+          "steps": [
+            "Step 1: Extract owner and repo from URL",
+            "Step 2: Generate repository summary via git_summary",
+            "Step 3: Get repository tree structure via git_tree",
+            "Step 4: Identify key files for analysis",
+            "Step 5: Extract critical file contents via git_files"
+          ]
+        },
+        {
+          "name": "codebase_intelligence",
+          "description": "Automated codebase understanding and documentation",
+          "trigger": "Need to understand repository structure",
+          "steps": [
+            "Step 1: Repository summary and metadata extraction",
+            "Step 2: Directory structure analysis and categorization",
+            "Step 3: Key file identification and content extraction",
+            "Step 4: Architecture pattern recognition",
+            "Step 5: Documentation and README analysis"
+          ]
+        }
+      ]
+    },
+    "agent_instructions": {
+      "enabled": true,
+      "agent_type": "specialized",
+      "agent_config": {
+        "persona": "Repository Intelligence Analyst - Expert in codebase analysis, architecture understanding, and repository profiling",
+        "capabilities": [
+          "Repository structure analysis and visualization",
+          "Source code pattern recognition and categorization",
+          "Architecture documentation and diagramming",
+          "Multi-repository comparative analysis",
+          "Automated codebase summarization"
+        ],
+        "automation_rules": [
+          "Rule 1: Automatically analyze any GitHub repository URL mentioned in conversation",
+          "Rule 2: Always start with git_summary for repository overview",
+          "Rule 3: Use git_tree before making structural assumptions",
+          "Rule 4: Extract key configuration files automatically (package.json, requirements.txt, etc.)",
+          "Rule 5: Store analysis results in knowledge graph for future reference"
+        ],
+        "integration_points": [
+          "Memento MCP: Store repository analysis results for persistent knowledge",
+          "Atlas MCP: Create analysis tasks and track repository assessment progress",
+          "Supabase MCP: Store repository metadata and analysis results in database"
+        ]
+      }
+    },
+    "hooks": {
+      "session_start": {
+        "enabled": false,
+        "script": "",
+        "description": ""
+      },
+      "session_end": {
+        "enabled": false,
+        "script": "",
+        "description": ""
+      },
+      "tool_usage": {
+        "enabled": true,
+        "pre_execution": "",
+        "post_execution": "mcp-servers/scripts/gitingest_post_hook.sh",
+        "description": "Store analysis results in knowledge systems after successful repository analysis"
+      }
+    }
+  },
+  "integration": {
+    "mcp_servers": [
+      {
+        "server": "memento-mcp",
+        "relationship": "enhances",
+        "description": "Stores repository analysis results in knowledge graph for persistent learning"
+      },
+      {
+        "server": "supabase-mcp",
+        "relationship": "enhances",
+        "description": "Stores repository metadata and analysis results in structured database"
+      },
+      {
+        "server": "atlas-mcp",
+        "relationship": "enhances",
+        "description": "Creates and tracks repository analysis tasks and projects"
+      }
+    ],
+    "external_systems": [
+      {
+        "system": "GitHub API",
+        "type": "api",
+        "integration": "direct",
+        "description": "Direct integration with GitHub API for repository data access"
+      }
+    ],
+    "data_flow": {
+      "inputs": ["GitHub repository URLs", "Owner/repo parameters", "File path specifications"],
+      "outputs": ["Repository summaries", "Directory trees", "File contents", "Metadata extractions"],
+      "storage": ["Temporary analysis cache", "Knowledge graph storage via Memento"]
+    }
+  },
+  "security": {
+    "authentication": {
+      "methods": ["smithery_api_key"],
+      "credential_storage": "environment",
+      "rotation_required": false,
+      "encryption": "in_transit"
+    },
+    "permissions": {
+      "required": ["read_public_repositories"],
+      "optional": [],
+      "sensitive_data": false,
+      "data_retention": "Analysis results cached temporarily, stored in knowledge systems"
+    },
+    "network": {
+      "outbound_connections": ["api.github.com:443", "server.smithery.ai:443"],
+      "inbound_connections": [],
+      "proxy_support": true,
+      "firewall_requirements": []
+    }
+  },
+  "monitoring": {
+    "health_check": {
+      "endpoint": "/health",
+      "method": "GET",
+      "expected_response": "200",
+      "timeout": 5000
+    },
+    "metrics": {
+      "response_time": true,
+      "error_rate": true,
+      "request_count": true,
+      "custom_metrics": ["repositories_analyzed", "files_extracted", "analysis_cache_hits"]
+    },
+    "logging": {
+      "level": "info",
+      "format": "json",
+      "destination": "stdout",
+      "retention": "7 days"
+    },
+    "alerting": {
+      "enabled": false,
+      "conditions": [],
+      "notifications": []
+    }
+  },
+  "maintenance": {
+    "update_frequency": "monthly",
+    "backup_required": false,
+    "backup_schedule": "",
+    "downtime_tolerance": "low",
+    "rollback_procedure": [
+      "Step 1: Remove server from Claude configuration",
+      "Step 2: Re-add previous version via Smithery",
+      "Step 3: Verify functionality with test repository"
+    ]
+  }
+}
