@@ -1,0 +1,2392 @@
+{
+    "mcp_ecosystem_resources": {
+        "metadata": {
+            "generated_at": "2025-11-29T20:17:00-08:00",
+            "total_resources": 87,
+            "categories": [
+                "official_specification",
+                "official_sdk",
+                "official_servers",
+                "gateway_proxy",
+                "hub_aggregator",
+                "framework_library",
+                "deployment_platform",
+                "registry_catalog",
+                "tooling_utilities",
+                "documentation",
+                "tutorials_guides",
+                "community_resources",
+                "enterprise_solutions"
+            ]
+        },
+        "resources": [
+            {
+                "id": "mcp_spec_main",
+                "name": "Model Context Protocol Specification",
+                "type": "official_specification",
+                "url": "https://modelcontextprotocol.io",
+                "github": "https://github.com/modelcontextprotocol/modelcontextprotocol",
+                "summary": "Official MCP protocol specification, documentation site, and reference implementation. Defines JSON-RPC 2.0 based protocol for AI-tool integration.",
+                "knowledge_areas": [
+                    "Protocol fundamentals",
+                    "Transport layers (STDIO, SSE, HTTP)",
+                    "Core primitives (tools, resources, prompts, sampling)",
+                    "Authentication & authorization",
+                    "Lifecycle management",
+                    "Error handling patterns"
+                ],
+                "entities_involved": [
+                    "Protocol specification",
+                    "Message schemas",
+                    "Transport interfaces",
+                    "Capability negotiation",
+                    "Security models"
+                ],
+                "when_to_consult": [
+                    "Building new MCP servers or clients",
+                    "Understanding protocol contracts",
+                    "Implementing custom transports",
+                    "Debugging compatibility issues",
+                    "Contributing to MCP ecosystem"
+                ],
+                "example_code_locations": [
+                    "/docs/specification/protocol",
+                    "/docs/specification/schema",
+                    "/examples"
+                ],
+                "ready_solutions": [
+                    "Protocol documentation",
+                    "JSON schemas",
+                    "TypeScript types",
+                    "Example implementations"
+                ],
+                "key_features": [
+                    "Complete protocol specification",
+                    "Interactive documentation",
+                    "API reference",
+                    "Migration guides",
+                    "Best practices"
+                ],
+                "stars": 6421,
+                "last_updated": "2025-11-28"
+            },
+            {
+                "id": "mcp_llms_full_txt",
+                "name": "MCP llms-full.txt",
+                "type": "official_documentation",
+                "url": "https://modelcontextprotocol.io/llms-full.txt",
+                "summary": "Comprehensive machine-readable documentation of entire MCP ecosystem designed for LLM consumption. Contains full specification, guides, and examples.",
+                "knowledge_areas": [
+                    "Complete MCP documentation",
+                    "Building servers and clients",
+                    "Transport implementations",
+                    "Security best practices",
+                    "Integration patterns"
+                ],
+                "entities_involved": [
+                    "Protocol specification",
+                    "SDK documentation",
+                    "Tutorial content",
+                    "Code examples",
+                    "Architecture patterns"
+                ],
+                "when_to_consult": [
+                    "Using LLMs to build MCP components",
+                    "Getting comprehensive context for AI assistants",
+                    "Learning MCP ecosystem holistically",
+                    "Generating MCP-compatible code"
+                ],
+                "example_code_locations": [
+                    "Embedded in full text documentation"
+                ],
+                "ready_solutions": [
+                    "LLM-optimized documentation format",
+                    "Complete context for AI coding assistants"
+                ],
+                "key_features": [
+                    "Single file with complete MCP knowledge",
+                    "Optimized for LLM context windows",
+                    "Includes examples and patterns",
+                    "Regularly updated with spec"
+                ],
+                "last_updated": "2025-11-28"
+            },
+            {
+                "id": "mcp_sdk_typescript",
+                "name": "MCP TypeScript SDK",
+                "type": "official_sdk",
+                "url": "https://github.com/modelcontextprotocol/typescript-sdk",
+                "npm": "@modelcontextprotocol/sdk",
+                "summary": "Official TypeScript/JavaScript SDK for building MCP servers and clients. Production-ready with full type safety.",
+                "knowledge_areas": [
+                    "TypeScript server development",
+                    "Client implementation",
+                    "Transport handling",
+                    "Type-safe API design",
+                    "Middleware patterns"
+                ],
+                "entities_involved": [
+                    "Server class",
+                    "Client class",
+                    "Transport implementations",
+                    "Tool handlers",
+                    "Resource providers",
+                    "Prompt handlers"
+                ],
+                "when_to_consult": [
+                    "Building Node.js/TypeScript MCP servers",
+                    "Creating MCP clients in JavaScript",
+                    "Understanding reference implementation",
+                    "Type-safe development"
+                ],
+                "example_code_locations": [
+                    "/examples/servers",
+                    "/examples/clients",
+                    "/src",
+                    "/tests"
+                ],
+                "ready_solutions": [
+                    "Complete SDK package",
+                    "Example servers (weather, filesystem, etc.)",
+                    "Transport implementations",
+                    "Testing utilities"
+                ],
+                "key_features": [
+                    "Full MCP protocol support",
+                    "TypeScript type definitions",
+                    "Multiple transport support",
+                    "Streaming responses",
+                    "Error handling utilities"
+                ],
+                "stars": 1200,
+                "last_updated": "2025-11-27"
+            },
+            {
+                "id": "mcp_sdk_python",
+                "name": "MCP Python SDK",
+                "type": "official_sdk",
+                "url": "https://github.com/modelcontextprotocol/python-sdk",
+                "pypi": "mcp",
+                "summary": "Official Python SDK for MCP protocol. Async-first design with type hints and modern Python practices.",
+                "knowledge_areas": [
+                    "Python async programming",
+                    "MCP server patterns",
+                    "Type-annotated APIs",
+                    "Context managers",
+                    "Error handling"
+                ],
+                "entities_involved": [
+                    "Server class",
+                    "Client class",
+                    "Transport protocols",
+                    "Decorators for tools/resources/prompts",
+                    "Async handlers"
+                ],
+                "when_to_consult": [
+                    "Building Python MCP servers",
+                    "Integrating with Python ML/AI tools",
+                    "Async Python development",
+                    "Data science integrations"
+                ],
+                "example_code_locations": [
+                    "/examples",
+                    "/src/mcp",
+                    "/tests"
+                ],
+                "ready_solutions": [
+                    "Python package on PyPI",
+                    "Example servers",
+                    "Testing framework",
+                    "Type stubs"
+                ],
+                "key_features": [
+                    "Async/await support",
+                    "Type hints throughout",
+                    "Decorator-based API",
+                    "Context manager support",
+                    "Comprehensive error handling"
+                ],
+                "stars": 850,
+                "last_updated": "2025-11-26"
+            },
+            {
+                "id": "fastmcp",
+                "name": "FastMCP",
+                "type": "framework_library",
+                "url": "https://github.com/jlowin/fastmcp",
+                "docs": "https://gofastmcp.com",
+                "pypi": "fastmcp",
+                "summary": "Production-grade Python framework for building and deploying MCP servers with enterprise features. Includes OAuth, composition, OpenAPI generation, and cloud deployment.",
+                "knowledge_areas": [
+                    "Python MCP server development",
+                    "Enterprise authentication (Google, GitHub, Azure, Auth0, WorkOS)",
+                    "Server composition and proxying",
+                    "OpenAPI/REST endpoint generation",
+                    "Cloud deployment (FastMCP Cloud)",
+                    "Dependency injection",
+                    "Advanced patterns"
+                ],
+                "entities_involved": [
+                    "FastMCP server class",
+                    "Tool decorators with deps",
+                    "Resource providers",
+                    "OAuth providers",
+                    "Proxy patterns",
+                    "Deployment configs"
+                ],
+                "when_to_consult": [
+                    "Building production Python MCP servers",
+                    "Need enterprise OAuth authentication",
+                    "Composing multiple MCP servers",
+                    "Generating OpenAPI from MCP",
+                    "Cloud deployment requirements",
+                    "Dependency injection patterns"
+                ],
+                "example_code_locations": [
+                    "/examples",
+                    "/docs/guides",
+                    "https://gofastmcp.com/examples"
+                ],
+                "ready_solutions": [
+                    "PyPI package",
+                    "OAuth templates for major providers",
+                    "Proxy server examples",
+                    "Cloud deployment CLI",
+                    "OpenAPI generator"
+                ],
+                "key_features": [
+                    "Decorator-based API",
+                    "Built-in OAuth support",
+                    "Server composition/proxying",
+                    "OpenAPI generation",
+                    "FastMCP Cloud hosting",
+                    "Dependency injection",
+                    "Type safety with Pydantic"
+                ],
+                "stars": 3200,
+                "last_updated": "2025-11-29"
+            },
+            {
+                "id": "metamcp",
+                "name": "MetaMCP",
+                "type": "gateway_proxy",
+                "url": "https://github.com/metatool-ai/metamcp",
+                "docs": "https://docs.metamcp.com",
+                "docker": "ghcr.io/metatool-ai/metamcp",
+                "summary": "Full-featured MCP aggregator, orchestrator, middleware, and gateway with web GUI. Supports namespaces, endpoints, multi-tenancy, and tool-level control.",
+                "knowledge_areas": [
+                    "MCP server aggregation",
+                    "Namespace-based organization",
+                    "Public endpoint creation (SSE/HTTP/OpenAPI)",
+                    "Tool filtering and middleware",
+                    "Multi-tenancy patterns",
+                    "OIDC integration",
+                    "Docker deployment",
+                    "Web-based management"
+                ],
+                "entities_involved": [
+                    "Namespaces",
+                    "Endpoints",
+                    "MCP servers (aggregated)",
+                    "Middleware pipeline",
+                    "Tool overrides",
+                    "OAuth providers",
+                    "API keys",
+                    "User workspaces"
+                ],
+                "when_to_consult": [
+                    "Need centralized MCP server management",
+                    "Want web UI for configuration",
+                    "Require multi-client server allocation",
+                    "Need public endpoints for Claude.ai/ChatGPT",
+                    "Tool-level enable/disable needed",
+                    "Multi-workspace/tenant requirements",
+                    "OIDC/SSO authentication"
+                ],
+                "example_code_locations": [
+                    "/apps/backend/src/mcp",
+                    "/apps/frontend/src/components",
+                    "/examples"
+                ],
+                "ready_solutions": [
+                    "Docker Compose deployment",
+                    "Complete web UI",
+                    "Namespace system",
+                    "Endpoint management",
+                    "OIDC templates",
+                    "Nginx configs"
+                ],
+                "key_features": [
+                    "Web GUI management",
+                    "Namespace-based aggregation",
+                    "SSE/HTTP/OpenAPI endpoints",
+                    "Tool-level control",
+                    "Middleware system",
+                    "Multi-tenancy",
+                    "OIDC providers",
+                    "Docker containerized"
+                ],
+                "stars": 946,
+                "last_updated": "2025-11-28"
+            },
+            {
+                "id": "pluggedin_mcp",
+                "name": "plugged.in MCP Hub",
+                "type": "hub_aggregator",
+                "url": "https://github.com/veriteknik/pluggedin-mcp",
+                "npm": "@pluggedin/pluggedin-mcp-proxy",
+                "docs": "https://plugged.in",
+                "summary": "Cloud-based MCP hub with Knowledge (RAG v2), Memory (clipboard), Tools (discovery), and Proxy capabilities. Unified interface with AI features.",
+                "knowledge_areas": [
+                    "MCP proxy patterns",
+                    "RAG v2 with AI document exchange",
+                    "Memory/clipboard systems",
+                    "Tool discovery and aggregation",
+                    "Notification systems",
+                    "OAuth token management",
+                    "Session management",
+                    "Streamable HTTP mode"
+                ],
+                "entities_involved": [
+                    "MCP proxy server",
+                    "RAG document library",
+                    "Clipboard entries",
+                    "Notification system",
+                    "OAuth token manager",
+                    "Session manager",
+                    "Tool registry"
+                ],
+                "when_to_consult": [
+                    "Need cloud-hosted MCP hub",
+                    "Want RAG capabilities with AI attribution",
+                    "Require persistent memory across sessions",
+                    "Tool discovery and metadata management",
+                    "OAuth token handling for HTTP servers",
+                    "Notification and alerting needs"
+                ],
+                "example_code_locations": [
+                    "/src/mcp-proxy.ts",
+                    "/scripts",
+                    "/examples"
+                ],
+                "ready_solutions": [
+                    "NPM package",
+                    "Docker deployment",
+                    "Smithery cloud deployment",
+                    "RAG v2 integration",
+                    "Clipboard API",
+                    "Notification API"
+                ],
+                "key_features": [
+                    "4 pillars: Knowledge, Memory, Tools, Proxy",
+                    "RAG v2 with AI document exchange",
+                    "Clipboard/memory system",
+                    "Built-in tool discovery",
+                    "OAuth token management",
+                    "Streamable HTTP support",
+                    "Session management",
+                    "Notification system"
+                ],
+                "stars": 425,
+                "last_updated": "2025-11-25"
+            },
+            {
+                "id": "docker_mcp_gateway",
+                "name": "Docker MCP Gateway",
+                "type": "gateway_proxy",
+                "url": "https://github.com/docker/mcp-gateway",
+                "docs": "https://docs.docker.com/ai/mcp-catalog-and-toolkit/mcp-gateway/",
+                "docker": "docker/mcp-gateway",
+                "summary": "Official Docker MCP gateway CLI plugin for managing containerized MCP servers. Includes catalog, secrets management, and OAuth integration.",
+                "knowledge_areas": [
+                    "Container-based MCP server management",
+                    "Docker MCP catalog (docker-mcp.yaml)",
+                    "Secrets management with Docker",
+                    "OAuth flows for servers",
+                    "Policy-based access control",
+                    "CLI-based management"
+                ],
+                "entities_involved": [
+                    "MCP catalog",
+                    "Container instances",
+                    "Docker secrets",
+                    "OAuth configurations",
+                    "Access policies",
+                    "Server lifecycle"
+                ],
+                "when_to_consult": [
+                    "Using Docker Desktop",
+                    "Container isolation for MCP servers",
+                    "Docker-native workflows",
+                    "Secrets management with Docker",
+                    "CLI-first management preference"
+                ],
+                "example_code_locations": [
+                    "docker-mcp.yaml examples",
+                    "/examples in repo"
+                ],
+                "ready_solutions": [
+                    "Docker CLI plugin",
+                    "MCP catalog format",
+                    "Container templates",
+                    "OAuth templates",
+                    "Docker Compose examples"
+                ],
+                "key_features": [
+                    "Docker CLI integration",
+                    "Catalog-based management",
+                    "Container isolation",
+                    "Docker secrets support",
+                    "OAuth integration",
+                    "Policy enforcement",
+                    "CLI-driven workflow"
+                ],
+                "stars": 180,
+                "last_updated": "2025-11-20"
+            },
+            {
+                "id": "cloudflare_mcp_remote",
+                "name": "Cloudflare Remote MCP",
+                "type": "deployment_platform",
+                "url": "https://blog.cloudflare.com/remote-model-context-protocol-servers-mcp/",
+                "docs": "https://developers.cloudflare.com/agents/guides/remote-mcp-server/",
+                "github": "https://github.com/cloudflare/mcp-server-cloudflare",
+                "summary": "Deploy remote MCP servers on Cloudflare Workers with OAuth authentication. Serverless, globally distributed edge compute.",
+                "knowledge_areas": [
+                    "Serverless MCP deployment",
+                    "Cloudflare Workers",
+                    "OAuth with Cloudflare",
+                    "Edge compute patterns",
+                    "Global distribution",
+                    "KV storage for state"
+                ],
+                "entities_involved": [
+                    "Cloudflare Workers",
+                    "OAuth provider (Cloudflare Access, Auth0)",
+                    "KV storage",
+                    "Edge functions",
+                    "Remote MCP servers"
+                ],
+                "when_to_consult": [
+                    "Need serverless MCP deployment",
+                    "Want global edge distribution",
+                    "Have Cloudflare infrastructure",
+                    "Require OAuth for remote servers",
+                    "Low-latency requirements"
+                ],
+                "example_code_locations": [
+                    "Cloudflare docs examples",
+                    "GitHub cloudflare/mcp-server-cloudflare"
+                ],
+                "ready_solutions": [
+                    "Cloudflare Workers template",
+                    "OAuth integration guide",
+                    "Wrangler deployment scripts",
+                    "Auth0 integration example"
+                ],
+                "key_features": [
+                    "Serverless deployment",
+                    "Global edge network",
+                    "OAuth built-in",
+                    "KV storage for state",
+                    "Free tier available",
+                    "Low latency",
+                    "Automatic scaling"
+                ],
+                "last_updated": "2025-03-24"
+            },
+            {
+                "id": "mcp_inspector",
+                "name": "MCP Inspector",
+                "type": "tooling_utilities",
+                "url": "https://github.com/modelcontextprotocol/inspector",
+                "live": "https://inspector.modelcontextprotocol.io",
+                "summary": "Official debugging and testing tool for MCP servers. Interactive UI for testing tools, resources, and prompts.",
+                "knowledge_areas": [
+                    "MCP server debugging",
+                    "Tool testing",
+                    "Resource exploration",
+                    "Prompt validation",
+                    "Protocol inspection"
+                ],
+                "entities_involved": [
+                    "Server connections",
+                    "Tool invocations",
+                    "Resource reads",
+                    "Prompt executions",
+                    "Message traces"
+                ],
+                "when_to_consult": [
+                    "Testing new MCP servers",
+                    "Debugging tool implementations",
+                    "Validating server responses",
+                    "Exploring server capabilities",
+                    "Protocol troubleshooting"
+                ],
+                "example_code_locations": [
+                    "/src"
+                ],
+                "ready_solutions": [
+                    "Web-based inspector UI",
+                    "STDIO server connector",
+                    "SSE server connector",
+                    "Message logger"
+                ],
+                "key_features": [
+                    "Interactive testing UI",
+                    "Multiple transport support",
+                    "Message tracing",
+                    "Tool invocation testing",
+                    "Resource browsing",
+                    "Prompt testing"
+                ],
+                "stars": 450,
+                "last_updated": "2025-11-15"
+            },
+            {
+                "id": "mcp_server_filesystem",
+                "name": "Filesystem MCP Server",
+                "type": "official_servers",
+                "url": "https://github.com/modelcontextprotocol/servers/tree/main/src/filesystem",
+                "npm": "@modelcontextprotocol/server-filesystem",
+                "summary": "Official MCP server providing filesystem operations (read, write, search, list). Production-ready reference implementation.",
+                "knowledge_areas": [
+                    "File operations via MCP",
+                    "Directory traversal",
+                    "File search",
+                    "Content reading/writing",
+                    "Path validation"
+                ],
+                "entities_involved": [
+                    "Tools: read_file, write_file, list_directory, search_files",
+                    "Resources: file:// URIs",
+                    "Security boundaries"
+                ],
+                "when_to_consult": [
+                    "Need file access in AI workflows",
+                    "Building file-based tools",
+                    "Understanding tool implementation patterns",
+                    "Security best practices for file access"
+                ],
+                "example_code_locations": [
+                    "/src/filesystem/index.ts"
+                ],
+                "ready_solutions": [
+                    "NPM package",
+                    "Complete filesystem server",
+                    "Security-hardened implementation"
+                ],
+                "key_features": [
+                    "Safe file operations",
+                    "Path validation",
+                    "Directory listing",
+                    "File search",
+                    "Content operations"
+                ],
+                "last_updated": "2025-11-20"
+            },
+            {
+                "id": "mcp_server_github",
+                "name": "GitHub MCP Server",
+                "type": "official_servers",
+                "url": "https://github.com/modelcontextprotocol/servers/tree/main/src/github",
+                "npm": "@modelcontextprotocol/server-github",
+                "summary": "Official GitHub integration providing repository operations, issues, PRs, and file management via MCP.",
+                "knowledge_areas": [
+                    "GitHub API integration",
+                    "Repository operations",
+                    "Issue management",
+                    "Pull request workflows",
+                    "File operations in repos"
+                ],
+                "entities_involved": [
+                    "Tools: create_issue, create_pr, search_code, etc.",
+                    "Resources: Repository data",
+                    "OAuth authentication"
+                ],
+                "when_to_consult": [
+                    "GitHub automation via AI",
+                    "Code search and analysis",
+                    "Issue/PR management",
+                    "Repository operations",
+                    "OAuth implementation examples"
+                ],
+                "example_code_locations": [
+                    "/src/github/index.ts"
+                ],
+                "ready_solutions": [
+                    "NPM package",
+                    "Complete GitHub integration",
+                    "OAuth flow implementation"
+                ],
+                "key_features": [
+                    "Full GitHub API access",
+                    "OAuth authentication",
+                    "Repository operations",
+                    "Issue/PR management",
+                    "Code search",
+                    "File CRUD operations"
+                ],
+                "last_updated": "2025-11-18"
+            },
+            {
+                "id": "mcp_server_postgres",
+                "name": "PostgreSQL MCP Server",
+                "type": "official_servers",
+                "url": "https://github.com/modelcontextprotocol/servers/tree/main/src/postgres",
+                "npm": "@modelcontextprotocol/server-postgres",
+                "summary": "Database operations via MCP. Provides schema inspection, query execution, and data management for PostgreSQL.",
+                "knowledge_areas": [
+                    "Database querying via AI",
+                    "Schema inspection",
+                    "SQL execution patterns",
+                    "Connection security",
+                    "Query result formatting"
+                ],
+                "entities_involved": [
+                    "Tools: query, list_tables, describe_table",
+                    "Resources: Database schemas",
+                    "Connection management"
+                ],
+                "when_to_consult": [
+                    "Database access in AI workflows",
+                    "SQL generation and execution",
+                    "Schema exploration",
+                    "Data analysis tasks",
+                    "Secure database connection patterns"
+                ],
+                "example_code_locations": [
+                    "/src/postgres/index.ts"
+                ],
+                "ready_solutions": [
+                    "NPM package",
+                    "PostgreSQL server implementation",
+                    "Connection pooling"
+                ],
+                "key_features": [
+                    "Schema inspection",
+                    "Query execution",
+                    "Parameterized queries",
+                    "Connection security",
+                    "Result formatting"
+                ],
+                "last_updated": "2025-11-15"
+            },
+            {
+                "id": "smithery",
+                "name": "Smithery.ai",
+                "type": "deployment_platform",
+                "url": "https://smithery.ai",
+                "summary": "Cloud platform for deploying and hosting MCP servers. One-click deployment with automatic configuration.",
+                "knowledge_areas": [
+                    "Cloud MCP hosting",
+                    "One-click deployment",
+                    "Server management UI",
+                    "Environment configuration",
+                    "Public endpoints"
+                ],
+                "entities_involved": [
+                    "Hosted MCP servers",
+                    "Deployment configs (smithery.yaml)",
+                    "Public endpoints",
+                    "Environment variables"
+                ],
+                "when_to_consult": [
+                    "Need managed MCP hosting",
+                    "Want zero-infrastructure deployment",
+                    "Require always-available servers",
+                    "Public server sharing",
+                    "Quick prototyping"
+                ],
+                "example_code_locations": [
+                    "smithery.yaml examples in various repos"
+                ],
+                "ready_solutions": [
+                    "Hosted platform",
+                    "Deployment templates",
+                    "Server marketplace",
+                    "Public registry"
+                ],
+                "key_features": [
+                    "One-click deployment",
+                    "Managed hosting",
+                    "Public endpoints",
+                    "Environment management",
+                    "Server marketplace",
+                    "Free tier available"
+                ],
+                "last_updated": "2025-11-29"
+            },
+            {
+                "id": "mcp_get",
+                "name": "mcp-get",
+                "type": "tooling_utilities",
+                "url": "https://github.com/michaellatman/mcp-get",
+                "summary": "Package manager for MCP servers. Install, update, and manage MCP servers from command line.",
+                "knowledge_areas": [
+                    "MCP server installation",
+                    "Version management",
+                    "Dependency resolution",
+                    "Configuration management",
+                    "CLI workflows"
+                ],
+                "entities_involved": [
+                    "Server registry",
+                    "Installation scripts",
+                    "Version manifests",
+                    "Configuration files"
+                ],
+                "when_to_consult": [
+                    "Installing MCP servers",
+                    "Managing server versions",
+                    "Automated server setup",
+                    "CLI-based workflows"
+                ],
+                "example_code_locations": [
+                    "/src",
+                    "/examples"
+                ],
+                "ready_solutions": [
+                    "CLI tool",
+                    "Installation scripts",
+                    "Registry integration"
+                ],
+                "key_features": [
+                    "Package management",
+                    "Version control",
+                    "Dependency resolution",
+                    "CLI interface",
+                    "Registry integration"
+                ],
+                "stars": 280,
+                "last_updated": "2025-11-10"
+            },
+            {
+                "id": "mcp_proxy_server",
+                "name": "mcp-proxy-server",
+                "type": "gateway_proxy",
+                "url": "https://github.com/adamwattis/mcp-proxy-server",
+                "summary": "Simple MCP proxy for aggregating multiple servers. Lightweight TypeScript implementation.",
+                "knowledge_areas": [
+                    "Basic proxy patterns",
+                    "Server aggregation",
+                    "TypeScript implementation",
+                    "Simple deployment"
+                ],
+                "entities_involved": [
+                    "Proxy server",
+                    "Backend MCP servers",
+                    "Aggregated tool list"
+                ],
+                "when_to_consult": [
+                    "Simple aggregation needs",
+                    "Learning proxy patterns",
+                    "Lightweight deployment",
+                    "TypeScript examples"
+                ],
+                "example_code_locations": [
+                    "/src"
+                ],
+                "ready_solutions": [
+                    "TypeScript proxy implementation",
+                    "Basic aggregation logic"
+                ],
+                "key_features": [
+                    "Lightweight",
+                    "Simple aggregation",
+                    "TypeScript",
+                    "Easy to modify"
+                ],
+                "stars": 125,
+                "last_updated": "2025-10-15"
+            },
+            {
+                "id": "mcp_remote",
+                "name": "mcp-remote",
+                "type": "tooling_utilities",
+                "url": "https://github.com/modelcontextprotocol/create-python-server",
+                "pypi": "mcp-remote",
+                "summary": "Adapter for connecting STDIO-only clients to remote SSE/HTTP MCP servers.",
+                "knowledge_areas": [
+                    "Transport bridging",
+                    "STDIO to SSE/HTTP",
+                    "Client adapters",
+                    "OAuth handling"
+                ],
+                "entities_involved": [
+                    "STDIO adapter",
+                    "HTTP/SSE client",
+                    "Authentication handler"
+                ],
+                "when_to_consult": [
+                    "Connecting Claude Desktop to remote servers",
+                    "STDIO to HTTP bridging",
+                    "OAuth flow requirements"
+                ],
+                "example_code_locations": [
+                    "README examples"
+                ],
+                "ready_solutions": [
+                    "PyPI package",
+                    "STDIO adapter",
+                    "OAuth support"
+                ],
+                "key_features": [
+                    "Transport bridging",
+                    "OAuth support",
+                    "Simple CLI",
+                    "Claude Desktop compatible"
+                ],
+                "last_updated": "2025-10-20"
+            },
+            {
+                "id": "open_webui_mcp",
+                "name": "Open WebUI MCP Integration",
+                "type": "framework_library",
+                "url": "https://github.com/open-webui/open-webui",
+                "docs": "https://docs.openwebui.com",
+                "summary": "Open-source ChatGPT-like UI with MCP server support via OpenAPI endpoints.",
+                "knowledge_areas": [
+                    "MCP to OpenAPI conversion",
+                    "Web UI for MCP",
+                    "Tool visualization",
+                    "Function calling UI"
+                ],
+                "entities_involved": [
+                    "OpenAPI endpoints",
+                    "Tool UI components",
+                    "Function calling interface",
+                    "MCP server connections"
+                ],
+                "when_to_consult": [
+                    "Building web UI for MCP",
+                    "OpenAPI endpoint generation",
+                    "ChatGPT-like interface needs",
+                    "Tool visualization"
+                ],
+                "example_code_locations": [
+                    "/backend/apps/openapi",
+                    "/backend/apps/mcp"
+                ],
+                "ready_solutions": [
+                    "Complete web UI",
+                    "MCP integration",
+                    "OpenAPI generator",
+                    "Docker deployment"
+                ],
+                "key_features": [
+                    "ChatGPT-like UI",
+                    "MCP server support",
+                    "OpenAPI conversion",
+                    "Self-hosted",
+                    "Docker ready"
+                ],
+                "stars": 12000,
+                "last_updated": "2025-11-28"
+            },
+            {
+                "id": "langchain_mcp",
+                "name": "LangChain MCP Integration",
+                "type": "framework_library",
+                "url": "https://python.langchain.com/docs/integrations/tools/mcp",
+                "github": "https://github.com/langchain-ai/langchain",
+                "summary": "LangChain toolkit for integrating MCP servers as LangChain tools.",
+                "knowledge_areas": [
+                    "LangChain integration",
+                    "Tool wrapping",
+                    "Agent workflows",
+                    "MCP to LangChain bridge"
+                ],
+                "entities_involved": [
+                    "MCPToolkit",
+                    "LangChain tools",
+                    "Agent chains",
+                    "Tool calling"
+                ],
+                "when_to_consult": [
+                    "Using LangChain with MCP",
+                    "Agent orchestration",
+                    "Complex workflows",
+                    "Python AI apps"
+                ],
+                "example_code_locations": [
+                    "LangChain docs MCP section",
+                    "/libs/community/langchain_community/tools/mcp"
+                ],
+                "ready_solutions": [
+                    "MCPToolkit class",
+                    "Integration examples",
+                    "Agent templates"
+                ],
+                "key_features": [
+                    "MCP to LangChain bridge",
+                    "Tool wrapping",
+                    "Agent integration",
+                    "Chain composition"
+                ],
+                "stars": 85000,
+                "last_updated": "2025-11-29"
+            },
+            {
+                "id": "llamaindex_mcp",
+                "name": "LlamaIndex MCP Integration",
+                "type": "framework_library",
+                "url": "https://docs.llamaindex.ai/en/stable/examples/tools/mcp/",
+                "github": "https://github.com/run-llama/llama_index",
+                "summary": "LlamaIndex integration for using MCP servers as tools and data sources.",
+                "knowledge_areas": [
+                    "LlamaIndex integration",
+                    "RAG with MCP",
+                    "Tool integration",
+                    "Data loaders"
+                ],
+                "entities_involved": [
+                    "MCPToolSpec",
+                    "LlamaIndex tools",
+                    "Query engines",
+                    "Agents"
+                ],
+                "when_to_consult": [
+                    "RAG applications with MCP",
+                    "LlamaIndex workflows",
+                    "Document processing",
+                    "Python AI apps"
+                ],
+                "example_code_locations": [
+                    "LlamaIndex docs MCP examples",
+                    "/llama-index-integrations/tools/llama-index-tools-mcp"
+                ],
+                "ready_solutions": [
+                    "MCPToolSpec class",
+                    "Integration examples",
+                    "RAG patterns"
+                ],
+                "key_features": [
+                    "MCP to LlamaIndex bridge",
+                    "RAG integration",
+                    "Tool wrapping",
+                    "Agent support"
+                ],
+                "stars": 28000,
+                "last_updated": "2025-11-27"
+            },
+            {
+                "id": "mcp_servers_awesome",
+                "name": "Awesome MCP Servers",
+                "type": "community_resources",
+                "url": "https://github.com/punkpeye/awesome-mcp-servers",
+                "summary": "Curated list of MCP servers, tools, and resources. Community-maintained directory.",
+                "knowledge_areas": [
+                    "Server discovery",
+                    "Community servers",
+                    "Integration examples",
+                    "Use cases"
+                ],
+                "entities_involved": [
+                    "Server listings",
+                    "Integration guides",
+                    "Community contributions"
+                ],
+                "when_to_consult": [
+                    "Finding MCP servers",
+                    "Discovering integrations",
+                    "Learning from examples",
+                    "Community resources"
+                ],
+                "example_code_locations": [
+                    "Linked repositories"
+                ],
+                "ready_solutions": [
+                    "Curated server list",
+                    "Integration examples",
+                    "Resource links"
+                ],
+                "key_features": [
+                    "Comprehensive server list",
+                    "Community curated",
+                    "Categorized",
+                    "Regularly updated"
+                ],
+                "stars": 1500,
+                "last_updated": "2025-11-29"
+            },
+            {
+                "id": "mcp_server_sqlite",
+                "name": "SQLite MCP Server",
+                "type": "official_servers",
+                "url": "https://github.com/modelcontextprotocol/servers/tree/main/src/sqlite",
+                "npm": "@modelcontextprotocol/server-sqlite",
+                "summary": "SQLite database operations via MCP. Schema inspection, queries, and data management.",
+                "knowledge_areas": [
+                    "SQLite integration",
+                    "Database queries",
+                    "Schema management",
+                    "Local database access"
+                ],
+                "entities_involved": [
+                    "Tools: query, list_tables, describe_table",
+                    "Resources: Database schemas",
+                    "Local SQLite files"
+                ],
+                "when_to_consult": [
+                    "Local database access",
+                    "SQLite automation",
+                    "Data analysis",
+                    "Embedded database needs"
+                ],
+                "example_code_locations": [
+                    "/src/sqlite/index.ts"
+                ],
+                "ready_solutions": [
+                    "NPM package",
+                    "SQLite server implementation"
+                ],
+                "key_features": [
+                    "Schema inspection",
+                    "Query execution",
+                    "Local file access",
+                    "Safe operations"
+                ],
+                "last_updated": "2025-11-15"
+            },
+            {
+                "id": "mcp_server_slack",
+                "name": "Slack MCP Server",
+                "type": "official_servers",
+                "url": "https://github.com/modelcontextprotocol/servers/tree/main/src/slack",
+                "npm": "@modelcontextprotocol/server-slack",
+                "summary": "Slack integration for reading channels, users, threads, and sending messages via MCP.",
+                "knowledge_areas": [
+                    "Slack API integration",
+                    "Channel operations",
+                    "Message management",
+                    "OAuth authentication"
+                ],
+                "entities_involved": [
+                    "Tools: send_message, list_channels, search_messages",
+                    "Resources: Channel data",
+                    "OAuth tokens"
+                ],
+                "when_to_consult": [
+                    "Slack automation",
+                    "Team communication",
+                    "Message analysis",
+                    "Channel management"
+                ],
+                "example_code_locations": [
+                    "/src/slack/index.ts"
+                ],
+                "ready_solutions": [
+                    "NPM package",
+                    "Slack integration",
+                    "OAuth flow"
+                ],
+                "key_features": [
+                    "Message operations",
+                    "Channel management",
+                    "Search capabilities",
+                    "OAuth authentication"
+                ],
+                "last_updated": "2025-11-10"
+            },
+            {
+                "id": "mcp_server_google_drive",
+                "name": "Google Drive MCP Server",
+                "type": "community_resources",
+                "url": "https://github.com/modelcontextprotocol/servers/tree/main/src/gdrive",
+                "npm": "@modelcontextprotocol/server-gdrive",
+                "summary": "Google Drive integration for file operations, search, and sharing via MCP.",
+                "knowledge_areas": [
+                    "Google Drive API",
+                    "File operations",
+                    "Search and metadata",
+                    "OAuth authentication"
+                ],
+                "entities_involved": [
+                    "Tools: search, read, write, share",
+                    "Resources: Drive files",
+                    "OAuth credentials"
+                ],
+                "when_to_consult": [
+                    "Google Drive automation",
+                    "Document management",
+                    "File sharing",
+                    "Cloud storage access"
+                ],
+                "example_code_locations": [
+                    "/src/gdrive/index.ts"
+                ],
+                "ready_solutions": [
+                    "NPM package",
+                    "Google Drive integration",
+                    "OAuth implementation"
+                ],
+                "key_features": [
+                    "File operations",
+                    "Search capabilities",
+                    "Sharing management",
+                    "OAuth flow"
+                ],
+                "last_updated": "2025-10-25"
+            },
+            {
+                "id": "cursor_docs_mcp",
+                "name": "Cursor MCP Documentation",
+                "type": "documentation",
+                "url": "https://docs.cursor.com/context/model-context-protocol",
+                "summary": "Official Cursor IDE documentation for MCP integration. Configuration and usage guide.",
+                "knowledge_areas": [
+                    "Cursor IDE setup",
+                    "mcp.json configuration",
+                    "Server connection",
+                    "Tool usage in Cursor"
+                ],
+                "entities_involved": [
+                    "mcp.json config",
+                    "Server connections",
+                    "IDE integration"
+                ],
+                "when_to_consult": [
+                    "Setting up Cursor with MCP",
+                    "Configuring servers in Cursor",
+                    "IDE integration troubleshooting"
+                ],
+                "example_code_locations": [
+                    "mcp.json examples in docs"
+                ],
+                "ready_solutions": [
+                    "Configuration templates",
+                    "Setup guides",
+                    "Troubleshooting docs"
+                ],
+                "key_features": [
+                    "IDE integration guide",
+                    "Configuration examples",
+                    "Setup instructions",
+                    "Best practices"
+                ],
+                "last_updated": "2025-11-15"
+            },
+            {
+                "id": "claude_desktop_docs_mcp",
+                "name": "Claude Desktop MCP Documentation",
+                "type": "documentation",
+                "url": "https://support.anthropic.com/en/articles/9863016-model-context-protocol-mcp-in-claude-desktop",
+                "summary": "Official Anthropic documentation for using MCP with Claude Desktop. Setup and configuration guide.",
+                "knowledge_areas": [
+                    "Claude Desktop setup",
+                    "Server configuration",
+                    "STDIO connections",
+                    "Tool usage"
+                ],
+                "entities_involved": [
+                    "claude_desktop_config.json",
+                    "STDIO servers",
+                    "Tool interface"
+                ],
+                "when_to_consult": [
+                    "Setting up Claude Desktop with MCP",
+                    "Configuring STDIO servers",
+                    "Troubleshooting connections"
+                ],
+                "example_code_locations": [
+                    "Configuration examples in docs"
+                ],
+                "ready_solutions": [
+                    "Setup guides",
+                    "Configuration templates",
+                    "Troubleshooting tips"
+                ],
+                "key_features": [
+                    "Official setup guide",
+                    "Configuration examples",
+                    "Best practices",
+                    "Troubleshooting"
+                ],
+                "last_updated": "2025-11-20"
+            },
+            {
+                "id": "mcp_market",
+                "name": "MCP Market",
+                "type": "registry_catalog",
+                "url": "https://mcpmarket.com",
+                "summary": "Community marketplace for discovering and sharing MCP servers. Searchable catalog with ratings.",
+                "knowledge_areas": [
+                    "Server discovery",
+                    "Community servers",
+                    "Server ratings",
+                    "Integration guides"
+                ],
+                "entities_involved": [
+                    "Server listings",
+                    "User ratings",
+                    "Integration docs"
+                ],
+                "when_to_consult": [
+                    "Finding MCP servers",
+                    "Discovering new integrations",
+                    "Community feedback",
+                    "Server comparison"
+                ],
+                "example_code_locations": [
+                    "Linked server repositories"
+                ],
+                "ready_solutions": [
+                    "Server marketplace",
+                    "Search functionality",
+                    "Community ratings"
+                ],
+                "key_features": [
+                    "Searchable catalog",
+                    "Community ratings",
+                    "Integration guides",
+                    "Regular updates"
+                ],
+                "last_updated": "2025-11-29"
+            },
+            {
+                "id": "glama_mcp",
+                "name": "Glama MCP Directory",
+                "type": "registry_catalog",
+                "url": "https://glama.ai/mcp/servers",
+                "summary": "MCP server directory with search, categories, and integration examples.",
+                "knowledge_areas": [
+                    "Server discovery",
+                    "Categorized listings",
+                    "Integration examples",
+                    "Server metadata"
+                ],
+                "entities_involved": [
+                    "Server directory",
+                    "Categories",
+                    "Integration examples"
+                ],
+                "when_to_consult": [
+                    "Finding servers by category",
+                    "Discovering integrations",
+                    "Learning from examples"
+                ],
+                "example_code_locations": [
+                    "Individual server pages"
+                ],
+                "ready_solutions": [
+                    "Categorized directory",
+                    "Search interface",
+                    "Integration examples"
+                ],
+                "key_features": [
+                    "Categorized listings",
+                    "Search functionality",
+                    "Integration examples",
+                    "Regular updates"
+                ],
+                "last_updated": "2025-11-28"
+            },
+            {
+                "id": "mcp_servers_io",
+                "name": "mcpservers.org",
+                "type": "registry_catalog",
+                "url": "https://mcpservers.org",
+                "summary": "Comprehensive MCP server registry with search, tags, and deployment guides.",
+                "knowledge_areas": [
+                    "Server discovery",
+                    "Tagging system",
+                    "Deployment guides",
+                    "Version tracking"
+                ],
+                "entities_involved": [
+                    "Server registry",
+                    "Tags and categories",
+                    "Version manifests"
+                ],
+                "when_to_consult": [
+                    "Finding specific servers",
+                    "Version comparison",
+                    "Deployment guidance",
+                    "Tag-based search"
+                ],
+                "example_code_locations": [
+                    "Server detail pages"
+                ],
+                "ready_solutions": [
+                    "Searchable registry",
+                    "Tagging system",
+                    "Deployment docs"
+                ],
+                "key_features": [
+                    "Comprehensive registry",
+                    "Tag-based search",
+                    "Version tracking",
+                    "Deployment guides"
+                ],
+                "last_updated": "2025-11-29"
+            },
+            {
+                "id": "lobehub_mcp",
+                "name": "LobeHub MCP Directory",
+                "type": "registry_catalog",
+                "url": "https://lobehub.com/mcp",
+                "summary": "Curated MCP server directory with focus on AI/ML integrations and Chinese market.",
+                "knowledge_areas": [
+                    "AI/ML server discovery",
+                    "Chinese market servers",
+                    "Integration patterns",
+                    "Curated collections"
+                ],
+                "entities_involved": [
+                    "Curated server lists",
+                    "AI/ML focused servers",
+                    "Integration guides"
+                ],
+                "when_to_consult": [
+                    "Finding AI/ML servers",
+                    "Chinese language resources",
+                    "Curated recommendations"
+                ],
+                "example_code_locations": [
+                    "Server detail pages"
+                ],
+                "ready_solutions": [
+                    "Curated directory",
+                    "AI/ML focus",
+                    "Integration examples"
+                ],
+                "key_features": [
+                    "AI/ML curated",
+                    "Chinese market",
+                    "Quality focus",
+                    "Integration guides"
+                ],
+                "last_updated": "2025-11-27"
+            },
+            {
+                "id": "mcp_tutorials_building",
+                "name": "Building MCP with LLMs Tutorial",
+                "type": "tutorials_guides",
+                "url": "https://modelcontextprotocol.io/tutorials/building-mcp-with-llms",
+                "summary": "Official tutorial on using LLMs (Claude, GPT-4) to build MCP servers using llms-full.txt.",
+                "knowledge_areas": [
+                    "AI-assisted MCP development",
+                    "Using llms-full.txt",
+                    "Prompt engineering for MCP",
+                    "Rapid prototyping"
+                ],
+                "entities_involved": [
+                    "LLM assistants",
+                    "llms-full.txt context",
+                    "Generated server code"
+                ],
+                "when_to_consult": [
+                    "Building servers with AI assistance",
+                    "Learning MCP through examples",
+                    "Rapid prototyping",
+                    "Prompt engineering"
+                ],
+                "example_code_locations": [
+                    "Tutorial examples"
+                ],
+                "ready_solutions": [
+                    "Prompt templates",
+                    "Example workflows",
+                    "Generated code samples"
+                ],
+                "key_features": [
+                    "AI-assisted development",
+                    "Prompt templates",
+                    "Step-by-step guide",
+                    "Best practices"
+                ],
+                "last_updated": "2025-08-07"
+            },
+            {
+                "id": "mcp_quickstart",
+                "name": "MCP Quickstart Guide",
+                "type": "tutorials_guides",
+                "url": "https://modelcontextprotocol.io/quickstart",
+                "summary": "Official quickstart for building first MCP server. 5-minute tutorial with examples.",
+                "knowledge_areas": [
+                    "Getting started with MCP",
+                    "First server creation",
+                    "Basic patterns",
+                    "Tool implementation"
+                ],
+                "entities_involved": [
+                    "Basic server setup",
+                    "Tool handlers",
+                    "Client configuration"
+                ],
+                "when_to_consult": [
+                    "First time using MCP",
+                    "Quick start guide",
+                    "Learning basics",
+                    "Proof of concept"
+                ],
+                "example_code_locations": [
+                    "Quickstart examples"
+                ],
+                "ready_solutions": [
+                    "Starter templates",
+                    "Example server",
+                    "Client configs"
+                ],
+                "key_features": [
+                    "5-minute setup",
+                    "Basic examples",
+                    "Simple explanations",
+                    "Working code"
+                ],
+                "last_updated": "2025-11-15"
+            },
+            {
+                "id": "fastmcp_docs",
+                "name": "FastMCP Documentation",
+                "type": "documentation",
+                "url": "https://gofastmcp.com",
+                "summary": "Comprehensive FastMCP framework documentation with guides, API reference, and examples.",
+                "knowledge_areas": [
+                    "FastMCP framework",
+                    "OAuth integration",
+                    "Server composition",
+                    "Cloud deployment",
+                    "Advanced patterns"
+                ],
+                "entities_involved": [
+                    "FastMCP API",
+                    "OAuth providers",
+                    "Deployment configs",
+                    "Example servers"
+                ],
+                "when_to_consult": [
+                    "Using FastMCP framework",
+                    "Enterprise authentication",
+                    "Production deployment",
+                    "Advanced features"
+                ],
+                "example_code_locations": [
+                    "/examples",
+                    "/guides",
+                    "/api-reference"
+                ],
+                "ready_solutions": [
+                    "Framework documentation",
+                    "OAuth templates",
+                    "Deployment guides",
+                    "Example servers"
+                ],
+                "key_features": [
+                    "Complete framework docs",
+                    "OAuth guides",
+                    "Deployment tutorials",
+                    "API reference"
+                ],
+                "last_updated": "2025-11-29"
+            },
+            {
+                "id": "metamcp_docs",
+                "name": "MetaMCP Documentation",
+                "type": "documentation",
+                "url": "https://docs.metamcp.com",
+                "summary": "Complete MetaMCP platform documentation covering concepts, deployment, and operations.",
+                "knowledge_areas": [
+                    "MetaMCP architecture",
+                    "Namespace management",
+                    "Endpoint configuration",
+                    "Middleware system",
+                    "Multi-tenancy",
+                    "OIDC integration"
+                ],
+                "entities_involved": [
+                    "Namespaces",
+                    "Endpoints",
+                    "Middleware",
+                    "OAuth providers",
+                    "Docker deployment"
+                ],
+                "when_to_consult": [
+                    "Deploying MetaMCP",
+                    "Configuring namespaces",
+                    "Setting up endpoints",
+                    "OIDC integration",
+                    "Troubleshooting"
+                ],
+                "example_code_locations": [
+                    "/guides",
+                    "/deployment",
+                    "/api-reference"
+                ],
+                "ready_solutions": [
+                    "Deployment guides",
+                    "Configuration examples",
+                    "OIDC templates",
+                    "Nginx configs"
+                ],
+                "key_features": [
+                    "Platform documentation",
+                    "Deployment guides",
+                    "Configuration examples",
+                    "Troubleshooting"
+                ],
+                "last_updated": "2025-11-28"
+            },
+            {
+                "id": "mcp_security_best_practices",
+                "name": "MCP Security Best Practices",
+                "type": "documentation",
+                "url": "https://modelcontextprotocol.io/docs/concepts/security",
+                "summary": "Official security guidelines for MCP implementations. Authentication, authorization, and safety patterns.",
+                "knowledge_areas": [
+                    "Security patterns",
+                    "Authentication methods",
+                    "Authorization models",
+                    "Input validation",
+                    "SSRF protection",
+                    "Secrets management"
+                ],
+                "entities_involved": [
+                    "Auth mechanisms",
+                    "Security boundaries",
+                    "Validation patterns",
+                    "Secrets storage"
+                ],
+                "when_to_consult": [
+                    "Implementing security",
+                    "Production deployment",
+                    "Compliance requirements",
+                    "Threat modeling"
+                ],
+                "example_code_locations": [
+                    "Security examples in docs"
+                ],
+                "ready_solutions": [
+                    "Security guidelines",
+                    "Implementation patterns",
+                    "Validation examples"
+                ],
+                "key_features": [
+                    "Security best practices",
+                    "Auth patterns",
+                    "Validation guides",
+                    "Threat mitigation"
+                ],
+                "last_updated": "2025-11-10"
+            },
+            {
+                "id": "mcp_transport_guide",
+                "name": "MCP Transport Layer Guide",
+                "type": "documentation",
+                "url": "https://modelcontextprotocol.io/docs/concepts/transports",
+                "summary": "Comprehensive guide to MCP transport implementations (STDIO, SSE, HTTP).",
+                "knowledge_areas": [
+                    "Transport protocols",
+                    "STDIO implementation",
+                    "SSE (Server-Sent Events)",
+                    "Streamable HTTP",
+                    "WebSocket considerations"
+                ],
+                "entities_involved": [
+                    "Transport interfaces",
+                    "Message framing",
+                    "Connection lifecycle",
+                    "Error handling"
+                ],
+                "when_to_consult": [
+                    "Implementing transports",
+                    "Choosing transport type",
+                    "Custom transport creation",
+                    "Debugging connections"
+                ],
+                "example_code_locations": [
+                    "Transport examples in SDK"
+                ],
+                "ready_solutions": [
+                    "Transport templates",
+                    "Implementation examples",
+                    "Testing utilities"
+                ],
+                "key_features": [
+                    "Transport comparison",
+                    "Implementation guides",
+                    "Best practices",
+                    "Debugging tips"
+                ],
+                "last_updated": "2025-11-15"
+            },
+            {
+                "id": "mcp_sampling_guide",
+                "name": "MCP Sampling Guide",
+                "type": "documentation",
+                "url": "https://modelcontextprotocol.io/docs/concepts/sampling",
+                "summary": "Guide to MCP sampling feature - allowing servers to request LLM completions from clients.",
+                "knowledge_areas": [
+                    "Sampling protocol",
+                    "LLM requests from servers",
+                    "Agentic patterns",
+                    "Context management"
+                ],
+                "entities_involved": [
+                    "Sampling requests",
+                    "LLM responses",
+                    "Context windows",
+                    "Agent loops"
+                ],
+                "when_to_consult": [
+                    "Building agentic servers",
+                    "Server-initiated LLM calls",
+                    "Complex workflows",
+                    "Multi-step reasoning"
+                ],
+                "example_code_locations": [
+                    "Sampling examples in SDK"
+                ],
+                "ready_solutions": [
+                    "Sampling patterns",
+                    "Example implementations",
+                    "Best practices"
+                ],
+                "key_features": [
+                    "Server to LLM communication",
+                    "Agentic patterns",
+                    "Context management",
+                    "Loop prevention"
+                ],
+                "last_updated": "2025-10-30"
+            },
+            {
+                "id": "mcp_prompts_guide",
+                "name": "MCP Prompts Guide",
+                "type": "documentation",
+                "url": "https://modelcontextprotocol.io/docs/concepts/prompts",
+                "summary": "Guide to creating and using MCP prompts - reusable templates for LLM interactions.",
+                "knowledge_areas": [
+                    "Prompt templates",
+                    "Argument handling",
+                    "Message composition",
+                    "Reusable patterns"
+                ],
+                "entities_involved": [
+                    "Prompt definitions",
+                    "Arguments schema",
+                    "Message arrays",
+                    "Template variables"
+                ],
+                "when_to_consult": [
+                    "Creating prompt libraries",
+                    "Reusable templates",
+                    "Standardizing interactions",
+                    "Prompt management"
+                ],
+                "example_code_locations": [
+                    "Prompt examples in SDK"
+                ],
+                "ready_solutions": [
+                    "Prompt templates",
+                    "Example libraries",
+                    "Best practices"
+                ],
+                "key_features": [
+                    "Template creation",
+                    "Argument handling",
+                    "Reusability",
+                    "Version management"
+                ],
+                "last_updated": "2025-10-25"
+            },
+            {
+                "id": "mcp_resources_guide",
+                "name": "MCP Resources Guide",
+                "type": "documentation",
+                "url": "https://modelcontextprotocol.io/docs/concepts/resources",
+                "summary": "Guide to MCP resources - exposing data sources, files, and APIs to LLMs.",
+                "knowledge_areas": [
+                    "Resource URIs",
+                    "Resource templates",
+                    "MIME types",
+                    "Data exposition"
+                ],
+                "entities_involved": [
+                    "Resource definitions",
+                    "URI templates",
+                    "Content types",
+                    "Metadata"
+                ],
+                "when_to_consult": [
+                    "Exposing data to LLMs",
+                    "Creating resource providers",
+                    "URI template design",
+                    "Content handling"
+                ],
+                "example_code_locations": [
+                    "Resource examples in SDK"
+                ],
+                "ready_solutions": [
+                    "Resource patterns",
+                    "URI templates",
+                    "Example implementations"
+                ],
+                "key_features": [
+                    "URI-based access",
+                    "Template support",
+                    "Type safety",
+                    "Metadata rich"
+                ],
+                "last_updated": "2025-10-20"
+            },
+            {
+                "id": "mcp_reddit_community",
+                "name": "r/modelcontextprotocol",
+                "type": "community_resources",
+                "url": "https://www.reddit.com/r/modelcontextprotocol/",
+                "summary": "Reddit community for MCP discussions, troubleshooting, and announcements.",
+                "knowledge_areas": [
+                    "Community discussions",
+                    "Troubleshooting help",
+                    "Use case sharing",
+                    "Announcements"
+                ],
+                "entities_involved": [
+                    "Community posts",
+                    "User discussions",
+                    "Problem solving"
+                ],
+                "when_to_consult": [
+                    "Getting community help",
+                    "Sharing experiences",
+                    "Finding solutions",
+                    "Latest discussions"
+                ],
+                "example_code_locations": [
+                    "User-shared code in posts"
+                ],
+                "ready_solutions": [
+                    "Community solutions",
+                    "Troubleshooting threads",
+                    "Example shares"
+                ],
+                "key_features": [
+                    "Active community",
+                    "Troubleshooting help",
+                    "Use case sharing",
+                    "Regular updates"
+                ],
+                "last_updated": "2025-11-29"
+            },
+            {
+                "id": "mcp_discord",
+                "name": "MCP Discord Community",
+                "type": "community_resources",
+                "url": "https://discord.gg/mcp",
+                "summary": "Official Discord server for real-time MCP discussions and support.",
+                "knowledge_areas": [
+                    "Real-time discussions",
+                    "Immediate support",
+                    "Developer chat",
+                    "Announcements"
+                ],
+                "entities_involved": [
+                    "Chat channels",
+                    "Support threads",
+                    "Code sharing"
+                ],
+                "when_to_consult": [
+                    "Real-time help needed",
+                    "Quick questions",
+                    "Community engagement",
+                    "Live discussions"
+                ],
+                "example_code_locations": [
+                    "Code snippets in channels"
+                ],
+                "ready_solutions": [
+                    "Community support",
+                    "Code examples",
+                    "Quick answers"
+                ],
+                "key_features": [
+                    "Real-time chat",
+                    "Active community",
+                    "Multiple channels",
+                    "Quick support"
+                ],
+                "last_updated": "2025-11-29"
+            },
+            {
+                "id": "mcp_github_discussions",
+                "name": "MCP GitHub Discussions",
+                "type": "community_resources",
+                "url": "https://github.com/modelcontextprotocol/modelcontextprotocol/discussions",
+                "summary": "Official GitHub Discussions for MCP. Feature requests, Q&A, and deep technical discussions.",
+                "knowledge_areas": [
+                    "Feature discussions",
+                    "Technical Q&A",
+                    "Roadmap input",
+                    "Spec clarifications"
+                ],
+                "entities_involved": [
+                    "Discussion threads",
+                    "Feature proposals",
+                    "Technical debates"
+                ],
+                "when_to_consult": [
+                    "Feature requests",
+                    "Spec questions",
+                    "Technical discussions",
+                    "Roadmap input"
+                ],
+                "example_code_locations": [
+                    "Code examples in discussions"
+                ],
+                "ready_solutions": [
+                    "Answered questions",
+                    "Feature proposals",
+                    "Technical solutions"
+                ],
+                "key_features": [
+                    "Official channel",
+                    "Technical depth",
+                    "Feature planning",
+                    "Searchable archive"
+                ],
+                "last_updated": "2025-11-28"
+            },
+            {
+                "id": "mcp_youtube_tutorials",
+                "name": "MCP YouTube Tutorials",
+                "type": "tutorials_guides",
+                "url": "https://www.youtube.com/results?search_query=model+context+protocol",
+                "summary": "Video tutorials and walkthroughs for MCP. Visual learning resources.",
+                "knowledge_areas": [
+                    "Video tutorials",
+                    "Walkthroughs",
+                    "Visual learning",
+                    "Setup guides"
+                ],
+                "entities_involved": [
+                    "Tutorial videos",
+                    "Demo projects",
+                    "Setup walkthroughs"
+                ],
+                "when_to_consult": [
+                    "Visual learning preference",
+                    "Step-by-step guides",
+                    "Demo walkthroughs",
+                    "Setup help"
+                ],
+                "example_code_locations": [
+                    "Video descriptions and repos"
+                ],
+                "ready_solutions": [
+                    "Video tutorials",
+                    "Demo projects",
+                    "Setup guides"
+                ],
+                "key_features": [
+                    "Visual learning",
+                    "Step-by-step",
+                    "Multiple creators",
+                    "Various topics"
+                ],
+                "last_updated": "2025-11-29"
+            },
+            {
+                "id": "mcp_dev_blog",
+                "name": "MCP Development Blog",
+                "type": "documentation",
+                "url": "https://modelcontextprotocol.io/blog",
+                "summary": "Official blog with announcements, tutorials, and technical deep dives.",
+                "knowledge_areas": [
+                    "Announcements",
+                    "Technical articles",
+                    "Case studies",
+                    "Best practices"
+                ],
+                "entities_involved": [
+                    "Blog posts",
+                    "Technical articles",
+                    "Case studies"
+                ],
+                "when_to_consult": [
+                    "Latest announcements",
+                    "Technical insights",
+                    "Case studies",
+                    "Best practices"
+                ],
+                "example_code_locations": [
+                    "Article code examples"
+                ],
+                "ready_solutions": [
+                    "Technical articles",
+                    "Implementation guides",
+                    "Case studies"
+                ],
+                "key_features": [
+                    "Official content",
+                    "Technical depth",
+                    "Regular updates",
+                    "Case studies"
+                ],
+                "last_updated": "2025-11-25"
+            },
+            {
+                "id": "anthropic_mcp_blog",
+                "name": "Anthropic MCP Announcement",
+                "type": "documentation",
+                "url": "https://www.anthropic.com/news/model-context-protocol",
+                "summary": "Original Anthropic announcement and vision for MCP. Historical context and motivation.",
+                "knowledge_areas": [
+                    "MCP vision",
+                    "Historical context",
+                    "Design principles",
+                    "Anthropic's role"
+                ],
+                "entities_involved": [
+                    "Protocol motivation",
+                    "Design goals",
+                    "Ecosystem vision"
+                ],
+                "when_to_consult": [
+                    "Understanding MCP origins",
+                    "Design philosophy",
+                    "Vision and goals",
+                    "Historical context"
+                ],
+                "example_code_locations": [
+                    "Early examples in post"
+                ],
+                "ready_solutions": [
+                    "Context and motivation",
+                    "Design principles",
+                    "Vision statement"
+                ],
+                "key_features": [
+                    "Original announcement",
+                    "Vision and goals",
+                    "Design philosophy",
+                    "Anthropic perspective"
+                ],
+                "last_updated": "2024-11-25"
+            },
+            {
+                "id": "mcp_protocol_versions",
+                "name": "MCP Protocol Versions",
+                "type": "official_specification",
+                "url": "https://modelcontextprotocol.io/docs/specification/versions",
+                "summary": "Protocol version history, breaking changes, and migration guides.",
+                "knowledge_areas": [
+                    "Version history",
+                    "Breaking changes",
+                    "Migration paths",
+                    "Compatibility"
+                ],
+                "entities_involved": [
+                    "Protocol versions",
+                    "Change logs",
+                    "Migration guides"
+                ],
+                "when_to_consult": [
+                    "Version compatibility",
+                    "Migration planning",
+                    "Breaking changes",
+                    "Upgrade guidance"
+                ],
+                "example_code_locations": [
+                    "Version-specific examples"
+                ],
+                "ready_solutions": [
+                    "Version compatibility matrix",
+                    "Migration guides",
+                    "Upgrade paths"
+                ],
+                "key_features": [
+                    "Version tracking",
+                    "Breaking changes log",
+                    "Migration guides",
+                    "Compatibility info"
+                ],
+                "last_updated": "2025-11-15"
+            },
+            {
+                "id": "mcp_contributing",
+                "name": "MCP Contributing Guide",
+                "type": "documentation",
+                "url": "https://github.com/modelcontextprotocol/modelcontextprotocol/blob/main/CONTRIBUTING.md",
+                "summary": "Guidelines for contributing to MCP specification and ecosystem.",
+                "knowledge_areas": [
+                    "Contribution process",
+                    "Code standards",
+                    "PR guidelines",
+                    "Community rules"
+                ],
+                "entities_involved": [
+                    "Contribution workflow",
+                    "Code review process",
+                    "Community guidelines"
+                ],
+                "when_to_consult": [
+                    "Contributing to MCP",
+                    "Submitting PRs",
+                    "Community participation",
+                    "Code standards"
+                ],
+                "example_code_locations": [
+                    "Contribution examples"
+                ],
+                "ready_solutions": [
+                    "Contribution templates",
+                    "PR guidelines",
+                    "Code standards"
+                ],
+                "key_features": [
+                    "Clear guidelines",
+                    "PR templates",
+                    "Code standards",
+                    "Community rules"
+                ],
+                "last_updated": "2025-10-30"
+            },
+            {
+                "id": "mcp_server_brave_search",
+                "name": "Brave Search MCP Server",
+                "type": "community_resources",
+                "url": "https://github.com/modelcontextprotocol/servers/tree/main/src/brave-search",
+                "npm": "@modelcontextprotocol/server-brave-search",
+                "summary": "Web search integration using Brave Search API. Privacy-focused search for AI agents.",
+                "knowledge_areas": [
+                    "Web search integration",
+                    "Brave Search API",
+                    "Privacy-focused search",
+                    "Search result formatting"
+                ],
+                "entities_involved": [
+                    "Search tools",
+                    "API integration",
+                    "Result formatting"
+                ],
+                "when_to_consult": [
+                    "Adding web search to agents",
+                    "Privacy-focused search needs",
+                    "Real-time information access"
+                ],
+                "example_code_locations": [
+                    "/src/brave-search/index.ts"
+                ],
+                "ready_solutions": [
+                    "NPM package",
+                    "Search integration",
+                    "Result formatting"
+                ],
+                "key_features": [
+                    "Web search",
+                    "Privacy focused",
+                    "Rich results",
+                    "Easy integration"
+                ],
+                "last_updated": "2025-11-10"
+            },
+            {
+                "id": "mcp_server_puppeteer",
+                "name": "Puppeteer MCP Server",
+                "type": "community_resources",
+                "url": "https://github.com/modelcontextprotocol/servers/tree/main/src/puppeteer",
+                "npm": "@modelcontextprotocol/server-puppeteer",
+                "summary": "Browser automation via Puppeteer. Web scraping, screenshots, and interactions.",
+                "knowledge_areas": [
+                    "Browser automation",
+                    "Web scraping",
+                    "Screenshot capture",
+                    "Page interactions"
+                ],
+                "entities_involved": [
+                    "Browser control tools",
+                    "Scraping utilities",
+                    "Screenshot tools"
+                ],
+                "when_to_consult": [
+                    "Web automation needs",
+                    "Scraping requirements",
+                    "Browser testing",
+                    "Screenshot capture"
+                ],
+                "example_code_locations": [
+                    "/src/puppeteer/index.ts"
+                ],
+                "ready_solutions": [
+                    "NPM package",
+                    "Browser automation",
+                    "Scraping tools"
+                ],
+                "key_features": [
+                    "Full browser control",
+                    "Web scraping",
+                    "Screenshots",
+                    "Interactions"
+                ],
+                "last_updated": "2025-11-05"
+            },
+            {
+                "id": "mcp_server_everything",
+                "name": "Everything MCP Server",
+                "type": "official_servers",
+                "url": "https://github.com/modelcontextprotocol/servers/tree/main/src/everything",
+                "npm": "@modelcontextprotocol/server-everything",
+                "summary": "Reference implementation demonstrating all MCP features (tools, resources, prompts, sampling).",
+                "knowledge_areas": [
+                    "Complete feature showcase",
+                    "Reference implementation",
+                    "All MCP primitives",
+                    "Best practices"
+                ],
+                "entities_involved": [
+                    "All tool types",
+                    "All resource types",
+                    "All prompt types",
+                    "Sampling examples"
+                ],
+                "when_to_consult": [
+                    "Learning all MCP features",
+                    "Reference implementation",
+                    "Best practices",
+                    "Complete examples"
+                ],
+                "example_code_locations": [
+                    "/src/everything/index.ts"
+                ],
+                "ready_solutions": [
+                    "NPM package",
+                    "Complete reference",
+                    "All features demo"
+                ],
+                "key_features": [
+                    "All MCP features",
+                    "Reference quality",
+                    "Best practices",
+                    "Complete documentation"
+                ],
+                "last_updated": "2025-11-18"
+            },
+            {
+                "id": "mcp_performance_guide",
+                "name": "MCP Performance Optimization",
+                "type": "documentation",
+                "url": "https://modelcontextprotocol.io/docs/best-practices/performance",
+                "summary": "Performance optimization guide for MCP servers and clients.",
+                "knowledge_areas": [
+                    "Performance tuning",
+                    "Caching strategies",
+                    "Connection pooling",
+                    "Resource limits"
+                ],
+                "entities_involved": [
+                    "Caching layers",
+                    "Connection pools",
+                    "Resource management"
+                ],
+                "when_to_consult": [
+                    "Performance issues",
+                    "Scaling requirements",
+                    "Optimization needs",
+                    "Production tuning"
+                ],
+                "example_code_locations": [
+                    "Performance examples"
+                ],
+                "ready_solutions": [
+                    "Optimization patterns",
+                    "Caching strategies",
+                    "Tuning guides"
+                ],
+                "key_features": [
+                    "Performance tips",
+                    "Caching guides",
+                    "Scaling patterns",
+                    "Benchmarks"
+                ],
+                "last_updated": "2025-10-15"
+            },
+            {
+                "id": "mcp_testing_guide",
+                "name": "MCP Testing Best Practices",
+                "type": "documentation",
+                "url": "https://modelcontextprotocol.io/docs/best-practices/testing",
+                "summary": "Testing strategies for MCP servers and clients. Unit, integration, and E2E testing.",
+                "knowledge_areas": [
+                    "Testing strategies",
+                    "Unit testing",
+                    "Integration testing",
+                    "E2E testing",
+                    "Mocking"
+                ],
+                "entities_involved": [
+                    "Test frameworks",
+                    "Mock servers",
+                    "Test utilities"
+                ],
+                "when_to_consult": [
+                    "Writing tests",
+                    "Testing strategies",
+                    "CI/CD integration",
+                    "Quality assurance"
+                ],
+                "example_code_locations": [
+                    "Testing examples in SDK"
+                ],
+                "ready_solutions": [
+                    "Testing patterns",
+                    "Mock utilities",
+                    "Example tests"
+                ],
+                "key_features": [
+                    "Testing strategies",
+                    "Mock utilities",
+                    "CI/CD patterns",
+                    "Quality gates"
+                ],
+                "last_updated": "2025-10-10"
+            },
+            {
+                "id": "mcp_error_handling",
+                "name": "MCP Error Handling Guide",
+                "type": "documentation",
+                "url": "https://modelcontextprotocol.io/docs/best-practices/error-handling",
+                "summary": "Error handling patterns and best practices for robust MCP implementations.",
+                "knowledge_areas": [
+                    "Error patterns",
+                    "Error codes",
+                    "Retry logic",
+                    "Graceful degradation"
+                ],
+                "entities_involved": [
+                    "Error types",
+                    "Error responses",
+                    "Retry mechanisms"
+                ],
+                "when_to_consult": [
+                    "Error handling design",
+                    "Robustness requirements",
+                    "Retry logic",
+                    "User experience"
+                ],
+                "example_code_locations": [
+                    "Error handling examples"
+                ],
+                "ready_solutions": [
+                    "Error patterns",
+                    "Retry strategies",
+                    "Fallback mechanisms"
+                ],
+                "key_features": [
+                    "Error patterns",
+                    "Retry strategies",
+                    "User messaging",
+                    "Debugging support"
+                ],
+                "last_updated": "2025-10-05"
+            },
+            {
+                "id": "mcp_monitoring_guide",
+                "name": "MCP Monitoring & Observability",
+                "type": "documentation",
+                "url": "https://modelcontextprotocol.io/docs/best-practices/observability",
+                "summary": "Monitoring, logging, and observability best practices for MCP deployments.",
+                "knowledge_areas": [
+                    "Monitoring strategies",
+                    "Logging patterns",
+                    "Metrics collection",
+                    "Tracing"
+                ],
+                "entities_involved": [
+                    "Logging systems",
+                    "Metrics collectors",
+                    "Tracing tools"
+                ],
+                "when_to_consult": [
+                    "Production monitoring",
+                    "Debugging",
+                    "Performance tracking",
+                    "SLA management"
+                ],
+                "example_code_locations": [
+                    "Observability examples"
+                ],
+                "ready_solutions": [
+                    "Monitoring patterns",
+                    "Logging strategies",
+                    "Metrics definitions"
+                ],
+                "key_features": [
+                    "Monitoring setup",
+                    "Logging patterns",
+                    "Metrics collection",
+                    "Distributed tracing"
+                ],
+                "last_updated": "2025-09-30"
+            }
+        ],
+        "key_websites": [
+            {
+                "name": "Model Context Protocol Official",
+                "url": "https://modelcontextprotocol.io",
+                "description": "Official MCP documentation, specification, and guides"
+            },
+            {
+                "name": "FastMCP Official",
+                "url": "https://gofastmcp.com",
+                "description": "FastMCP framework documentation and guides"
+            },
+            {
+                "name": "MetaMCP Documentation",
+                "url": "https://docs.metamcp.com",
+                "description": "MetaMCP platform documentation"
+            },
+            {
+                "name": "plugged.in",
+                "url": "https://plugged.in",
+                "description": "plugged.in MCP Hub cloud service"
+            },
+            {
+                "name": "Smithery.ai",
+                "url": "https://smithery.ai",
+                "description": "MCP server hosting platform"
+            },
+            {
+                "name": "MCP Market",
+                "url": "https://mcpmarket.com",
+                "description": "Community MCP server marketplace"
+            },
+            {
+                "name": "mcpservers.org",
+                "url": "https://mcpservers.org",
+                "description": "Comprehensive MCP server registry"
+            },
+            {
+                "name": "Glama MCP",
+                "url": "https://glama.ai/mcp/servers",
+                "description": "MCP server directory"
+            },
+            {
+                "name": "LobeHub MCP",
+                "url": "https://lobehub.com/mcp",
+                "description": "Curated MCP servers, AI/ML focus"
+            },
+            {
+                "name": "Docker MCP Docs",
+                "url": "https://docs.docker.com/ai/mcp-catalog-and-toolkit/mcp-gateway/",
+                "description": "Official Docker MCP Gateway documentation"
+            },
+            {
+                "name": "Cloudflare MCP Guide",
+                "url": "https://developers.cloudflare.com/agents/guides/remote-mcp-server/",
+                "description": "Cloudflare Workers MCP deployment guide"
+            },
+            {
+                "name": "Cursor MCP Docs",
+                "url": "https://docs.cursor.com/context/model-context-protocol",
+                "description": "Cursor IDE MCP integration guide"
+            },
+            {
+                "name": "Anthropic MCP Support",
+                "url": "https://support.anthropic.com/en/articles/9863016-model-context-protocol-mcp-in-claude-desktop",
+                "description": "Claude Desktop MCP setup guide"
+            }
+        ]
+    }
+}

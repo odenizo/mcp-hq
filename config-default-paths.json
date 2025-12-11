@@ -1,0 +1,54 @@
+{
+  "settings": {
+    "path_linux": "$HOME/.mcp/settings.json",
+    "path_macos": "$HOME/.mcp/settings.json",
+    "description": "Primary MCP settings file; create if missing to set global defaults."
+  },
+  "mcp_configs": {
+    "dir_linux": "$HOME/.mcp/configs/",
+    "dir_macos": "$HOME/.mcp/configs/",
+    "description": "Folder for individual MCP server configs (e.g., context7-mcp.json)."
+  },
+  "global_custom_instructions": {
+    "path_linux": "$HOME/.mcp/custom_instructions.json",
+    "path_macos": "$HOME/.mcp/custom_instructions.json",
+    "description": "User-level custom instructions shared across coding agents."
+  },
+  "customizations": {
+    "dir_linux": "$HOME/.mcp/customizations/",
+    "dir_macos": "$HOME/.mcp/customizations/",
+    "description": "Assets such as prompt fragments, reusable snippets, themes."
+  },
+  "logs": {
+    "dir_linux": "$HOME/.mcp/logs/",
+    "dir_macos": "$HOME/.mcp/logs/",
+    "description": "Agent/MCP runtime logs for debugging."
+  },
+  "templates": {
+    "dir": "$HOME/.mcp/templates/",
+    "files": [
+      "settings.template.json",
+      "mcp-server.template.json",
+      "custom_instructions.template.json"
+    ],
+    "description": "Starter templates agents can copy to bootstrap configs."
+  },
+  "schemas": {
+    "dir": "$HOME/.mcp/schemas/",
+    "files": [
+      "settings.schema.json",
+      "mcp-server.schema.json",
+      "custom_instructions.schema.json"
+    ],
+    "description": "JSON Schemas to validate settings and MCP server configs."
+  },
+  "toml_structures": {
+    "dir": "$HOME/.mcp/toml/",
+    "files": [
+      "settings.example.toml",
+      "mcp-server.example.toml"
+    ],
+    "description": "Optional TOML equivalents for environments that prefer TOML."
+  },
+  "agent_guidelines": "Keep user-level files under $HOME/.mcp; prefer per-project overrides in ./.mcp/ when needed. Validate against schemas before enabling MCP servers."
+}

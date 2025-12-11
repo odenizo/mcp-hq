@@ -1,0 +1,12 @@
+{
+	"folders": [
+		{
+			"path": "../.."
+		},
+		{
+			"name": "mcp-hq",
+			"path": "."
+		}
+	],
+	"settings": {}
+}
