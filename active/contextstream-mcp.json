@@ -1,0 +1,222 @@
+{
+  "metadata": {
+    "server_id": "contextstream",
+    "display_name": "ContextStream MCP Server",
+    "namespace": "@contextstream",
+    "package": "@contextstream/mcp-server",
+    "version": "1.0.0",
+    "description": "Persistent memory, semantic search, and code intelligence for any MCP-compatible AI tool. Stores decisions, preferences, and lessons across sessions.",
+    "use_cases": [
+      "Session-aware context loading",
+      "Memory capture and recall (decisions, preferences, tasks, bugs, lessons)",
+      "Code search (semantic, hybrid, keyword, pattern)",
+      "Knowledge graph and code analysis",
+      "Local repo ingestion for indexing"
+    ],
+    "tools": [
+      {
+        "name": "session_init",
+        "description": "Initialize session with folder context",
+        "parameters": ["folder_path", "context_hint"],
+        "use_case": "REQUIRED on first message of every conversation"
+      },
+      {
+        "name": "context_smart",
+        "description": "Get semantically relevant context for current message",
+        "parameters": ["user_message"],
+        "use_case": "REQUIRED on every message after session_init"
+      },
+      {
+        "name": "session_capture",
+        "description": "Capture decisions, preferences, and insights",
+        "parameters": ["content", "type"],
+        "use_case": "MANDATORY after completing any task"
+      },
+      {
+        "name": "session_capture_lesson",
+        "description": "Capture lessons from mistakes and corrections",
+        "parameters": ["title", "severity", "category", "trigger", "impact", "prevention", "keywords"],
+        "use_case": "MANDATORY when user expresses frustration or corrects mistakes"
+      },
+      {
+        "name": "session_recall",
+        "description": "Recall past decisions and context",
+        "parameters": ["query"],
+        "use_case": "When user asks about past decisions"
+      }
+    ],
+    "resources": [],
+    "requirements": {
+      "authentication": "api_key",
+      "api_keys_needed": ["CONTEXTSTREAM_API_KEY"],
+      "external_dependencies": ["ContextStream API"],
+      "network_access": true,
+      "file_system_access": false,
+      "database_access": false
+    },
+    "performance": {
+      "response_time": "fast",
+      "resource_usage": "low",
+      "concurrent_requests": 10,
+      "rate_limits": "Free tier: limited calls; PRO tier: unlimited"
+    },
+    "maturity": {
+      "stability": "stable",
+      "maintenance": "active",
+      "community": "growing",
+      "documentation": "excellent"
+    },
+    "planned_agent": {
+      "assigned": false,
+      "agent_name": "",
+      "agent_role": "",
+      "automation_level": "fully-automated"
+    },
+    "priority_deployment": "npm",
+    "tags": ["memory", "context", "semantic-search", "knowledge-graph", "persistence"]
+  },
+  "deployment": {
+    "npm": {
+      "available": true,
+      "package": "@contextstream/mcp-server",
+      "command": "npx",
+      "args": ["-y", "@contextstream/mcp-server"],
+      "env": {
+        "CONTEXTSTREAM_API_URL": "https://api.contextstream.io",
+        "CONTEXTSTREAM_API_KEY": "YOUR_API_KEY_HERE"
+      },
+      "disabled": false,
+      "autoApprove": ["*"],
+      "requirements": {
+        "node_version": ">=18.0.0",
+        "npm": true,
+        "global_install": false
+      },
+      "instructions": {
+        "setup": [
+          "Get API key from https://contextstream.io",
+          "Add to MCP config with CONTEXTSTREAM_API_KEY environment variable",
+          "Restart AI tool to load server"
+        ],
+        "configuration": {
+          "environment_variables": {
+            "CONTEXTSTREAM_API_URL": "API base URL (https://api.contextstream.io)",
+            "CONTEXTSTREAM_API_KEY": "Your ContextStream API key",
+            "CONTEXTSTREAM_WORKSPACE_ID": "(Optional) Default workspace ID",
+            "CONTEXTSTREAM_PROJECT_ID": "(Optional) Default project ID"
+          }
+        },
+        "verification": [
+          "Check tool loads in MCP client",
+          "Call session_init to verify connection"
+        ]
+      }
+    },
+    "local": {
+      "available": true,
+      "command": "npx",
+      "args": ["-y", "@contextstream/mcp-server"],
+      "env": {
+        "CONTEXTSTREAM_API_URL": "https://api.contextstream.io",
+        "CONTEXTSTREAM_API_KEY": "YOUR_API_KEY_HERE"
+      },
+      "disabled": false
+    }
+  },
+  "config_by_tool": {
+    "claude_code": {
+      "config_file": "~/.claude.json",
+      "tool_prefix": "mcp__contextstream__",
+      "example_tool_call": "mcp__contextstream__session_init",
+      "config": {
+        "mcpServers": {
+          "contextstream": {
+            "command": "npx",
+            "args": ["-y", "@contextstream/mcp-server"],
+            "env": {
+              "CONTEXTSTREAM_API_URL": "https://api.contextstream.io",
+              "CONTEXTSTREAM_API_KEY": "YOUR_API_KEY_HERE"
+            }
+          }
+        }
+      }
+    },
+    "codex_cli": {
+      "config_file": "~/.codex/config.toml",
+      "tool_prefix": "",
+      "example_tool_call": "session_init",
+      "config": {
+        "mcp_servers": {
+          "contextstream": {
+            "command": "npx",
+            "args": ["-y", "@contextstream/mcp-server"],
+            "env": {
+              "CONTEXTSTREAM_API_URL": "https://api.contextstream.io",
+              "CONTEXTSTREAM_API_KEY": "YOUR_API_KEY_HERE"
+            }
+          }
+        }
+      }
+    },
+    "gemini_cli": {
+      "config_file": "~/.gemini/settings.json",
+      "tool_prefix": "",
+      "example_tool_call": "session_init",
+      "config": {
+        "mcpServers": {
+          "contextstream": {
+            "type": "stdio",
+            "command": "npx",
+            "args": ["-y", "@contextstream/mcp-server"],
+            "env": {
+              "CONTEXTSTREAM_API_URL": "https://api.contextstream.io",
+              "CONTEXTSTREAM_API_KEY": "YOUR_API_KEY_HERE"
+            }
+          }
+        }
+      }
+    },
+    "copilot_cli": {
+      "config_file": "~/.copilot/mcp-config.json",
+      "tool_prefix": "",
+      "example_tool_call": "session_init",
+      "config": {
+        "mcpServers": {
+          "contextstream": {
+            "type": "local",
+            "command": "npx",
+            "args": ["-y", "@contextstream/mcp-server"],
+            "env": {
+              "CONTEXTSTREAM_API_URL": "https://api.contextstream.io",
+              "CONTEXTSTREAM_API_KEY": "${CONTEXTSTREAM_API_KEY}"
+            },
+            "tools": ["*"]
+          }
+        }
+      }
+    },
+    "antigravity": {
+      "config_file": "~/.antigravity/settings.json (TBD)",
+      "tool_prefix": "",
+      "example_tool_call": "session_init",
+      "note": "Antigravity MCP configuration structure needs verification"
+    }
+  },
+  "automation": {
+    "global_instructions": {
+      "enabled": true,
+      "instructions": [
+        "REQUIRED EVERY MESSAGE workflow",
+        "First message: call session_init",
+        "Subsequent messages: call context_smart FIRST",
+        "After completing task: call session_capture",
+        "User frustration/correction: call session_capture_lesson"
+      ],
+      "triggers": [
+        "keyword: context - automatically use context_smart",
+        "keyword: remember - use session_capture",
+        "context: user frustration/correction - use session_capture_lesson"
+      ]
+    }
+  }
+}
