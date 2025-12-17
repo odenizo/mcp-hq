@@ -40,15 +40,15 @@ touch .github/instructions/frontend.instructions.md
 
 **Note:** If a path matches both repository-wide and path-specific instructions, both are used. Avoid conflicts as Copilot's choice between conflicting instructions is non-deterministic.
 
-### 3. Agent Instructions (Global-ish)
-**Location:** Repository root
+### 3. Agent Instructions
+**Locations:** 
+- `AGENTS.md` - Anywhere in repo tree (nearest one takes precedence)
+- `CLAUDE.md` - In repo root only (for Claude-based agents)
+- `GEMINI.md` - In repo root only (for Gemini-based agents)
 
-For AI agents, Copilot CLI looks for:
-- `CLAUDE.md` (for Claude-based agents)
-- `GEMINI.md` (for Gemini-based agents)  
-- `COPILOT.md` (likely for Copilot-specific instructions)
+**Note:** `AGENTS.md` follows the [OpenAI agents.md standard](https://github.com/openai/agents.md). Multiple `AGENTS.md` files can exist in subdirectories, with the nearest one taking precedence.
 
-These files in the repository root act as agent-specific global instructions.
+**⚠️ There is NO `COPILOT.md` file!** Copilot uses `AGENTS.md` or the repository-wide instructions.
 
 ## 🔧 Command Line Options
 
@@ -162,16 +162,18 @@ For ContextStream MCP server integration, see:
 
 ## ✅ Best Practices
 
-1. **Repository instructions:** Use `.github/copilot-instructions.md` for project-specific guidelines
+1. **Repository instructions:** Use `.github/copilot-instructions.md` for project-specific guidelines (applies to all Copilot tools)
 2. **Path-specific:** Use `.github/instructions/*.instructions.md` for component-specific rules
-3. **Agent files:** Use `COPILOT.md` in repo root for Copilot-specific agent instructions
-4. **MCP config:** Configure servers in `~/.copilot/mcp-config.json` only
-5. **Tool naming:** Always use `<server>-<tool>` format for MCP tools
-6. **No conflicts:** Avoid conflicting instructions between files
+3. **Agent files:** Use `AGENTS.md` following OpenAI agents.md standard (can be in subdirectories)
+4. **Model-specific:** Use `CLAUDE.md` or `GEMINI.md` in repo root for model-specific instructions
+5. **MCP config:** Configure servers in `~/.copilot/mcp-config.json` only
+6. **Tool naming:** Always use `<server>-<tool>` format for MCP tools
+7. **No conflicts:** Avoid conflicting instructions between files
 
 ## 🚨 Common Mistakes
 
 ❌ **Trying to create `~/.copilot/COPILOT.md`** - Copilot CLI doesn't read this
+❌ **Using `COPILOT.md` instead of `AGENTS.md`** - COPILOT.md doesn't exist, use AGENTS.md
 ❌ **Using raw tool names** - Use `contextstream-session_init` not `session_init`
 ❌ **Expecting global instructions** - No true global file exists, use per-repo files
 ❌ **Conflicting instructions** - Between repository-wide and path-specific files

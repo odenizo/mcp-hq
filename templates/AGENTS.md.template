@@ -1,6 +1,9 @@
-# GitHub Copilot CLI - Repository Instructions
+# AI Agent Instructions (AGENTS.md)
 
-This file provides custom instructions for GitHub Copilot CLI when working in this repository.
+This file provides custom instructions for AI agents (including GitHub Copilot) when working in this repository.
+
+**Standard:** OpenAI agents.md format (https://github.com/openai/agents.md)  
+**Scope:** Nearest AGENTS.md in directory tree takes precedence
 
 ## Project Context
 
@@ -68,5 +71,9 @@ npm run deploy
 
 ---
 
-**Note:** This file is read by GitHub Copilot CLI as agent-specific instructions.
-For repository-wide instructions that apply to all tools, use `.github/copilot-instructions.md`.
+**Note:** 
+- This file follows the OpenAI agents.md standard (https://github.com/openai/agents.md)
+- GitHub Copilot reads AGENTS.md files - nearest one in directory tree takes precedence
+- You can have multiple AGENTS.md files in subdirectories for different contexts
+- Alternative: Use CLAUDE.md or GEMINI.md in repo root for model-specific instructions
+- For repository-wide instructions that apply to all tools, use `.github/copilot-instructions.md`
