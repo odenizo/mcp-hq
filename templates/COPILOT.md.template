@@ -1,0 +1,72 @@
+# GitHub Copilot CLI - Repository Instructions
+
+This file provides custom instructions for GitHub Copilot CLI when working in this repository.
+
+## Project Context
+
+<!-- Describe your project here -->
+This is a [project type] that [main purpose].
+
+## Development Guidelines
+
+### Code Style
+<!-- Add code style guidelines -->
+- Follow [style guide name] conventions
+- Use [naming conventions]
+- Prefer [patterns/approaches]
+
+### Architecture
+<!-- Describe architecture patterns -->
+- Use [architectural pattern]
+- Organize code by [organization strategy]
+- Dependencies managed with [tool]
+
+### Testing
+<!-- Testing requirements -->
+- Write tests for all new features
+- Test coverage should be [percentage]
+- Use [testing framework]
+
+### Documentation
+<!-- Documentation standards -->
+- Document all public APIs
+- Use [documentation format]
+- Keep README updated
+
+## Common Tasks
+
+### Building
+```bash
+# Build commands
+npm run build
+```
+
+### Testing
+```bash
+# Test commands
+npm test
+```
+
+### Deployment
+```bash
+# Deployment process
+npm run deploy
+```
+
+## Important Patterns
+
+<!-- Add project-specific patterns -->
+- When doing X, always Y
+- Avoid Z because [reason]
+- Use [library/tool] for [purpose]
+
+## Resources
+
+- Documentation: [link]
+- API Reference: [link]
+- Team guidelines: [link]
+
+---
+
+**Note:** This file is read by GitHub Copilot CLI as agent-specific instructions.
+For repository-wide instructions that apply to all tools, use `.github/copilot-instructions.md`.

@@ -1,0 +1,108 @@
+# Repository Custom Instructions for GitHub Copilot
+
+These instructions apply to ALL GitHub Copilot interactions in this repository, including Copilot Chat, Copilot CLI, and other Copilot-enabled tools.
+
+## Project Overview
+
+[Brief description of the project, its purpose, and main technologies]
+
+## Code Standards
+
+### Language & Framework
+- Primary language: [language]
+- Framework/stack: [framework]
+- Version requirements: [versions]
+
+### Code Style
+- Follow [style guide] for code formatting
+- Use [linter/formatter configuration]
+- Naming conventions: [conventions]
+
+### File Organization
+- Structure follows [pattern] approach
+- Place [file types] in [directories]
+- Configuration files in [location]
+
+## Development Workflow
+
+### Branch Strategy
+- Main branch: [branch name]
+- Feature branches: [naming pattern]
+- Commit message format: [format]
+
+### Testing Requirements
+- Write [type] tests for new features
+- Minimum coverage: [percentage]
+- Test framework: [framework]
+- Run tests before committing
+
+### Code Review
+- All changes require [review process]
+- Check [checklist items] before PR
+- Address all comments before merging
+
+## Architecture Guidelines
+
+### Design Patterns
+- Use [pattern] for [use case]
+- Avoid [anti-pattern] because [reason]
+- Prefer [approach] over [alternative]
+
+### Dependencies
+- Package manager: [tool]
+- Prefer [library] for [purpose]
+- Check license compatibility before adding dependencies
+
+### Error Handling
+- Use [error handling strategy]
+- Log errors with [logging framework]
+- User-facing errors should [requirements]
+
+## Security Guidelines
+
+- Never commit secrets or API keys
+- Use environment variables for configuration
+- Sanitize all user inputs
+- Follow [security standard] for [area]
+
+## Performance Considerations
+
+- Optimize [specific areas]
+- Avoid [performance anti-patterns]
+- Monitor [metrics]
+
+## Documentation
+
+- Document all public APIs with [format]
+- Update README for significant changes
+- Include examples for complex features
+
+## Common Patterns
+
+### Database Access
+[How to access database, patterns to follow]
+
+### API Design
+[REST/GraphQL patterns, versioning, responses]
+
+### State Management
+[How state is managed in the application]
+
+### Authentication/Authorization
+[Auth patterns, session management]
+
+## Known Issues & Workarounds
+
+- [Issue]: [Workaround]
+- [Limitation]: [How to handle]
+
+## Resources
+
+- [Documentation link]
+- [API reference]
+- [Team wiki/guidelines]
+- [Deployment docs]
+
+---
+
+**Note:** These instructions are automatically loaded by GitHub Copilot when working in this repository. For path-specific instructions, create files in `.github/instructions/`.
