@@ -63,7 +63,7 @@ cat templates/contextstream-instructions/CODEX-CLI-GEMINI-COPILOT-INSTRUCTIONS.m
 | Claude Code | `mcp__contextstream__<tool>` | `mcp__contextstream__session_init` |
 | Codex CLI | `<tool>` (raw name) | `session_init` |
 | Gemini CLI | `<tool>` (raw name) | `session_init` |
-| Copilot CLI | `<tool>` (raw name) | `session_init` |
+| Copilot CLI | `contextstream-<tool>` (server-prefixed) | `contextstream-session_init` |
 | Antigravity | `<tool>` (raw name) | `session_init` |
 
 ## Required Workflow
@@ -95,9 +95,10 @@ cat templates/contextstream-instructions/CODEX-CLI-GEMINI-COPILOT-INSTRUCTIONS.m
 ## Files in This Directory
 
 - `CLAUDE-CODE-INSTRUCTIONS.md` - Instructions for Claude Code (uses `mcp__contextstream__` prefix)
-- `CODEX-CLI-GEMINI-COPILOT-INSTRUCTIONS.md` - Instructions for Codex, Gemini, Copilot (use raw tool names)
-- `install-all.sh` - Automated installation script
+- `CODEX-CLI-GEMINI-INSTRUCTIONS.md` - Instructions for Codex CLI and Gemini CLI (use raw tool names)
+- `COPILOT-CLI-INSTRUCTIONS.md` - Instructions for GitHub Copilot CLI (uses `contextstream-` prefix)
 - `README.md` - This file
+- `install-all.sh` - Automated installation script
 
 ## Configuration Files
 

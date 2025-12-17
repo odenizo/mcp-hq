@@ -172,18 +172,21 @@ echo ""
 echo -e "${BLUE}Installing for Codex CLI...${NC}"
 append_instructions \
     "$HOME/.codex/AGENTS.md" \
-    "$SCRIPT_DIR/CODEX-CLI-GEMINI-COPILOT-INSTRUCTIONS.md"
+    "$SCRIPT_DIR/CODEX-CLI-GEMINI-INSTRUCTIONS.md"
 add_mcp_server_toml "$HOME/.codex/config.toml"
 echo ""
 
 echo -e "${BLUE}Installing for Gemini CLI...${NC}"
 append_instructions \
     "$HOME/.gemini/GEMINI.md" \
-    "$SCRIPT_DIR/CODEX-CLI-GEMINI-COPILOT-INSTRUCTIONS.md"
+    "$SCRIPT_DIR/CODEX-CLI-GEMINI-INSTRUCTIONS.md"
 add_mcp_server_json "$HOME/.gemini/settings.json" "stdio"
 echo ""
 
 echo -e "${BLUE}Installing for GitHub Copilot CLI...${NC}"
+# Note: Copilot CLI uses server-prefixed tool names (contextstream-session_init)
+# Instructions are in COPILOT-CLI-INSTRUCTIONS.md but not auto-added
+echo -e "${YELLOW}Note: Copilot CLI uses contextstream-<tool_name> format${NC}"
 add_mcp_server_json "$HOME/.copilot/mcp-config.json" "local"
 echo ""
 
