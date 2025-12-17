@@ -1,9 +1,10 @@
 # GitHub Copilot CLI Documentation
 
-This directory contains official GitHub Copilot CLI documentation from the github/docs repository.
+This directory contains official GitHub Copilot CLI documentation from the github/docs repository, plus comprehensive guides for advanced setups.
 
 ## 📁 Documentation Files
 
+### Official Docs
 - **copilot-cli-about.md** - About GitHub Copilot CLI (concepts and overview)
 - **copilot-cli-install.md** - Installing GitHub Copilot CLI
 - **copilot-cli-use.md** - Using GitHub Copilot CLI (basic usage guide)
@@ -11,9 +12,35 @@ This directory contains official GitHub Copilot CLI documentation from the githu
 - **copilot-custom-agents.md** - Creating custom agents
 - **copilot-mcp-extend.md** - Extending Copilot with Model Context Protocol (MCP)
 
-## 📖 Custom Instructions in Copilot CLI
+### Community Guides
+- **GLOBAL-INSTRUCTIONS-GUIDE.md** ⭐ **NEW** - Complete guide for setting up global instructions via default agent
 
-Copilot CLI supports **three levels** of custom instructions:
+## 📚 Quick Start Guides
+
+### Setup Global Instructions (5 minutes)
+
+**See:** [GLOBAL-INSTRUCTIONS-GUIDE.md](./GLOBAL-INSTRUCTIONS-GUIDE.md)
+
+Quick setup:
+```bash
+# Automated setup
+bash ../../scripts/setup-global-copilot-agent.sh
+
+# Edit instructions
+nano ~/.copilot/agents/default/instructions.md
+
+# Test
+copilot --agent default --prompt "test"
+```
+
+### Resources
+- **Setup Script:** `../../scripts/setup-global-copilot-agent.sh`
+- **Instructions Template:** `../../templates/copilot-global-instructions.md`
+- **Full Guide:** `./GLOBAL-INSTRUCTIONS-GUIDE.md`
+
+## 🎯 Custom Instructions Overview
+
+Copilot CLI supports **four levels** of custom instructions:
 
 ### Level 1: Repository-Wide Custom Instructions
 **Location:** `.github/copilot-instructions.md`
@@ -50,87 +77,38 @@ touch .github/instructions/frontend.instructions.md
 
 **⚠️ There is NO `COPILOT.md` file!** Copilot uses `AGENTS.md` or the repository-wide instructions.
 
-## 🌐 Global Instructions via Default Agent
+### Level 4: Global Default Agent (NEW)
+**Location:** `~/.copilot/agents/default/`
 
-To have instructions that apply **globally across all projects**, create a default user-level agent:
-
-### Step 1: Create Default Agent Directory
+Applies globally across all projects without repository files.
 
 ```bash
+# Quick setup
 mkdir -p ~/.copilot/agents/default
-```
 
-### Step 2: Create Agent Configuration
-
-**File:** `~/.copilot/agents/default/agent.yaml`
-
-```yaml
+# Create config
+cat > ~/.copilot/agents/default/agent.yaml << 'EOF'
 name: default
 description: "Default global agent with system-wide instructions"
 instructions_file: instructions.md
+EOF
+
+# Copy template
+cp templates/copilot-global-instructions.md ~/.copilot/agents/default/instructions.md
 ```
 
-### Step 3: Create Global Instructions File
+**See:** [GLOBAL-INSTRUCTIONS-GUIDE.md](./GLOBAL-INSTRUCTIONS-GUIDE.md) for complete setup and usage.
 
-**File:** `~/.copilot/agents/default/instructions.md`
+## 🌐 Instruction Hierarchy
 
-```markdown
-# Global Copilot Instructions
-
-## Code Style
-- Use 2-space indentation for JavaScript/YAML
-- Use 4-space indentation for Python
-- Follow project-specific style guides
-
-## Best Practices
-- Write tests for all new functions
-- Document public APIs
-- Use meaningful variable names
-
-## Security
-- Never commit secrets to version control
-- Use environment variables for sensitive data
-- Follow OWASP guidelines for web applications
-```
-
-### Step 4: Make Default Agent Auto-Load
-
-**Option A: Set as default in shell config**
-
-Add to `~/.bashrc`, `~/.zshrc`, or equivalent:
-
-```bash
-export COPILOT_AGENT_DEFAULT=default
-```
-
-**Option B: Use explicitly in commands**
-
-```bash
-# Run with default agent
-copilot --agent default --prompt "Your request"
-
-# In interactive mode, select default agent
-copilot
-# Then use: /agent default
-```
-
-**Option C: Create symlink for quick access**
-
-```bash
-# Link to a common directory for reference
-ln -s ~/.copilot/agents/default/instructions.md ~/instructions-global.md
-```
-
-### Step 5: Layering Instructions (Hierarchy)
-
-When using default agent + repository instructions, the precedence is:
+When multiple instruction files exist, precedence is:
 
 1. **Repository-specific** (`.github/copilot-instructions.md`) - **Highest priority**
 2. **Path-specific** (`.github/instructions/*.instructions.md`)
 3. **Agent-level** (`.AGENTS.md` / `CLAUDE.md` / `GEMINI.md`)
-4. **Default agent** (`~/.copilot/agents/default/instructions.md`) - **Lowest priority**
+4. **Global default agent** (`~/.copilot/agents/default/`) - **Lowest priority**
 
-**Example:** If a repo has `.github/copilot-instructions.md`, it will override the default agent instructions.
+**Example:** If a repo has `.github/copilot-instructions.md`, it will override the global default agent instructions.
 
 ## 🔧 Command Line Options
 
@@ -150,26 +128,53 @@ copilot --additional-mcp-config <json>
 copilot --allow-all-tools
 ```
 
-## ✨ Recommended Global Instructions Setup
+## ✨ Setting Up Global Instructions
 
-For maximum flexibility with global instructions:
+**See full guide:** [GLOBAL-INSTRUCTIONS-GUIDE.md](./GLOBAL-INSTRUCTIONS-GUIDE.md)
+
+### Automated Setup
 
 ```bash
-# 1. Create default agent
+# Run setup script from mcp-hq root
+bash scripts/setup-global-copilot-agent.sh
+```
+
+### Manual Setup
+
+```bash
+# 1. Create agent directory
 mkdir -p ~/.copilot/agents/default
 
-# 2. Copy template (if available)
-cp ./templates/copilot-global-instructions.md ~/.copilot/agents/default/instructions.md
-
-# 3. Create agent config
+# 2. Create agent configuration
 cat > ~/.copilot/agents/default/agent.yaml << 'EOF'
 name: default
 description: "Default global agent with system-wide instructions"
 instructions_file: instructions.md
 EOF
 
-# 4. Test it
-copilot --agent default --prompt "Tell me your instructions"
+# 3. Create instructions file
+cat > ~/.copilot/agents/default/instructions.md << 'EOF'
+# Global Copilot Instructions
+
+## Code Style
+- JavaScript: 2 spaces
+- Python: 4 spaces
+
+## Best Practices
+- Write tests for new functions
+- Document public APIs
+EOF
+
+# 4. Test
+copilot --agent default --prompt "What instructions are you following?"
+```
+
+### Auto-Load (Optional)
+
+Add to `~/.bashrc` or `~/.zshrc`:
+
+```bash
+export COPILOT_AGENT_DEFAULT=default
 ```
 
 ## 📦 MCP Configuration
@@ -244,8 +249,16 @@ For ContextStream MCP server integration, see:
 ❌ **Trying to create `~/.copilot/COPILOT.md`** - Copilot CLI doesn't read this
 ❌ **Using `COPILOT.md` instead of `AGENTS.md`** - COPILOT.md doesn't exist, use AGENTS.md
 ❌ **Using raw tool names** - Use `contextstream-session_init` not `session_init`
-❌ **Expecting magic global instructions** - Use default agent setup explicitly
+❌ **Missing global agent setup** - Instructions must be in `~/.copilot/agents/default/`
 ❌ **Conflicting instructions** - Between repository-wide and path-specific files
+
+## 🚀 Next Steps
+
+1. **Read:** [GLOBAL-INSTRUCTIONS-GUIDE.md](./GLOBAL-INSTRUCTIONS-GUIDE.md)
+2. **Setup:** Run `bash ../../scripts/setup-global-copilot-agent.sh`
+3. **Customize:** Edit `~/.copilot/agents/default/instructions.md`
+4. **Test:** Use `copilot --agent default --prompt "test"`
+5. **Automate:** Add export to shell config (optional)
 
 ## 📝 Last Updated
 
