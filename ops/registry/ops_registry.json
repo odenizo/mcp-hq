@@ -1,0 +1,20 @@
+{
+  "servers": [
+    {
+      "id": "srv-contextstream-mcp",
+      "name": "ContextStream MCP Server",
+      "category": "developer-tools",
+      "subcategory": "context-and-memory",
+      "status": "planned",
+      "deployment": {
+        "mode": "local-stdio",
+        "command": "npx -y @contextstream/mcp-server",
+        "env": ["CONTEXTSTREAM_API_KEY", "CONTEXTSTREAM_TOOLSET", "CONTEXTSTREAM_WORKSPACE_ID", "CONTEXTSTREAM_PROJECT_ID"]
+      },
+      "artifacts": {
+        "catalog": "catalog/servers/contextstream/contextstream_mcp_server_object.v4.json",
+        "schema": "spec/schemas/mcp_server_object.schema.v4.json"
+      }
+    }
+  ]
+}

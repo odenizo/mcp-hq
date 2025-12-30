@@ -1,0 +1,12 @@
+{
+  "servers": [
+    {
+      "id": "srv-contextstream-mcp",
+      "name": "ContextStream MCP Server",
+      "path": "servers/contextstream/contextstream_mcp_server_object.v4.json",
+      "schema_version": "4.0.0",
+      "category": "developer-tools",
+      "subcategory": "context-and-memory"
+    }
+  ]
+}

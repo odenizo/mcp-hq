@@ -1,0 +1,1279 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "MCP Server Catalog Object",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "generated_at",
+    "provenance",
+    "integrity",
+    "server",
+    "repo_layout",
+    "runtime",
+    "installation",
+    "configuration",
+    "global_instructions",
+    "inventory",
+    "tools_schema",
+    "resources_schema",
+    "prompts_schema",
+    "ops"
+  ],
+  "properties": {
+    "schema_version": {
+      "type": "string"
+    },
+    "generated_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "provenance": {
+      "type": "object",
+      "required": [
+        "generator",
+        "generated_from",
+        "extraction_rules"
+      ],
+      "properties": {
+        "generator": {
+          "type": "object",
+          "required": [
+            "name",
+            "version"
+          ],
+          "properties": {
+            "name": {
+              "type": "string"
+            },
+            "version": {
+              "type": "string"
+            }
+          }
+        },
+        "generated_from": {
+          "type": "object",
+          "properties": {
+            "zip_path": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "root_dir": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "commit": {
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          }
+        },
+        "extraction_rules": {
+          "type": "object",
+          "properties": {
+            "tools_file": {
+              "type": "string"
+            },
+            "resources_file": {
+              "type": "string"
+            },
+            "prompts_file": {
+              "type": "string"
+            },
+            "rules_templates_file": {
+              "type": "string"
+            },
+            "notes": {
+              "type": "string"
+            }
+          }
+        },
+        "warnings": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "integrity": {
+      "type": "object",
+      "properties": {
+        "zip_sha256": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "repo_tree_sha256": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "schema_sha256": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "server": {
+      "type": "object",
+      "required": [
+        "name",
+        "description",
+        "github_repo",
+        "package",
+        "version",
+        "category",
+        "subcategory"
+      ],
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "github_repo": {
+          "type": "object",
+          "required": [
+            "owner",
+            "repo",
+            "url"
+          ],
+          "properties": {
+            "owner": {
+              "type": "string"
+            },
+            "repo": {
+              "type": "string"
+            },
+            "url": {
+              "type": "string",
+              "format": "uri"
+            },
+            "default_branch": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "commit": {
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          }
+        },
+        "package": {
+          "type": "string"
+        },
+        "version": {
+          "type": "string"
+        },
+        "entrypoint": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "category": {
+          "type": "string"
+        },
+        "subcategory": {
+          "type": "string"
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "repo_layout": {
+      "type": "object",
+      "required": [
+        "root_dir",
+        "key_paths"
+      ],
+      "properties": {
+        "zip_path": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "root_dir": {
+          "type": "string"
+        },
+        "key_paths": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "path",
+              "kind",
+              "description"
+            ],
+            "properties": {
+              "path": {
+                "type": "string"
+              },
+              "kind": {
+                "type": "string",
+                "enum": [
+                  "file",
+                  "dir"
+                ]
+              },
+              "description": {
+                "type": "string"
+              },
+              "contains": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "runtime": {
+      "type": "object",
+      "required": [
+        "local_remote",
+        "transport",
+        "deployment_options",
+        "smithery",
+        "capabilities"
+      ],
+      "properties": {
+        "local_remote": {
+          "type": "string",
+          "enum": [
+            "local",
+            "remote",
+            "hybrid"
+          ]
+        },
+        "transport": {
+          "type": "object",
+          "required": [
+            "type"
+          ],
+          "properties": {
+            "type": {
+              "type": "string"
+            },
+            "notes": {
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          }
+        },
+        "deployment_options": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "type",
+              "summary"
+            ],
+            "properties": {
+              "type": {
+                "type": "string",
+                "enum": [
+                  "npx",
+                  "node",
+                  "docker",
+                  "smithery",
+                  "cloud-hosted",
+                  "other"
+                ]
+              },
+              "summary": {
+                "type": "string"
+              },
+              "commands": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "notes": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              }
+            }
+          }
+        },
+        "smithery": {
+          "type": "object",
+          "required": [
+            "compatible"
+          ],
+          "properties": {
+            "compatible": {
+              "type": "boolean"
+            },
+            "smithery_yaml_path": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "config_schema": {
+              "type": [
+                "object",
+                "null"
+              ]
+            },
+            "notes": {
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          }
+        },
+        "capabilities": {
+          "type": "object",
+          "properties": {
+            "auto_context": {
+              "type": "object",
+              "properties": {
+                "enabled": {
+                  "type": "boolean"
+                },
+                "skip_tools": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "prefix_format_notes": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                }
+              }
+            },
+            "pro_gating": {
+              "type": "object",
+              "properties": {
+                "enabled": {
+                  "type": "boolean"
+                },
+                "default_pro_tools": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "upgrade_url_env": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "pro_tools_override_env": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                }
+              }
+            },
+            "prompts_enabled_by_default": {
+              "type": "boolean"
+            }
+          }
+        }
+      }
+    },
+    "installation": {
+      "type": "object",
+      "required": [
+        "requirements",
+        "install_scripts"
+      ],
+      "properties": {
+        "requirements": {
+          "type": "object",
+          "properties": {
+            "node": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "other": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "install_scripts": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "name",
+              "shell",
+              "lines"
+            ],
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "shell": {
+                "type": "string"
+              },
+              "lines": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "notes": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "configuration": {
+      "type": "object",
+      "required": [
+        "options",
+        "configuration_schema"
+      ],
+      "properties": {
+        "precedence": {
+          "type": "object",
+          "properties": {
+            "order": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "options": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "key",
+              "type",
+              "required",
+              "description"
+            ],
+            "properties": {
+              "key": {
+                "type": "string"
+              },
+              "type": {
+                "type": "string"
+              },
+              "required": {
+                "type": "boolean"
+              },
+              "required_mode": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "enum": [
+                  null,
+                  "always",
+                  "one_of",
+                  "optional"
+                ]
+              },
+              "required_condition": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "default": {},
+              "description": {
+                "type": "string"
+              },
+              "where_used": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "configuration_schema": {
+          "type": "object"
+        },
+        "examples": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "name",
+              "config"
+            ],
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "config": {
+                "type": "object"
+              }
+            }
+          }
+        },
+        "secrets": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "global_instructions": {
+      "type": "object",
+      "required": [
+        "recommended",
+        "targets"
+      ],
+      "properties": {
+        "recommended": {
+          "type": "string"
+        },
+        "targets": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "client",
+              "file_names"
+            ],
+            "properties": {
+              "client": {
+                "type": "string"
+              },
+              "file_names": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "notes": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "inventory": {
+      "type": "object",
+      "required": [
+        "counts",
+        "context_injections"
+      ],
+      "properties": {
+        "counts": {
+          "type": "object",
+          "required": [
+            "tools",
+            "prompts",
+            "resources"
+          ],
+          "properties": {
+            "tools": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "prompts": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "resources": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "enabled_by_default": {
+              "type": "object",
+              "properties": {
+                "tools": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "prompts": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "resources": {
+                  "type": "integer",
+                  "minimum": 0
+                }
+              }
+            }
+          }
+        },
+        "context_injections": {
+          "type": "object",
+          "required": [
+            "token_estimates"
+          ],
+          "properties": {
+            "token_estimates": {
+              "type": "object",
+              "required": [
+                "total_tokens"
+              ],
+              "properties": {
+                "method": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "total_tokens": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "by_tool": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "required": [
+                      "tool",
+                      "estimated_tokens"
+                    ],
+                    "properties": {
+                      "tool": {
+                        "type": "string"
+                      },
+                      "estimated_tokens": {
+                        "type": "integer",
+                        "minimum": 0
+                      },
+                      "basis": {
+                        "type": [
+                          "string",
+                          "null"
+                        ]
+                      }
+                    }
+                  }
+                },
+                "notes": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "tools_schema": {
+      "type": "object",
+      "required": [
+        "tools",
+        "tools_by_name"
+      ],
+      "properties": {
+        "tools": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/tool"
+          }
+        },
+        "tools_by_name": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/$defs/tool"
+          }
+        }
+      }
+    },
+    "resources_schema": {
+      "type": "object",
+      "required": [
+        "resources",
+        "resources_by_name"
+      ],
+      "properties": {
+        "resources": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/resource"
+          }
+        },
+        "resources_by_name": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/$defs/resource"
+          }
+        }
+      }
+    },
+    "prompts_schema": {
+      "type": "object",
+      "required": [
+        "prompts",
+        "prompts_by_name"
+      ],
+      "properties": {
+        "prompts": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/prompt"
+          }
+        },
+        "prompts_by_name": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/$defs/prompt"
+          }
+        }
+      }
+    },
+    "ops": {
+      "type": "object",
+      "required": [
+        "deployments",
+        "deployments_by_id",
+        "installations",
+        "installations_by_id",
+        "ecosystem_integrations",
+        "ecosystem_integrations_by_id"
+      ],
+      "properties": {
+        "deployments": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/deployment"
+          }
+        },
+        "deployments_by_id": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/$defs/deployment"
+          }
+        },
+        "installations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/installation_state"
+          }
+        },
+        "installations_by_id": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/$defs/installation_state"
+          }
+        },
+        "ecosystem_integrations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ecosystem_integration"
+          }
+        },
+        "ecosystem_integrations_by_id": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/$defs/ecosystem_integration"
+          }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "source_location": {
+      "type": "object",
+      "required": [
+        "file",
+        "start_line",
+        "end_line"
+      ],
+      "properties": {
+        "file": {
+          "type": "string"
+        },
+        "start_line": {
+          "type": "integer"
+        },
+        "end_line": {
+          "type": "integer"
+        }
+      }
+    },
+    "tool": {
+      "type": "object",
+      "required": [
+        "name",
+        "title",
+        "description",
+        "access",
+        "input",
+        "output",
+        "context_join",
+        "source_locations"
+      ],
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "title_effective": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "description": {
+          "type": "string"
+        },
+        "description_effective": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "access": {
+          "type": "object",
+          "required": [
+            "tier"
+          ],
+          "properties": {
+            "tier": {
+              "type": "string",
+              "enum": [
+                "free",
+                "pro"
+              ]
+            },
+            "label_in_mcp_list": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "gated_on_free_plan": {
+              "type": [
+                "boolean",
+                "null"
+              ]
+            }
+          }
+        },
+        "input": {
+          "type": "object",
+          "required": [
+            "zod_source",
+            "json_schema"
+          ],
+          "properties": {
+            "zod_source": {
+              "type": "string"
+            },
+            "json_schema": {
+              "type": "object"
+            },
+            "notes": {
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          }
+        },
+        "output": {
+          "type": "object",
+          "required": [
+            "envelope",
+            "structured_content_schema"
+          ],
+          "properties": {
+            "envelope": {
+              "type": "object"
+            },
+            "structured_content_schema": {
+              "type": [
+                "object",
+                "null"
+              ]
+            },
+            "notes": {
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          }
+        },
+        "context_join": {
+          "type": "object",
+          "required": [
+            "auto_context_prefix_applies",
+            "text_contract"
+          ],
+          "properties": {
+            "mcp_content_items": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "type": {
+                    "type": "string"
+                  },
+                  "mime_type": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "type"
+                ]
+              }
+            },
+            "auto_context_prefix_applies": {
+              "type": "boolean"
+            },
+            "text_contract": {
+              "type": "object",
+              "required": [
+                "format",
+                "construction_notes"
+              ],
+              "properties": {
+                "format": {
+                  "type": "string",
+                  "enum": [
+                    "json_pretty",
+                    "plain_text",
+                    "markdown",
+                    "mixed"
+                  ]
+                },
+                "construction_notes": {
+                  "type": "string"
+                },
+                "example_snippet": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "source_locations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/source_location"
+          }
+        }
+      }
+    },
+    "resource": {
+      "type": "object",
+      "required": [
+        "name",
+        "uri_template",
+        "title",
+        "description",
+        "source_locations"
+      ],
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "uri_template": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "title": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "mimeType": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "enabled_by_default": {
+          "type": "boolean"
+        },
+        "source_locations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/source_location"
+          }
+        }
+      }
+    },
+    "prompt": {
+      "type": "object",
+      "required": [
+        "name",
+        "description",
+        "arguments_schema",
+        "source_locations",
+        "access"
+      ],
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "title_expr": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "title_effective": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "description": {
+          "type": "string"
+        },
+        "access": {
+          "type": "object",
+          "required": [
+            "tier"
+          ],
+          "properties": {
+            "tier": {
+              "type": "string",
+              "enum": [
+                "free",
+                "pro"
+              ]
+            },
+            "label_in_list": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "enabled_by_default": {
+              "type": [
+                "boolean",
+                "null"
+              ]
+            }
+          }
+        },
+        "arguments_schema": {
+          "type": "object"
+        },
+        "template_text": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "source_locations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/source_location"
+          }
+        }
+      }
+    },
+    "deployment": {
+      "type": "object",
+      "required": [
+        "id",
+        "host_type",
+        "endpoint"
+      ],
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "host_type": {
+          "type": "string",
+          "enum": [
+            "vm",
+            "macbook",
+            "cloud",
+            "smithery",
+            "proxy",
+            "docker",
+            "other"
+          ]
+        },
+        "host_id": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "endpoint": {
+          "type": "string"
+        },
+        "status": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "enum": [
+            null,
+            "running",
+            "stopped",
+            "unknown"
+          ]
+        },
+        "version": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "config_ref": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "installation_state": {
+      "type": "object",
+      "required": [
+        "id",
+        "client"
+      ],
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "client": {
+          "type": "string"
+        },
+        "machine": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "config": {
+          "type": [
+            "object",
+            "null"
+          ]
+        },
+        "resolved_config": {
+          "type": [
+            "object",
+            "null"
+          ]
+        },
+        "config_sources": {
+          "type": [
+            "object",
+            "null"
+          ]
+        },
+        "installed_at": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        },
+        "notes": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "ecosystem_integration": {
+      "type": "object",
+      "required": [
+        "id",
+        "type"
+      ],
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "aggregator",
+            "gateway",
+            "docker-compose",
+            "reverse-proxy",
+            "mcp-proxy",
+            "other"
+          ]
+        },
+        "name": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "details": {
+          "type": [
+            "object",
+            "null"
+          ]
+        },
+        "notes": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    }
+  }
+}

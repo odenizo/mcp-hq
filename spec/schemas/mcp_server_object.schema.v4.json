@@ -1,0 +1,1715 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://mcp-hq.local/schemas/mcp_server_object.schema.v4.json",
+  "title": "MCP Server Object (v4)",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "server_id",
+    "name",
+    "description",
+    "source",
+    "inventory",
+    "tools_schema"
+  ],
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "const": "4.0.0",
+      "description": "Schema version for this server object."
+    },
+    "server_id": {
+      "type": "string",
+      "pattern": "^srv-[a-z0-9]+(?:-[a-z0-9]+)*$",
+      "description": "Stable MCP-HQ identifier for the server (slugged)."
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1
+    },
+    "description": {
+      "type": "string",
+      "minLength": 1
+    },
+    "category": {
+      "type": "string"
+    },
+    "subcategory": {
+      "type": "string"
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "default": []
+    },
+    "locality": {
+      "type": "string",
+      "enum": [
+        "local",
+        "remote",
+        "hybrid",
+        "unknown"
+      ],
+      "default": "unknown",
+      "description": "Whether the server is generally intended to run locally, remotely, or either."
+    },
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "github_repo"
+      ],
+      "properties": {
+        "github_repo": {
+          "type": "string",
+          "minLength": 1,
+          "description": "owner/repo"
+        },
+        "homepage": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "default": null
+        },
+        "license": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "default": null
+        },
+        "package": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "name": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "default": null
+            },
+            "version": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "default": null
+            },
+            "private": {
+              "type": [
+                "boolean",
+                "null"
+              ],
+              "default": null
+            }
+          }
+        }
+      }
+    },
+    "extraction": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "extracted_at",
+        "extractor",
+        "method"
+      ],
+      "properties": {
+        "extracted_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "extractor": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Extractor name/version, e.g. mcp-hq-extractor@0.1"
+        },
+        "input_artifact": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "type": {
+              "type": "string",
+              "enum": [
+                "zip",
+                "git",
+                "directory",
+                "unknown"
+              ],
+              "default": "unknown"
+            },
+            "ref": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "default": null,
+              "description": "Path/URL/ref used as extractor input."
+            }
+          }
+        },
+        "repo_snapshot": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "commit_sha": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "default": null
+            },
+            "tag": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "default": null
+            },
+            "branch": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "default": null
+            }
+          }
+        },
+        "method": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "strategy"
+          ],
+          "properties": {
+            "strategy": {
+              "type": "string",
+              "enum": [
+                "ast",
+                "regex",
+                "runtime-introspection",
+                "manual"
+              ]
+            },
+            "entrypoints_scanned": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "default": []
+            },
+            "patterns_used": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "default": []
+            },
+            "notes": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "default": null
+            }
+          }
+        },
+        "confidence": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "tools": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1,
+              "default": 0.5
+            },
+            "resources": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1,
+              "default": 0.5
+            },
+            "prompts": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1,
+              "default": 0.5
+            }
+          }
+        },
+        "warnings": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ExtractionWarning"
+          },
+          "default": []
+        }
+      }
+    },
+    "key_paths": {
+      "type": "array",
+      "description": "Important files/folders in the repo with brief descriptions.",
+      "items": {
+        "$ref": "#/$defs/KeyPath"
+      },
+      "default": []
+    },
+    "runtime": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "language": {
+          "type": "string",
+          "default": "unknown"
+        },
+        "entrypoints": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Entrypoint"
+          },
+          "default": []
+        },
+        "mcp_transports_supported": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "stdio",
+              "http",
+              "sse",
+              "unknown"
+            ]
+          },
+          "default": [
+            "unknown"
+          ]
+        },
+        "required_env": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/EnvVar"
+          },
+          "default": []
+        },
+        "optional_env": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/EnvVar"
+          },
+          "default": []
+        },
+        "required_secrets": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/SecretRef"
+          },
+          "default": []
+        }
+      }
+    },
+    "deployment": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "supported_modes": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "local",
+              "remote",
+              "container",
+              "serverless",
+              "unknown"
+            ]
+          },
+          "default": [
+            "unknown"
+          ]
+        },
+        "docker": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "supported": {
+              "type": "boolean",
+              "default": false
+            },
+            "files": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "default": []
+            },
+            "image": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "default": null
+            }
+          }
+        },
+        "smithery": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "compatible": {
+              "type": "boolean",
+              "default": false
+            },
+            "files": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "default": []
+            },
+            "notes": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "default": null
+            }
+          }
+        },
+        "healthcheck": {
+          "$ref": "#/$defs/Healthcheck"
+        }
+      }
+    },
+    "configuration": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "options": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ConfigOption"
+          },
+          "default": []
+        },
+        "schema": {
+          "type": [
+            "object",
+            "null"
+          ],
+          "default": null,
+          "description": "Optional JSON Schema describing full configuration.",
+          "additionalProperties": true
+        },
+        "examples": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ConfigExample"
+          },
+          "default": []
+        }
+      }
+    },
+    "toolsets": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "default": null,
+      "additionalProperties": false,
+      "properties": {
+        "defined_toolsets": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Toolset"
+          },
+          "default": []
+        },
+        "default_toolset_id": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "default": null
+        },
+        "selection_mechanism": {
+          "$ref": "#/$defs/SelectionMechanism"
+        }
+      }
+    },
+    "context_injection": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "global_instructions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/InstructionBlock"
+          },
+          "default": []
+        },
+        "per_tool_instructions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ToolInstructionBlock"
+          },
+          "default": []
+        },
+        "dynamic_context_sources": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/DynamicContextSource"
+          },
+          "default": []
+        },
+        "tokenizer": {
+          "$ref": "#/$defs/TokenizerInfo"
+        },
+        "totals": {
+          "$ref": "#/$defs/ContextTotals"
+        }
+      }
+    },
+    "inventory": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "tools"
+      ],
+      "properties": {
+        "tools": {
+          "$ref": "#/$defs/InventoryCounts"
+        },
+        "resources": {
+          "$ref": "#/$defs/InventoryCounts"
+        },
+        "prompts": {
+          "$ref": "#/$defs/InventoryCounts"
+        }
+      }
+    },
+    "ids": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "tool_ids": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "default": {},
+          "description": "Optional mapping tool_name -> stable tool id."
+        },
+        "resource_ids": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "default": {}
+        },
+        "prompt_ids": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "default": {}
+        }
+      }
+    },
+    "content_hashes": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "repo_tree_hash": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "default": null
+        },
+        "tools_schema_hash": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "default": null
+        },
+        "resources_schema_hash": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "default": null
+        },
+        "prompts_schema_hash": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "default": null
+        }
+      }
+    },
+    "tools_schema": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "tools"
+      ],
+      "properties": {
+        "tools": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Tool"
+          }
+        },
+        "tools_by_name": {
+          "type": [
+            "object",
+            "null"
+          ],
+          "default": null,
+          "description": "Optional derived map for fast querying (name -> tool).",
+          "additionalProperties": {
+            "$ref": "#/$defs/Tool"
+          }
+        }
+      }
+    },
+    "resources_schema": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "default": null,
+      "additionalProperties": false,
+      "properties": {
+        "resources": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Resource"
+          },
+          "default": []
+        },
+        "resources_by_name": {
+          "type": [
+            "object",
+            "null"
+          ],
+          "default": null,
+          "additionalProperties": {
+            "$ref": "#/$defs/Resource"
+          }
+        }
+      }
+    },
+    "prompts_schema": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "default": null,
+      "additionalProperties": false,
+      "properties": {
+        "prompts": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Prompt"
+          },
+          "default": []
+        },
+        "prompts_by_name": {
+          "type": [
+            "object",
+            "null"
+          ],
+          "default": null,
+          "additionalProperties": {
+            "$ref": "#/$defs/Prompt"
+          }
+        }
+      }
+    },
+    "ops": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "default": null,
+      "additionalProperties": false,
+      "properties": {
+        "known_issues": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/KnownIssue"
+          },
+          "default": []
+        },
+        "operational_notes": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "default": null
+        },
+        "telemetry": {
+          "$ref": "#/$defs/TelemetryProfile"
+        }
+      }
+    },
+    "references": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "default": null,
+      "additionalProperties": false,
+      "properties": {
+        "duplicates_of": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": []
+        },
+        "replaces": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "default": null
+        },
+        "replaced_by": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "default": null
+        }
+      }
+    }
+  },
+  "$defs": {
+    "KeyPath": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "path",
+        "description"
+      ],
+      "properties": {
+        "path": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "kind": {
+          "type": "string",
+          "enum": [
+            "file",
+            "dir",
+            "unknown"
+          ],
+          "default": "unknown"
+        }
+      }
+    },
+    "SourceLocation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "path"
+      ],
+      "properties": {
+        "path": {
+          "type": "string"
+        },
+        "locator": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "default": null,
+          "description": "e.g. line_range:12-48, symbol:registerTool"
+        },
+        "kind": {
+          "type": "string",
+          "enum": [
+            "code",
+            "doc",
+            "config",
+            "unknown"
+          ],
+          "default": "code"
+        }
+      }
+    },
+    "ExtractionWarning": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "code",
+        "message"
+      ],
+      "properties": {
+        "code": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        },
+        "location": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/SourceLocation"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "severity": {
+          "type": "string",
+          "enum": [
+            "info",
+            "warn",
+            "error"
+          ],
+          "default": "warn"
+        }
+      }
+    },
+    "Entrypoint": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "type"
+      ],
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "cli",
+            "module",
+            "docker",
+            "unknown"
+          ]
+        },
+        "command": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "default": null
+        },
+        "args": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": []
+        },
+        "notes": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "default": null
+        }
+      }
+    },
+    "EnvVar": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "name"
+      ],
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "required": {
+          "type": "boolean",
+          "default": false
+        },
+        "secret": {
+          "type": "boolean",
+          "default": false
+        },
+        "description": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "default": null
+        },
+        "example": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "default": null
+        }
+      }
+    },
+    "SecretRef": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "name"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Secret logical name, e.g. GITHUB_TOKEN"
+        },
+        "provider": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "default": null,
+          "description": "e.g. env, 1password, vault"
+        },
+        "notes": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "default": null
+        }
+      }
+    },
+    "Healthcheck": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "default": null,
+      "additionalProperties": false,
+      "properties": {
+        "method": {
+          "type": "string",
+          "enum": [
+            "tool_call",
+            "http",
+            "none",
+            "unknown"
+          ],
+          "default": "unknown"
+        },
+        "example": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "default": null,
+          "description": "Human-readable example call or URL"
+        },
+        "expected": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "default": null
+        }
+      }
+    },
+    "ConfigOption": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "key",
+        "type"
+      ],
+      "properties": {
+        "key": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string",
+          "description": "Primitive type or reference, e.g. string|boolean|number|object"
+        },
+        "required": {
+          "type": "boolean",
+          "default": false
+        },
+        "default": {},
+        "description": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "default": null
+        },
+        "secret": {
+          "type": "boolean",
+          "default": false
+        },
+        "source_locations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/SourceLocation"
+          },
+          "default": []
+        }
+      }
+    },
+    "ConfigExample": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "name",
+        "config"
+      ],
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "default": null
+        },
+        "config": {
+          "type": "object",
+          "additionalProperties": true
+        }
+      }
+    },
+    "Toolset": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "label",
+        "tool_names"
+      ],
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "label": {
+          "type": "string"
+        },
+        "description": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "default": null
+        },
+        "tool_names": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": []
+        },
+        "source_locations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/SourceLocation"
+          },
+          "default": []
+        }
+      }
+    },
+    "SelectionMechanism": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "default": null,
+      "additionalProperties": false,
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "env",
+            "config",
+            "cli",
+            "code-constant",
+            "unknown"
+          ],
+          "default": "unknown"
+        },
+        "keys": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": []
+        },
+        "notes": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "default": null
+        }
+      }
+    },
+    "InstructionBlock": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "text"
+      ],
+      "properties": {
+        "text": {
+          "type": "string"
+        },
+        "tokens_estimate": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0,
+          "default": null
+        },
+        "source_locations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/SourceLocation"
+          },
+          "default": []
+        }
+      }
+    },
+    "ToolInstructionBlock": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "tool_name",
+        "text"
+      ],
+      "properties": {
+        "tool_name": {
+          "type": "string"
+        },
+        "text": {
+          "type": "string"
+        },
+        "tokens_estimate": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0,
+          "default": null
+        },
+        "source_locations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/SourceLocation"
+          },
+          "default": []
+        }
+      }
+    },
+    "DynamicContextSource": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "type",
+        "description"
+      ],
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "e.g. file-contents, repo-tree, search-results"
+        },
+        "description": {
+          "type": "string"
+        },
+        "max_size_hint_tokens": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0,
+          "default": null
+        }
+      }
+    },
+    "TokenizerInfo": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "default": null,
+      "additionalProperties": false,
+      "properties": {
+        "model_family": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "default": null,
+          "description": "e.g. gpt-4o, claude-3"
+        },
+        "method": {
+          "type": "string",
+          "enum": [
+            "estimated",
+            "measured",
+            "unknown"
+          ],
+          "default": "unknown"
+        }
+      }
+    },
+    "ContextTotals": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "default": null,
+      "additionalProperties": false,
+      "properties": {
+        "tokens_estimate_global": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0,
+          "default": null
+        },
+        "tokens_estimate_per_tool_sum": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0,
+          "default": null
+        },
+        "tokens_estimate_max_runtime": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0,
+          "default": null
+        }
+      }
+    },
+    "InventoryCounts": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "declared": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0,
+          "default": null
+        },
+        "extracted": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0,
+          "default": null
+        },
+        "enabled_by_default": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0,
+          "default": null
+        }
+      }
+    },
+    "Tool": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "name",
+        "description"
+      ],
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "schemas": {
+          "$ref": "#/$defs/ToolSchemas"
+        },
+        "availability": {
+          "$ref": "#/$defs/Availability"
+        },
+        "side_effects": {
+          "$ref": "#/$defs/SideEffects"
+        },
+        "safety_profile": {
+          "$ref": "#/$defs/SafetyProfile"
+        },
+        "source_locations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/SourceLocation"
+          },
+          "default": []
+        },
+        "examples": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ToolExample"
+          },
+          "default": []
+        },
+        "notes": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "default": null
+        }
+      }
+    },
+    "ToolSchemas": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "default": null,
+      "additionalProperties": false,
+      "properties": {
+        "input": {
+          "$ref": "#/$defs/SchemaRef"
+        },
+        "output": {
+          "$ref": "#/$defs/SchemaRef"
+        },
+        "schema_completeness": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "input_present": {
+              "type": "boolean",
+              "default": false
+            },
+            "output_present": {
+              "type": "boolean",
+              "default": false
+            },
+            "constraints_present": {
+              "type": "boolean",
+              "default": false
+            }
+          }
+        }
+      }
+    },
+    "SchemaRef": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "default": null,
+      "additionalProperties": false,
+      "properties": {
+        "json_schema": {
+          "type": [
+            "object",
+            "null"
+          ],
+          "default": null,
+          "additionalProperties": true
+        },
+        "source_type": {
+          "type": "string",
+          "enum": [
+            "jsonschema",
+            "zod",
+            "typescript",
+            "unknown"
+          ],
+          "default": "unknown"
+        },
+        "source_locations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/SourceLocation"
+          },
+          "default": []
+        }
+      }
+    },
+    "Availability": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "default": null,
+      "additionalProperties": false,
+      "properties": {
+        "default_enabled": {
+          "type": [
+            "boolean",
+            "null"
+          ],
+          "default": null
+        },
+        "toolset_ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": []
+        },
+        "gating": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/GatingRule"
+          },
+          "default": []
+        }
+      }
+    },
+    "GatingRule": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "type"
+      ],
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "env",
+            "config",
+            "cli",
+            "unknown"
+          ]
+        },
+        "key": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "default": null
+        },
+        "expected_values": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": []
+        },
+        "notes": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "default": null
+        }
+      }
+    },
+    "SideEffects": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "default": null,
+      "additionalProperties": false,
+      "properties": {
+        "writes_files": {
+          "type": [
+            "boolean",
+            "null"
+          ],
+          "default": null
+        },
+        "writes_network": {
+          "type": [
+            "boolean",
+            "null"
+          ],
+          "default": null
+        },
+        "mutates_remote_state": {
+          "type": [
+            "boolean",
+            "null"
+          ],
+          "default": null
+        },
+        "requires_auth": {
+          "type": [
+            "boolean",
+            "null"
+          ],
+          "default": null
+        },
+        "reads_secrets": {
+          "type": [
+            "boolean",
+            "null"
+          ],
+          "default": null
+        }
+      }
+    },
+    "SafetyProfile": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "default": null,
+      "additionalProperties": false,
+      "properties": {
+        "idempotent": {
+          "type": [
+            "boolean",
+            "null"
+          ],
+          "default": null
+        },
+        "dry_run_supported": {
+          "type": [
+            "boolean",
+            "null"
+          ],
+          "default": null
+        },
+        "rollback_notes": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "default": null
+        }
+      }
+    },
+    "ToolExample": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "name"
+      ],
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "input_example": {
+          "type": [
+            "object",
+            "null"
+          ],
+          "default": null,
+          "additionalProperties": true
+        },
+        "output_example": {
+          "type": [
+            "object",
+            "null"
+          ],
+          "default": null,
+          "additionalProperties": true
+        },
+        "notes": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "default": null
+        }
+      }
+    },
+    "Resource": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "name",
+        "description"
+      ],
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "uri": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "default": null
+        },
+        "schemas": {
+          "$ref": "#/$defs/ToolSchemas"
+        },
+        "source_locations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/SourceLocation"
+          },
+          "default": []
+        },
+        "notes": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "default": null
+        }
+      }
+    },
+    "Prompt": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "name",
+        "description"
+      ],
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "arguments": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/PromptArg"
+          },
+          "default": []
+        },
+        "source_locations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/SourceLocation"
+          },
+          "default": []
+        },
+        "notes": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "default": null
+        }
+      }
+    },
+    "PromptArg": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "name"
+      ],
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "default": null
+        },
+        "required": {
+          "type": "boolean",
+          "default": false
+        },
+        "schema": {
+          "type": [
+            "object",
+            "null"
+          ],
+          "default": null,
+          "additionalProperties": true
+        }
+      }
+    },
+    "KnownIssue": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "symptom"
+      ],
+      "properties": {
+        "symptom": {
+          "type": "string"
+        },
+        "cause_hint": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "default": null
+        },
+        "workaround": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "default": null
+        },
+        "refs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": []
+        }
+      }
+    },
+    "TelemetryProfile": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "default": null,
+      "additionalProperties": false,
+      "properties": {
+        "logs": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "default": null
+        },
+        "metrics": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "default": null
+        },
+        "traces": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "default": null
+        },
+        "notes": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "default": null
+        }
+      }
+    }
+  }
+}

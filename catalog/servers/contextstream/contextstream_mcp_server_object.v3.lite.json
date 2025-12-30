@@ -1,0 +1,1855 @@
+{
+  "schema_version": "3.0.0",
+  "generated_at": "2025-12-27T05:40:41.128837+00:00",
+  "server": {
+    "name": "contextstream-mcp",
+    "description": "MCP server exposing ContextStream public API - code context, memory, search, and AI tools for developers",
+    "github_repo": {
+      "owner": "contextstream",
+      "repo": "mcp-server",
+      "url": "https://github.com/contextstream/mcp-server",
+      "default_branch": null,
+      "commit": null
+    },
+    "package": "@contextstream/mcp-server",
+    "version": "0.3.39",
+    "entrypoint": "dist/index.js",
+    "category": "developer-tools",
+    "subcategory": "context-and-memory",
+    "tags": [
+      "mcp",
+      "model-context-protocol",
+      "contextstream",
+      "ai",
+      "code-context",
+      "memory",
+      "knowledge-graph"
+    ]
+  },
+  "repo_layout": {
+    "zip_path": "/mnt/data/mcp-server-main (1).zip",
+    "root_dir": "/mnt/data/contextstream-mcp-server/mcp-server-main",
+    "key_paths": [
+      {
+        "path": "README.md",
+        "kind": "file",
+        "description": "User-facing documentation, install/config, usage patterns, env vars."
+      },
+      {
+        "path": "package.json",
+        "kind": "file",
+        "description": "Package metadata, scripts, dependencies, bin entrypoint."
+      },
+      {
+        "path": "smithery.yaml",
+        "kind": "file",
+        "description": "Smithery startCommand + configSchema + npx command function."
+      },
+      {
+        "path": "src/index.ts",
+        "kind": "file",
+        "description": "Server entrypoint: loads config, stdio transport, registers tools/resources (prompts disabled)."
+      },
+      {
+        "path": "src/config.ts",
+        "kind": "file",
+        "description": "Env-based configuration loader + Zod schema; enforces API key/JWT requirement."
+      },
+      {
+        "path": "src/tools.ts",
+        "kind": "file",
+        "description": "All MCP tools: registration, inputSchema (Zod), PRO gating, auto-context wrapper."
+      },
+      {
+        "path": "src/session-manager.ts",
+        "kind": "file",
+        "description": "Auto-context initialization, workspace discovery, context summary injection and warnings."
+      },
+      {
+        "path": "src/resources.ts",
+        "kind": "file",
+        "description": "MCP resources: OpenAPI spec, workspaces list, projects by workspace."
+      },
+      {
+        "path": "src/prompts.ts",
+        "kind": "file",
+        "description": "MCP prompts library (currently not registered by default)."
+      },
+      {
+        "path": "src/rules-templates.ts",
+        "kind": "file",
+        "description": "Editor rule templates; provides global instructions string and per-editor targets."
+      },
+      {
+        "path": "src/client.ts",
+        "kind": "file",
+        "description": "HTTP client for ContextStream API; used by tools/resources."
+      }
+    ]
+  },
+  "inventory": {
+    "tools": 86,
+    "prompts": 22,
+    "resources": 3,
+    "enabled_by_default": {
+      "tools": 17,
+      "resources": 3,
+      "prompts": 0
+    }
+  },
+  "configuration": {
+    "options": [
+      {
+        "key": "CONTEXTSTREAM_API_URL",
+        "type": "string(uri)",
+        "required": true,
+        "required_mode": "always",
+        "required_condition": null,
+        "default": null,
+        "description": "Base API URL (e.g. `https://api.contextstream.io`)",
+        "where_used": [
+          "src/config.ts",
+          "src/index.ts"
+        ]
+      },
+      {
+        "key": "CONTEXTSTREAM_API_KEY",
+        "type": "string",
+        "required": false,
+        "required_mode": "one_of",
+        "required_condition": "Require either CONTEXTSTREAM_API_KEY or CONTEXTSTREAM_JWT",
+        "default": null,
+        "description": "API key (*required unless `CONTEXTSTREAM_JWT` is set)",
+        "where_used": [
+          "src/config.ts",
+          "src/index.ts"
+        ]
+      },
+      {
+        "key": "CONTEXTSTREAM_JWT",
+        "type": "string",
+        "required": false,
+        "required_mode": "one_of",
+        "required_condition": "Require either CONTEXTSTREAM_API_KEY or CONTEXTSTREAM_JWT",
+        "default": null,
+        "description": "JWT (*required unless `CONTEXTSTREAM_API_KEY` is set)",
+        "where_used": [
+          "src/config.ts",
+          "src/index.ts"
+        ]
+      },
+      {
+        "key": "CONTEXTSTREAM_WORKSPACE_ID",
+        "type": "string(uuid)",
+        "required": false,
+        "required_mode": "optional",
+        "required_condition": null,
+        "default": null,
+        "description": "Default workspace ID fallback",
+        "where_used": [
+          "src/config.ts",
+          "src/index.ts"
+        ]
+      },
+      {
+        "key": "CONTEXTSTREAM_PROJECT_ID",
+        "type": "string(uuid)",
+        "required": false,
+        "required_mode": "optional",
+        "required_condition": null,
+        "default": null,
+        "description": "Default project ID fallback",
+        "where_used": [
+          "src/config.ts",
+          "src/index.ts"
+        ]
+      },
+      {
+        "key": "CONTEXTSTREAM_USER_AGENT",
+        "type": "string",
+        "required": false,
+        "required_mode": "optional",
+        "required_condition": null,
+        "default": null,
+        "description": "Custom user agent string",
+        "where_used": [
+          "src/config.ts",
+          "src/index.ts"
+        ]
+      },
+      {
+        "key": "CONTEXTSTREAM_PRO_TOOLS",
+        "type": "string",
+        "required": false,
+        "required_mode": "optional",
+        "required_condition": null,
+        "default": null,
+        "description": "Comma-separated tool names treated as PRO (default: `ai_context,ai_enhanced_context,ai_context_budget,ai_embeddings,ai_plan,ai_tasks`)",
+        "where_used": [
+          "src/config.ts",
+          "src/index.ts",
+          "src/tools.ts"
+        ]
+      },
+      {
+        "key": "CONTEXTSTREAM_UPGRADE_URL",
+        "type": "string(uri)",
+        "required": false,
+        "required_mode": "optional",
+        "required_condition": null,
+        "default": null,
+        "description": "Upgrade link shown when Free users call PRO tools (default: `https://contextstream.io/pricing`)",
+        "where_used": [
+          "src/config.ts",
+          "src/index.ts",
+          "src/tools.ts"
+        ]
+      },
+      {
+        "key": "CONTEXTSTREAM_TOOLSET",
+        "type": "string",
+        "required": false,
+        "required_mode": "optional",
+        "required_condition": null,
+        "default": null,
+        "description": "Tool exposure control (see README).",
+        "where_used": [
+          "src/tools.ts",
+          "README.md"
+        ]
+      },
+      {
+        "key": "CONTEXTSTREAM_TOOL_ALLOWLIST",
+        "type": "string",
+        "required": false,
+        "required_mode": "optional",
+        "required_condition": null,
+        "default": null,
+        "description": "Tool exposure control (see README).",
+        "where_used": [
+          "src/tools.ts",
+          "README.md"
+        ]
+      }
+    ]
+  },
+  "tools": [
+    {
+      "name": "mcp_server_version",
+      "title": "Get MCP server version",
+      "access": {
+        "tier": "free",
+        "label_in_mcp_list": "Free",
+        "gated_on_free_plan": false
+      },
+      "source_locations": [
+        {
+          "file": "src/tools.ts",
+          "start_line": 371,
+          "end_line": 382
+        }
+      ]
+    },
+    {
+      "name": "auth_me",
+      "title": "Get current user",
+      "access": {
+        "tier": "free",
+        "label_in_mcp_list": "Free",
+        "gated_on_free_plan": false
+      },
+      "source_locations": [
+        {
+          "file": "src/tools.ts",
+          "start_line": 384,
+          "end_line": 395
+        }
+      ]
+    },
+    {
+      "name": "workspaces_list",
+      "title": "List workspaces",
+      "access": {
+        "tier": "free",
+        "label_in_mcp_list": "Free",
+        "gated_on_free_plan": false
+      },
+      "source_locations": [
+        {
+          "file": "src/tools.ts",
+          "start_line": 398,
+          "end_line": 409
+        }
+      ]
+    },
+    {
+      "name": "workspaces_create",
+      "title": "Create workspace",
+      "access": {
+        "tier": "free",
+        "label_in_mcp_list": "Free",
+        "gated_on_free_plan": false
+      },
+      "source_locations": [
+        {
+          "file": "src/tools.ts",
+          "start_line": 411,
+          "end_line": 426
+        }
+      ]
+    },
+    {
+      "name": "workspaces_update",
+      "title": "Update workspace",
+      "access": {
+        "tier": "free",
+        "label_in_mcp_list": "Free",
+        "gated_on_free_plan": false
+      },
+      "source_locations": [
+        {
+          "file": "src/tools.ts",
+          "start_line": 428,
+          "end_line": 445
+        }
+      ]
+    },
+    {
+      "name": "workspaces_delete",
+      "title": "Delete workspace",
+      "access": {
+        "tier": "free",
+        "label_in_mcp_list": "Free",
+        "gated_on_free_plan": false
+      },
+      "source_locations": [
+        {
+          "file": "src/tools.ts",
+          "start_line": 447,
+          "end_line": 462
+        }
+      ]
+    },
+    {
+      "name": "projects_list",
+      "title": "List projects",
+      "access": {
+        "tier": "free",
+        "label_in_mcp_list": "Free",
+        "gated_on_free_plan": false
+      },
+      "source_locations": [
+        {
+          "file": "src/tools.ts",
+          "start_line": 465,
+          "end_line": 476
+        }
+      ]
+    },
+    {
+      "name": "projects_create",
+      "title": "Create project",
+      "access": {
+        "tier": "free",
+        "label_in_mcp_list": "Free",
+        "gated_on_free_plan": false
+      },
+      "source_locations": [
+        {
+          "file": "src/tools.ts",
+          "start_line": 478,
+          "end_line": 493
+        }
+      ]
+    },
+    {
+      "name": "projects_update",
+      "title": "Update project",
+      "access": {
+        "tier": "free",
+        "label_in_mcp_list": "Free",
+        "gated_on_free_plan": false
+      },
+      "source_locations": [
+        {
+          "file": "src/tools.ts",
+          "start_line": 495,
+          "end_line": 511
+        }
+      ]
+    },
+    {
+      "name": "projects_delete",
+      "title": "Delete project",
+      "access": {
+        "tier": "free",
+        "label_in_mcp_list": "Free",
+        "gated_on_free_plan": false
+      },
+      "source_locations": [
+        {
+          "file": "src/tools.ts",
+          "start_line": 513,
+          "end_line": 528
+        }
+      ]
+    },
+    {
+      "name": "projects_index",
+      "title": "Index project",
+      "access": {
+        "tier": "free",
+        "label_in_mcp_list": "Free",
+        "gated_on_free_plan": false
+      },
+      "source_locations": [
+        {
+          "file": "src/tools.ts",
+          "start_line": 530,
+          "end_line": 546
+        }
+      ]
+    },
+    {
+      "name": "search_semantic",
+      "title": "Semantic search",
+      "access": {
+        "tier": "free",
+        "label_in_mcp_list": "Free",
+        "gated_on_free_plan": false
+      },
+      "source_locations": [
+        {
+          "file": "src/tools.ts",
+          "start_line": 556,
+          "end_line": 563
+        }
+      ]
+    },
+    {
+      "name": "search_hybrid",
+      "title": "Hybrid search",
+      "access": {
+        "tier": "free",
+        "label_in_mcp_list": "Free",
+        "gated_on_free_plan": false
+      },
+      "source_locations": [
+        {
+          "file": "src/tools.ts",
+          "start_line": 565,
+          "end_line": 572
+        }
+      ]
+    },
+    {
+      "name": "search_keyword",
+      "title": "Keyword search",
+      "access": {
+        "tier": "free",
+        "label_in_mcp_list": "Free",
+        "gated_on_free_plan": false
+      },
+      "source_locations": [
+        {
+          "file": "src/tools.ts",
+          "start_line": 574,
+          "end_line": 581
+        }
+      ]
+    },
+    {
+      "name": "search_pattern",
+      "title": "Pattern search",
+      "access": {
+        "tier": "free",
+        "label_in_mcp_list": "Free",
+        "gated_on_free_plan": false
+      },
+      "source_locations": [
+        {
+          "file": "src/tools.ts",
+          "start_line": 583,
+          "end_line": 590
+        }
+      ]
+    },
+    {
+      "name": "memory_create_event",
+      "title": "Create memory event",
+      "access": {
+        "tier": "free",
+        "label_in_mcp_list": "Free",
+        "gated_on_free_plan": false
+      },
+      "source_locations": [
+        {
+          "file": "src/tools.ts",
+          "start_line": 593,
+          "end_line": 611
+        }
+      ]
+    },
+    {
+      "name": "memory_bulk_ingest",
+      "title": "Bulk ingest events",
+      "access": {
+        "tier": "free",
+        "label_in_mcp_list": "Free",
+        "gated_on_free_plan": false
+      },
+      "source_locations": [
+        {
+          "file": "src/tools.ts",
+          "start_line": 613,
+          "end_line": 628
+        }
+      ]
+    },
+    {
+      "name": "memory_list_events",
+      "title": "List memory events",
+      "access": {
+        "tier": "free",
+        "label_in_mcp_list": "Free",
+        "gated_on_free_plan": false
+      },
+      "source_locations": [
+        {
+          "file": "src/tools.ts",
+          "start_line": 630,
+          "end_line": 645
+        }
+      ]
+    },
+    {
+      "name": "memory_create_node",
+      "title": "Create knowledge node",
+      "access": {
+        "tier": "free",
+        "label_in_mcp_list": "Free",
+        "gated_on_free_plan": false
+      },
+      "source_locations": [
+        {
+          "file": "src/tools.ts",
+          "start_line": 647,
+          "end_line": 672
+        }
+      ]
+    },
+    {
+      "name": "memory_list_nodes",
+      "title": "List knowledge nodes",
+      "access": {
+        "tier": "free",
+        "label_in_mcp_list": "Free",
+        "gated_on_free_plan": false
+      },
+      "source_locations": [
+        {
+          "file": "src/tools.ts",
+          "start_line": 674,
+          "end_line": 689
+        }
+      ]
+    },
+    {
+      "name": "memory_search",
+      "title": "Memory-aware search",
+      "access": {
+        "tier": "free",
+        "label_in_mcp_list": "Free",
+        "gated_on_free_plan": false
+      },
+      "source_locations": [
+        {
+          "file": "src/tools.ts",
+          "start_line": 691,
+          "end_line": 707
+        }
+      ]
+    },
+    {
+      "name": "memory_decisions",
+      "title": "Decision summaries",
+      "access": {
+        "tier": "free",
+        "label_in_mcp_list": "Free",
+        "gated_on_free_plan": false
+      },
+      "source_locations": [
+        {
+          "file": "src/tools.ts",
+          "start_line": 709,
+          "end_line": 725
+        }
+      ]
+    },
+    {
+      "name": "graph_related",
+      "title": "Related knowledge nodes",
+      "access": {
+        "tier": "free",
+        "label_in_mcp_list": "Free",
+        "gated_on_free_plan": false
+      },
+      "source_locations": [
+        {
+          "file": "src/tools.ts",
+          "start_line": 728,
+          "end_line": 744
+        }
+      ]
+    },
+    {
+      "name": "graph_path",
+      "title": "Knowledge path",
+      "access": {
+        "tier": "free",
+        "label_in_mcp_list": "Free",
+        "gated_on_free_plan": false
+      },
+      "source_locations": [
+        {
+          "file": "src/tools.ts",
+          "start_line": 746,
+          "end_line": 762
+        }
+      ]
+    },
+    {
+      "name": "graph_decisions",
+      "title": "Decision graph",
+      "access": {
+        "tier": "free",
+        "label_in_mcp_list": "Free",
+        "gated_on_free_plan": false
+      },
+      "source_locations": [
+        {
+          "file": "src/tools.ts",
+          "start_line": 764,
+          "end_line": 779
+        }
+      ]
+    },
+    {
+      "name": "graph_dependencies",
+      "title": "Code dependencies",
+      "access": {
+        "tier": "free",
+        "label_in_mcp_list": "Free",
+        "gated_on_free_plan": false
+      },
+      "source_locations": [
+        {
+          "file": "src/tools.ts",
+          "start_line": 781,
+          "end_line": 801
+        }
+      ]
+    },
+    {
+      "name": "graph_call_path",
+      "title": "Call path",
+      "access": {
+        "tier": "free",
+        "label_in_mcp_list": "Free",
+        "gated_on_free_plan": false
+      },
+      "source_locations": [
+        {
+          "file": "src/tools.ts",
+          "start_line": 803,
+          "end_line": 826
+        }
+      ]
+    },
+    {
+      "name": "graph_impact",
+      "title": "Impact analysis",
+      "access": {
+        "tier": "free",
+        "label_in_mcp_list": "Free",
+        "gated_on_free_plan": false
+      },
+      "source_locations": [
+        {
+          "file": "src/tools.ts",
+          "start_line": 828,
+          "end_line": 847
+        }
+      ]
+    },
+    {
+      "name": "ai_context",
+      "title": "Build AI context",
+      "access": {
+        "tier": "pro",
+        "label_in_mcp_list": "PRO",
+        "gated_on_free_plan": true
+      },
+      "source_locations": [
+        {
+          "file": "src/tools.ts",
+          "start_line": 850,
+          "end_line": 869
+        }
+      ]
+    },
+    {
+      "name": "ai_embeddings",
+      "title": "Generate embeddings",
+      "access": {
+        "tier": "pro",
+        "label_in_mcp_list": "PRO",
+        "gated_on_free_plan": true
+      },
+      "source_locations": [
+        {
+          "file": "src/tools.ts",
+          "start_line": 871,
+          "end_line": 882
+        }
+      ]
+    },
+    {
+      "name": "ai_plan",
+      "title": "Generate dev plan",
+      "access": {
+        "tier": "pro",
+        "label_in_mcp_list": "PRO",
+        "gated_on_free_plan": true
+      },
+      "source_locations": [
+        {
+          "file": "src/tools.ts",
+          "start_line": 884,
+          "end_line": 899
+        }
+      ]
+    },
+    {
+      "name": "ai_tasks",
+      "title": "Generate tasks",
+      "access": {
+        "tier": "pro",
+        "label_in_mcp_list": "PRO",
+        "gated_on_free_plan": true
+      },
+      "source_locations": [
+        {
+          "file": "src/tools.ts",
+          "start_line": 901,
+          "end_line": 917
+        }
+      ]
+    },
+    {
+      "name": "ai_enhanced_context",
+      "title": "Enhanced AI context",
+      "access": {
+        "tier": "pro",
+        "label_in_mcp_list": "PRO",
+        "gated_on_free_plan": true
+      },
+      "source_locations": [
+        {
+          "file": "src/tools.ts",
+          "start_line": 919,
+          "end_line": 938
+        }
+      ]
+    },
+    {
+      "name": "projects_get",
+      "title": "Get project",
+      "access": {
+        "tier": "free",
+        "label_in_mcp_list": "Free",
+        "gated_on_free_plan": false
+      },
+      "source_locations": [
+        {
+          "file": "src/tools.ts",
+          "start_line": 941,
+          "end_line": 957
+        }
+      ]
+    },
+    {
+      "name": "projects_overview",
+      "title": "Project overview",
+      "access": {
+        "tier": "free",
+        "label_in_mcp_list": "Free",
+        "gated_on_free_plan": false
+      },
+      "source_locations": [
+        {
+          "file": "src/tools.ts",
+          "start_line": 959,
+          "end_line": 975
+        }
+      ]
+    },
+    {
+      "name": "projects_statistics",
+      "title": "Project statistics",
+      "access": {
+        "tier": "free",
+        "label_in_mcp_list": "Free",
+        "gated_on_free_plan": false
+      },
+      "source_locations": [
+        {
+          "file": "src/tools.ts",
+          "start_line": 977,
+          "end_line": 993
+        }
+      ]
+    },
+    {
+      "name": "projects_files",
+      "title": "List project files",
+      "access": {
+        "tier": "free",
+        "label_in_mcp_list": "Free",
+        "gated_on_free_plan": false
+      },
+      "source_locations": [
+        {
+          "file": "src/tools.ts",
+          "start_line": 995,
+          "end_line": 1011
+        }
+      ]
+    },
+    {
+      "name": "projects_index_status",
+      "title": "Index status",
+      "access": {
+        "tier": "free",
+        "label_in_mcp_list": "Free",
+        "gated_on_free_plan": false
+      },
+      "source_locations": [
+        {
+          "file": "src/tools.ts",
+          "start_line": 1013,
+          "end_line": 1029
+        }
+      ]
+    },
+    {
+      "name": "projects_ingest_local",
+      "title": "Ingest local files",
+      "access": {
+        "tier": "free",
+        "label_in_mcp_list": "Free",
+        "gated_on_free_plan": false
+      },
+      "source_locations": [
+        {
+          "file": "src/tools.ts",
+          "start_line": 1031,
+          "end_line": 1110
+        }
+      ]
+    },
+    {
+      "name": "workspaces_get",
+      "title": "Get workspace",
+      "access": {
+        "tier": "free",
+        "label_in_mcp_list": "Free",
+        "gated_on_free_plan": false
+      },
+      "source_locations": [
+        {
+          "file": "src/tools.ts",
+          "start_line": 1113,
+          "end_line": 1129
+        }
+      ]
+    },
+    {
+      "name": "workspaces_overview",
+      "title": "Workspace overview",
+      "access": {
+        "tier": "free",
+        "label_in_mcp_list": "Free",
+        "gated_on_free_plan": false
+      },
+      "source_locations": [
+        {
+          "file": "src/tools.ts",
+          "start_line": 1131,
+          "end_line": 1147
+        }
+      ]
+    },
+    {
+      "name": "workspaces_analytics",
+      "title": "Workspace analytics",
+      "access": {
+        "tier": "free",
+        "label_in_mcp_list": "Free",
+        "gated_on_free_plan": false
+      },
+      "source_locations": [
+        {
+          "file": "src/tools.ts",
+          "start_line": 1149,
+          "end_line": 1165
+        }
+      ]
+    },
+    {
+      "name": "workspaces_content",
+      "title": "Workspace content",
+      "access": {
+        "tier": "free",
+        "label_in_mcp_list": "Free",
+        "gated_on_free_plan": false
+      },
+      "source_locations": [
+        {
+          "file": "src/tools.ts",
+          "start_line": 1167,
+          "end_line": 1183
+        }
+      ]
+    },
+    {
+      "name": "memory_get_event",
+      "title": "Get memory event",
+      "access": {
+        "tier": "free",
+        "label_in_mcp_list": "Free",
+        "gated_on_free_plan": false
+      },
+      "source_locations": [
+        {
+          "file": "src/tools.ts",
+          "start_line": 1186,
+          "end_line": 1197
+        }
+      ]
+    },
+    {
+      "name": "memory_update_event",
+      "title": "Update memory event",
+      "access": {
+        "tier": "free",
+        "label_in_mcp_list": "Free",
+        "gated_on_free_plan": false
+      },
+      "source_locations": [
+        {
+          "file": "src/tools.ts",
+          "start_line": 1199,
+          "end_line": 1216
+        }
+      ]
+    },
+    {
+      "name": "memory_delete_event",
+      "title": "Delete memory event",
+      "access": {
+        "tier": "free",
+        "label_in_mcp_list": "Free",
+        "gated_on_free_plan": false
+      },
+      "source_locations": [
+        {
+          "file": "src/tools.ts",
+          "start_line": 1218,
+          "end_line": 1229
+        }
+      ]
+    },
+    {
+      "name": "memory_distill_event",
+      "title": "Distill memory event",
+      "access": {
+        "tier": "free",
+        "label_in_mcp_list": "Free",
+        "gated_on_free_plan": false
+      },
+      "source_locations": [
+        {
+          "file": "src/tools.ts",
+          "start_line": 1231,
+          "end_line": 1242
+        }
+      ]
+    },
+    {
+      "name": "memory_get_node",
+      "title": "Get knowledge node",
+      "access": {
+        "tier": "free",
+        "label_in_mcp_list": "Free",
+        "gated_on_free_plan": false
+      },
+      "source_locations": [
+        {
+          "file": "src/tools.ts",
+          "start_line": 1244,
+          "end_line": 1255
+        }
+      ]
+    },
+    {
+      "name": "memory_update_node",
+      "title": "Update knowledge node",
+      "access": {
+        "tier": "free",
+        "label_in_mcp_list": "Free",
+        "gated_on_free_plan": false
+      },
+      "source_locations": [
+        {
+          "file": "src/tools.ts",
+          "start_line": 1257,
+          "end_line": 1274
+        }
+      ]
+    },
+    {
+      "name": "memory_delete_node",
+      "title": "Delete knowledge node",
+      "access": {
+        "tier": "free",
+        "label_in_mcp_list": "Free",
+        "gated_on_free_plan": false
+      },
+      "source_locations": [
+        {
+          "file": "src/tools.ts",
+          "start_line": 1276,
+          "end_line": 1287
+        }
+      ]
+    },
+    {
+      "name": "memory_supersede_node",
+      "title": "Supersede knowledge node",
+      "access": {
+        "tier": "free",
+        "label_in_mcp_list": "Free",
+        "gated_on_free_plan": false
+      },
+      "source_locations": [
+        {
+          "file": "src/tools.ts",
+          "start_line": 1289,
+          "end_line": 1305
+        }
+      ]
+    },
+    {
+      "name": "memory_timeline",
+      "title": "Memory timeline",
+      "access": {
+        "tier": "free",
+        "label_in_mcp_list": "Free",
+        "gated_on_free_plan": false
+      },
+      "source_locations": [
+        {
+          "file": "src/tools.ts",
+          "start_line": 1307,
+          "end_line": 1323
+        }
+      ]
+    },
+    {
+      "name": "memory_summary",
+      "title": "Memory summary",
+      "access": {
+        "tier": "free",
+        "label_in_mcp_list": "Free",
+        "gated_on_free_plan": false
+      },
+      "source_locations": [
+        {
+          "file": "src/tools.ts",
+          "start_line": 1325,
+          "end_line": 1341
+        }
+      ]
+    },
+    {
+      "name": "graph_circular_dependencies",
+      "title": "Find circular dependencies",
+      "access": {
+        "tier": "free",
+        "label_in_mcp_list": "Free",
+        "gated_on_free_plan": false
+      },
+      "source_locations": [
+        {
+          "file": "src/tools.ts",
+          "start_line": 1344,
+          "end_line": 1360
+        }
+      ]
+    },
+    {
+      "name": "graph_unused_code",
+      "title": "Find unused code",
+      "access": {
+        "tier": "free",
+        "label_in_mcp_list": "Free",
+        "gated_on_free_plan": false
+      },
+      "source_locations": [
+        {
+          "file": "src/tools.ts",
+          "start_line": 1362,
+          "end_line": 1378
+        }
+      ]
+    },
+    {
+      "name": "graph_contradictions",
+      "title": "Find contradictions",
+      "access": {
+        "tier": "free",
+        "label_in_mcp_list": "Free",
+        "gated_on_free_plan": false
+      },
+      "source_locations": [
+        {
+          "file": "src/tools.ts",
+          "start_line": 1380,
+          "end_line": 1391
+        }
+      ]
+    },
+    {
+      "name": "search_suggestions",
+      "title": "Search suggestions",
+      "access": {
+        "tier": "free",
+        "label_in_mcp_list": "Free",
+        "gated_on_free_plan": false
+      },
+      "source_locations": [
+        {
+          "file": "src/tools.ts",
+          "start_line": 1394,
+          "end_line": 1409
+        }
+      ]
+    },
+    {
+      "name": "session_init",
+      "title": "Initialize conversation session",
+      "access": {
+        "tier": "free",
+        "label_in_mcp_list": "Free",
+        "gated_on_free_plan": false
+      },
+      "source_locations": [
+        {
+          "file": "src/tools.ts",
+          "start_line": 1415,
+          "end_line": 1533
+        }
+      ]
+    },
+    {
+      "name": "session_get_user_context",
+      "title": "Get user context and preferences",
+      "access": {
+        "tier": "free",
+        "label_in_mcp_list": "Free",
+        "gated_on_free_plan": false
+      },
+      "source_locations": [
+        {
+          "file": "src/tools.ts",
+          "start_line": 1535,
+          "end_line": 1549
+        }
+      ]
+    },
+    {
+      "name": "workspace_associate",
+      "title": "Associate folder with workspace",
+      "access": {
+        "tier": "free",
+        "label_in_mcp_list": "Free",
+        "gated_on_free_plan": false
+      },
+      "source_locations": [
+        {
+          "file": "src/tools.ts",
+          "start_line": 1551,
+          "end_line": 1614
+        }
+      ]
+    },
+    {
+      "name": "workspace_bootstrap",
+      "title": "Create workspace + project from folder",
+      "access": {
+        "tier": "free",
+        "label_in_mcp_list": "Free",
+        "gated_on_free_plan": false
+      },
+      "source_locations": [
+        {
+          "file": "src/tools.ts",
+          "start_line": 1616,
+          "end_line": 1763
+        }
+      ]
+    },
+    {
+      "name": "session_capture",
+      "title": "Capture context to memory",
+      "access": {
+        "tier": "free",
+        "label_in_mcp_list": "Free",
+        "gated_on_free_plan": false
+      },
+      "source_locations": [
+        {
+          "file": "src/tools.ts",
+          "start_line": 1765,
+          "end_line": 1819
+        }
+      ]
+    },
+    {
+      "name": "session_capture_lesson",
+      "title": "Capture a lesson learned",
+      "access": {
+        "tier": "free",
+        "label_in_mcp_list": "Free",
+        "gated_on_free_plan": false
+      },
+      "source_locations": [
+        {
+          "file": "src/tools.ts",
+          "start_line": 1825,
+          "end_line": 1939
+        }
+      ]
+    },
+    {
+      "name": "session_get_lessons",
+      "title": "Get lessons learned",
+      "access": {
+        "tier": "free",
+        "label_in_mcp_list": "Free",
+        "gated_on_free_plan": false
+      },
+      "source_locations": [
+        {
+          "file": "src/tools.ts",
+          "start_line": 1941,
+          "end_line": 2042
+        }
+      ]
+    },
+    {
+      "name": "session_smart_search",
+      "title": "Smart context search",
+      "access": {
+        "tier": "free",
+        "label_in_mcp_list": "Free",
+        "gated_on_free_plan": false
+      },
+      "source_locations": [
+        {
+          "file": "src/tools.ts",
+          "start_line": 2044,
+          "end_line": 2078
+        }
+      ]
+    },
+    {
+      "name": "session_remember",
+      "title": "Remember this",
+      "access": {
+        "tier": "free",
+        "label_in_mcp_list": "Free",
+        "gated_on_free_plan": false
+      },
+      "source_locations": [
+        {
+          "file": "src/tools.ts",
+          "start_line": 2080,
+          "end_line": 2123
+        }
+      ]
+    },
+    {
+      "name": "session_recall",
+      "title": "Recall from memory",
+      "access": {
+        "tier": "free",
+        "label_in_mcp_list": "Free",
+        "gated_on_free_plan": false
+      },
+      "source_locations": [
+        {
+          "file": "src/tools.ts",
+          "start_line": 2125,
+          "end_line": 2158
+        }
+      ]
+    },
+    {
+      "name": "generate_editor_rules",
+      "title": "Generate editor AI rules",
+      "access": {
+        "tier": "free",
+        "label_in_mcp_list": "Free",
+        "gated_on_free_plan": false
+      },
+      "source_locations": [
+        {
+          "file": "src/tools.ts",
+          "start_line": 2161,
+          "end_line": 2254
+        }
+      ]
+    },
+    {
+      "name": "session_summary",
+      "title": "Get compact context summary",
+      "access": {
+        "tier": "free",
+        "label_in_mcp_list": "Free",
+        "gated_on_free_plan": false
+      },
+      "source_locations": [
+        {
+          "file": "src/tools.ts",
+          "start_line": 2260,
+          "end_line": 2300
+        }
+      ]
+    },
+    {
+      "name": "session_compress",
+      "title": "Compress chat history to memory",
+      "access": {
+        "tier": "free",
+        "label_in_mcp_list": "Free",
+        "gated_on_free_plan": false
+      },
+      "source_locations": [
+        {
+          "file": "src/tools.ts",
+          "start_line": 2302,
+          "end_line": 2375
+        }
+      ]
+    },
+    {
+      "name": "ai_context_budget",
+      "title": "Get context within token budget",
+      "access": {
+        "tier": "pro",
+        "label_in_mcp_list": "PRO",
+        "gated_on_free_plan": true
+      },
+      "source_locations": [
+        {
+          "file": "src/tools.ts",
+          "start_line": 2377,
+          "end_line": 2434
+        }
+      ]
+    },
+    {
+      "name": "session_delta",
+      "title": "Get context changes since timestamp",
+      "access": {
+        "tier": "free",
+        "label_in_mcp_list": "Free",
+        "gated_on_free_plan": false
+      },
+      "source_locations": [
+        {
+          "file": "src/tools.ts",
+          "start_line": 2436,
+          "end_line": 2489
+        }
+      ]
+    },
+    {
+      "name": "context_smart",
+      "title": "Get smart context for user query",
+      "access": {
+        "tier": "free",
+        "label_in_mcp_list": "Free",
+        "gated_on_free_plan": false
+      },
+      "source_locations": [
+        {
+          "file": "src/tools.ts",
+          "start_line": 2491,
+          "end_line": 2558
+        }
+      ]
+    },
+    {
+      "name": "slack_stats",
+      "title": "Slack overview stats",
+      "access": {
+        "tier": "pro",
+        "label_in_mcp_list": "PRO",
+        "gated_on_free_plan": true
+      },
+      "source_locations": [
+        {
+          "file": "src/tools.ts",
+          "start_line": 2564,
+          "end_line": 2585
+        }
+      ]
+    },
+    {
+      "name": "slack_channels",
+      "title": "List Slack channels",
+      "access": {
+        "tier": "pro",
+        "label_in_mcp_list": "PRO",
+        "gated_on_free_plan": true
+      },
+      "source_locations": [
+        {
+          "file": "src/tools.ts",
+          "start_line": 2587,
+          "end_line": 2606
+        }
+      ]
+    },
+    {
+      "name": "slack_contributors",
+      "title": "Slack top contributors",
+      "access": {
+        "tier": "pro",
+        "label_in_mcp_list": "PRO",
+        "gated_on_free_plan": true
+      },
+      "source_locations": [
+        {
+          "file": "src/tools.ts",
+          "start_line": 2608,
+          "end_line": 2628
+        }
+      ]
+    },
+    {
+      "name": "slack_activity",
+      "title": "Slack activity feed",
+      "access": {
+        "tier": "pro",
+        "label_in_mcp_list": "PRO",
+        "gated_on_free_plan": true
+      },
+      "source_locations": [
+        {
+          "file": "src/tools.ts",
+          "start_line": 2630,
+          "end_line": 2658
+        }
+      ]
+    },
+    {
+      "name": "slack_discussions",
+      "title": "Slack key discussions",
+      "access": {
+        "tier": "pro",
+        "label_in_mcp_list": "PRO",
+        "gated_on_free_plan": true
+      },
+      "source_locations": [
+        {
+          "file": "src/tools.ts",
+          "start_line": 2660,
+          "end_line": 2681
+        }
+      ]
+    },
+    {
+      "name": "slack_search",
+      "title": "Search Slack messages",
+      "access": {
+        "tier": "pro",
+        "label_in_mcp_list": "PRO",
+        "gated_on_free_plan": true
+      },
+      "source_locations": [
+        {
+          "file": "src/tools.ts",
+          "start_line": 2683,
+          "end_line": 2705
+        }
+      ]
+    },
+    {
+      "name": "slack_sync_users",
+      "title": "Sync Slack users",
+      "access": {
+        "tier": "pro",
+        "label_in_mcp_list": "PRO",
+        "gated_on_free_plan": true
+      },
+      "source_locations": [
+        {
+          "file": "src/tools.ts",
+          "start_line": 2707,
+          "end_line": 2733
+        }
+      ]
+    },
+    {
+      "name": "github_stats",
+      "title": "GitHub overview stats",
+      "access": {
+        "tier": "pro",
+        "label_in_mcp_list": "PRO",
+        "gated_on_free_plan": true
+      },
+      "source_locations": [
+        {
+          "file": "src/tools.ts",
+          "start_line": 2739,
+          "end_line": 2759
+        }
+      ]
+    },
+    {
+      "name": "github_repos",
+      "title": "List GitHub repositories",
+      "access": {
+        "tier": "pro",
+        "label_in_mcp_list": "PRO",
+        "gated_on_free_plan": true
+      },
+      "source_locations": [
+        {
+          "file": "src/tools.ts",
+          "start_line": 2761,
+          "end_line": 2780
+        }
+      ]
+    },
+    {
+      "name": "github_contributors",
+      "title": "GitHub top contributors",
+      "access": {
+        "tier": "pro",
+        "label_in_mcp_list": "PRO",
+        "gated_on_free_plan": true
+      },
+      "source_locations": [
+        {
+          "file": "src/tools.ts",
+          "start_line": 2782,
+          "end_line": 2802
+        }
+      ]
+    },
+    {
+      "name": "github_activity",
+      "title": "GitHub activity feed",
+      "access": {
+        "tier": "pro",
+        "label_in_mcp_list": "PRO",
+        "gated_on_free_plan": true
+      },
+      "source_locations": [
+        {
+          "file": "src/tools.ts",
+          "start_line": 2804,
+          "end_line": 2834
+        }
+      ]
+    },
+    {
+      "name": "github_issues",
+      "title": "GitHub issues and PRs",
+      "access": {
+        "tier": "pro",
+        "label_in_mcp_list": "PRO",
+        "gated_on_free_plan": true
+      },
+      "source_locations": [
+        {
+          "file": "src/tools.ts",
+          "start_line": 2836,
+          "end_line": 2866
+        }
+      ]
+    },
+    {
+      "name": "github_search",
+      "title": "Search GitHub content",
+      "access": {
+        "tier": "pro",
+        "label_in_mcp_list": "PRO",
+        "gated_on_free_plan": true
+      },
+      "source_locations": [
+        {
+          "file": "src/tools.ts",
+          "start_line": 2868,
+          "end_line": 2890
+        }
+      ]
+    }
+  ],
+  "resources": [
+    {
+      "name": "contextstream-openapi",
+      "uri_template": "contextstream:openapi",
+      "title": "ContextStream OpenAPI spec",
+      "description": "Machine-readable OpenAPI from the configured API endpoint",
+      "source_locations": [
+        {
+          "file": "src/resources.ts",
+          "start_line": 8,
+          "end_line": 26
+        }
+      ]
+    },
+    {
+      "name": "contextstream-workspaces",
+      "uri_template": "contextstream:workspaces",
+      "title": "Workspaces",
+      "description": "List of accessible workspaces",
+      "source_locations": [
+        {
+          "file": "src/resources.ts",
+          "start_line": 27,
+          "end_line": 43
+        }
+      ]
+    },
+    {
+      "name": "contextstream-projects",
+      "uri_template": "contextstream:projects/{workspaceId}",
+      "title": "Projects for workspace",
+      "description": "Projects in the specified workspace",
+      "source_locations": [
+        {
+          "file": "src/resources.ts",
+          "start_line": 47,
+          "end_line": 62
+        }
+      ]
+    }
+  ],
+  "prompts": [
+    {
+      "name": "explore-codebase",
+      "description": "Get an overview of a project codebase structure and key components",
+      "access": {
+        "tier": "free",
+        "label_in_list": "Free",
+        "enabled_by_default": false
+      }
+    },
+    {
+      "name": "capture-decision",
+      "description": "Document an architectural or technical decision in workspace memory",
+      "access": {
+        "tier": "free",
+        "label_in_list": "Free",
+        "enabled_by_default": false
+      }
+    },
+    {
+      "name": "review-context",
+      "description": "Build context for reviewing code changes",
+      "access": {
+        "tier": "free",
+        "label_in_list": "Free",
+        "enabled_by_default": false
+      }
+    },
+    {
+      "name": "investigate-bug",
+      "description": "Build context for debugging an issue",
+      "access": {
+        "tier": "free",
+        "label_in_list": "Free",
+        "enabled_by_default": false
+      }
+    },
+    {
+      "name": "explore-knowledge",
+      "description": "Navigate and understand the knowledge graph for a workspace",
+      "access": {
+        "tier": "free",
+        "label_in_list": "Free",
+        "enabled_by_default": false
+      }
+    },
+    {
+      "name": "onboard-to-project",
+      "description": "Generate onboarding context for a new team member",
+      "access": {
+        "tier": "free",
+        "label_in_list": "Free",
+        "enabled_by_default": false
+      }
+    },
+    {
+      "name": "analyze-refactoring",
+      "description": "Analyze a codebase for refactoring opportunities",
+      "access": {
+        "tier": "free",
+        "label_in_list": "Free",
+        "enabled_by_default": false
+      }
+    },
+    {
+      "name": "build-context",
+      "description": "Build comprehensive context for an LLM task",
+      "access": {
+        "tier": "pro",
+        "label_in_list": "PRO",
+        "enabled_by_default": false
+      }
+    },
+    {
+      "name": "smart-search",
+      "description": "Search across memory, decisions, and code for a query",
+      "access": {
+        "tier": "free",
+        "label_in_list": "Free",
+        "enabled_by_default": false
+      }
+    },
+    {
+      "name": "recall-context",
+      "description": "Retrieve relevant past decisions and memory for a query",
+      "access": {
+        "tier": "free",
+        "label_in_list": "Free",
+        "enabled_by_default": false
+      }
+    },
+    {
+      "name": "session-summary",
+      "description": "Get a compact summary of workspace/project context",
+      "access": {
+        "tier": "free",
+        "label_in_list": "Free",
+        "enabled_by_default": false
+      }
+    },
+    {
+      "name": "capture-lesson",
+      "description": "Record a lesson learned from an error or correction",
+      "access": {
+        "tier": "free",
+        "label_in_list": "Free",
+        "enabled_by_default": false
+      }
+    },
+    {
+      "name": "capture-preference",
+      "description": "Save a user preference to memory",
+      "access": {
+        "tier": "free",
+        "label_in_list": "Free",
+        "enabled_by_default": false
+      }
+    },
+    {
+      "name": "capture-task",
+      "description": "Capture an action item into memory",
+      "access": {
+        "tier": "free",
+        "label_in_list": "Free",
+        "enabled_by_default": false
+      }
+    },
+    {
+      "name": "capture-bug",
+      "description": "Capture a bug report into workspace memory",
+      "access": {
+        "tier": "free",
+        "label_in_list": "Free",
+        "enabled_by_default": false
+      }
+    },
+    {
+      "name": "capture-feature",
+      "description": "Capture a feature request into workspace memory",
+      "access": {
+        "tier": "free",
+        "label_in_list": "Free",
+        "enabled_by_default": false
+      }
+    },
+    {
+      "name": "generate-plan",
+      "description": "Generate a development plan from a description",
+      "access": {
+        "tier": "pro",
+        "label_in_list": "PRO",
+        "enabled_by_default": false
+      }
+    },
+    {
+      "name": "generate-tasks",
+      "description": "Generate actionable tasks from a plan or description",
+      "access": {
+        "tier": "pro",
+        "label_in_list": "PRO",
+        "enabled_by_default": false
+      }
+    },
+    {
+      "name": "token-budget-context",
+      "description": "Get the most relevant context that fits within a token budget",
+      "access": {
+        "tier": "pro",
+        "label_in_list": "PRO",
+        "enabled_by_default": false
+      }
+    },
+    {
+      "name": "find-todos",
+      "description": "Scan the codebase for TODO/FIXME/HACK notes and summarize",
+      "access": {
+        "tier": "free",
+        "label_in_list": "Free",
+        "enabled_by_default": false
+      }
+    },
+    {
+      "name": "generate-editor-rules",
+      "description": "Generate ContextStream AI rule files for your editor",
+      "access": {
+        "tier": "free",
+        "label_in_list": "Free",
+        "enabled_by_default": false
+      }
+    },
+    {
+      "name": "index-local-repo",
+      "description": "Ingest local files into ContextStream for indexing/search",
+      "access": {
+        "tier": "free",
+        "label_in_list": "Free",
+        "enabled_by_default": false
+      }
+    }
+  ]
+}

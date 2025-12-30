@@ -1,0 +1,21 @@
+{
+  "nodes": [
+    {
+      "id": "host-macbook",
+      "role": "workstation",
+      "location": "local",
+      "servers": ["srv-contextstream-mcp"],
+      "notes": "Runs MCP server via npx stdio"
+    },
+    {
+      "id": "host-hetzner",
+      "role": "vm",
+      "location": "remote",
+      "servers": [],
+      "notes": "Future remote hosting target for MCP servers"
+    }
+  ],
+  "links": [
+    {"from": "host-macbook", "to": "host-hetzner", "type": "ssh", "notes": "for future deployments"}
+  ]
+}

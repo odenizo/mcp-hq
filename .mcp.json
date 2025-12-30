@@ -1,0 +1,25 @@
+{
+  "mcpServers": {
+    "filesystem": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-filesystem"],
+      "env": {}
+    },
+    "github": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-github"],
+      "env": {
+        "GITHUB_TOKEN": "REDACTED"
+      }
+    },
+    "contextstream": {
+      "command": "npx",
+      "args": ["-y", "@contextstream/mcp-server"],
+      "env": {
+        "CONTEXTSTREAM_API_KEY": "REPLACE_ME",
+        "CONTEXTSTREAM_TOOLSET": "full"
+      },
+      "notes": "Requires ContextStream API key; optional WORKSPACE/PROJECT IDs."
+    }
+  }
+}
