@@ -1,0 +1,179 @@
+# MCP Server Documentation Queue
+# Triage inbox for servers pending documentation
+# Organized by priority: P0 (immediate), P1 (high value), P2 (background)
+
+inbox:
+  # P0: Critical for Deniz's workflows - Week 1-2
+  - id: github-official
+    name: "GitHub MCP (Official)"
+    url: "https://github.com/modelcontextprotocol/servers/tree/main/src/github"
+    category: devtools
+    priority: P0
+    reason: "Daily use for issue/PR review and GitHub automation"
+    deniz_value: critical
+    status: inbox
+    created_date: "2026-01-03"
+    notes: "Official Anthropic server, fully documented in main repo"
+
+  - id: git-official
+    name: "Git MCP (Official)"
+    url: "https://github.com/modelcontextprotocol/servers/tree/main/src/git"
+    category: devtools
+    priority: P0
+    reason: "Foundation for code review, blame, history tracking"
+    deniz_value: critical
+    status: inbox
+    created_date: "2026-01-03"
+    notes: "Official Anthropic server, mature and stable"
+
+  - id: linear-mcp
+    name: "Linear MCP"
+    url: "https://github.com/linear/linear-mcp"
+    category: productivity
+    priority: P0
+    reason: "Task management - Deniz's daily workflow centerpiece"
+    deniz_value: critical
+    status: inbox
+    created_date: "2026-01-03"
+    maintenance: community
+    notes: "Community-maintained, active Linear official support"
+
+  # P1: High-value integrations - Week 2-3
+  - id: hetzner-cloud
+    name: "Hetzner Cloud MCP"
+    url: "https://github.com/[TBD]/hetzner-mcp"
+    category: infra
+    priority: P1
+    reason: "VM lifecycle management for Deniz's infrastructure"
+    deniz_value: high
+    status: inbox
+    created_date: "2026-01-03"
+    note_research: "RESEARCH REQUIRED: Verify if official MCP exists or needs development"
+    notes: "May need custom development or research alternative"
+
+  - id: dune-analytics
+    name: "Dune Analytics MCP"
+    url: "https://github.com/kukapay/dune-analytics-mcp"
+    category: data
+    priority: P1
+    reason: "Blockchain analytics for data projects"
+    deniz_value: medium
+    status: inbox
+    created_date: "2026-01-03"
+    maintenance: community
+    notes: "Community implementation of Dune API integration"
+
+  - id: slack
+    name: "Slack MCP"
+    url: "https://github.com/[search-needed]"
+    category: productivity
+    priority: P1
+    reason: "Team communication and notification workflow"
+    deniz_value: medium
+    status: inbox
+    created_date: "2026-01-03"
+    note_research: "Search awesome-mcp-servers for official or community Slack server"
+    notes: "Verify actively maintained"
+
+  - id: notion
+    name: "Notion MCP"
+    url: "https://github.com/[search-needed]"
+    category: productivity
+    priority: P1
+    reason: "Knowledge base and documentation management"
+    deniz_value: high
+    status: inbox
+    created_date: "2026-01-03"
+    note_research: "Search community servers for Notion integration"
+    notes: "May be multiple implementations"
+
+  - id: figma
+    name: "Figma MCP"
+    url: "https://github.com/[search-needed]"
+    category: productivity
+    priority: P1
+    reason: "Design system integration for documentation"
+    deniz_value: low
+    status: inbox
+    created_date: "2026-01-03"
+    note_research: "Search for community Figma MCP implementations"
+    notes: "Lower priority, design-focused"
+
+  - id: datadog
+    name: "Datadog MCP"
+    url: "https://github.com/[search-needed]"
+    category: observability
+    priority: P1
+    reason: "Monitoring and observability for infrastructure"
+    deniz_value: medium
+    status: inbox
+    created_date: "2026-01-03"
+    note_research: "Datadog cloud MCP integration"
+    notes: "Check official Datadog documentation"
+
+  - id: kubernetes
+    name: "Kubernetes MCP"
+    url: "https://github.com/[search-needed]"
+    category: infra
+    priority: P1
+    reason: "Container orchestration management"
+    deniz_value: medium
+    status: inbox
+    created_date: "2026-01-03"
+    note_research: "Google Cloud provides K8s MCP toolbox"
+    notes: "Official Google Cloud support for MCP"
+
+  # P2: Additional coverage - Backlog
+  - id: docker
+    name: "Docker MCP"
+    url: "https://www.docker.com/blog/introducing-docker-mcp-catalog-and-toolkit/"
+    category: infra
+    priority: P2
+    reason: "Container management and registry access"
+    deniz_value: low
+    status: inbox
+    created_date: "2026-01-03"
+    note_research: "Verify Docker MCP implementation status"
+    notes: "Docker announced MCP support - verify implementation"
+
+  - id: terraform
+    name: "Terraform MCP"
+    url: "https://github.com/[search-needed]"
+    category: infra
+    priority: P2
+    reason: "Infrastructure-as-code management"
+    deniz_value: low
+    status: inbox
+    created_date: "2026-01-03"
+    note_research: "Search for community Terraform MCP implementations"
+    notes: "IaC integration"
+
+  # Additional candidates for future expansion
+  - id: openrouter
+    name: "OpenRouter MCP"
+    url: "https://openrouter.ai"
+    category: devtools
+    priority: P2
+    reason: "Deniz has OpenRouter API key subscription"
+    deniz_value: medium
+    status: inbox
+    created_date: "2026-01-03"
+    notes: "Deniz-specific: Already using OpenRouter, MCP integration would be valuable"
+
+  - id: obsidian
+    name: "Obsidian MCP"
+    url: "https://github.com/[search-needed]"
+    category: productivity
+    priority: P2
+    reason: "Deniz uses Obsidian for knowledge management"
+    deniz_value: high
+    status: inbox
+    created_date: "2026-01-03"
+    notes: "Deniz-specific: PKM system integration"
+
+queue_stats:
+  total_inbox: 15
+  p0_count: 3
+  p1_count: 8
+  p2_count: 4
+  status_summary: "Ready for Phase 1 execution (P0: Week 1, P1: Weeks 2-3)"
