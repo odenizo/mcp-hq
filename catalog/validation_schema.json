@@ -1,0 +1,252 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "MCP Servers Catalog Schema",
+  "description": "JSON Schema for validating the MCP servers catalog structure",
+  "type": "object",
+  "required": ["version", "last_updated", "metadata", "servers"],
+  "properties": {
+    "version": {
+      "type": "string",
+      "description": "Catalog version (e.g., '1.0')",
+      "pattern": "^[0-9]+\\.[0-9]+$"
+    },
+    "last_updated": {
+      "type": "string",
+      "description": "ISO 8601 date when catalog was last updated",
+      "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+    },
+    "metadata": {
+      "type": "object",
+      "required": ["total_servers", "total_tools", "coverage_by_category"],
+      "properties": {
+        "total_servers": {
+          "type": "integer",
+          "description": "Total number of documented servers",
+          "minimum": 0
+        },
+        "total_tools": {
+          "type": "integer",
+          "description": "Total number of tools across all servers",
+          "minimum": 0
+        },
+        "coverage_by_category": {
+          "type": "object",
+          "description": "Coverage metrics per category",
+          "additionalProperties": {
+            "type": "string",
+            "pattern": "^[0-9]+/[0-9]+$"
+          }
+        },
+        "last_expanded": {
+          "type": "string",
+          "description": "ISO 8601 date of last expansion cycle"
+        },
+        "next_expansion_planned": {
+          "type": "string",
+          "description": "ISO 8601 date of next planned expansion"
+        }
+      }
+    },
+    "servers": {
+      "type": "array",
+      "description": "Array of documented MCP servers",
+      "items": {
+        "type": "object",
+        "required": ["id", "name", "category", "description", "repo_url", "maturity", "auth_model", "tools"],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Stable slug identifier",
+            "pattern": "^[a-z0-9-]+$"
+          },
+          "name": {
+            "type": "string",
+            "description": "Display name of the server"
+          },
+          "category": {
+            "type": "string",
+            "enum": ["devtools", "data", "infra", "productivity", "security", "observability", "crm", "workflow"],
+            "description": "Primary category"
+          },
+          "subcategories": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Optional secondary categories"
+          },
+          "description": {
+            "type": "string",
+            "description": "What this server does",
+            "minLength": 10
+          },
+          "repo_url": {
+            "type": "string",
+            "format": "uri",
+            "description": "GitHub or official repository URL"
+          },
+          "homepage": {
+            "type": "string",
+            "format": "uri",
+            "description": "Official homepage URL"
+          },
+          "maturity": {
+            "type": "string",
+            "enum": ["experimental", "stable", "production"],
+            "description": "Server maturity level"
+          },
+          "created_date": {
+            "type": "string",
+            "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$",
+            "description": "ISO 8601 date when server was added to catalog"
+          },
+          "auth_model": {
+            "type": "string",
+            "enum": ["none", "api_key", "oauth", "cloud_account", "local_only"],
+            "description": "Authentication model required"
+          },
+          "requires_credentials": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "description": "Credential type"
+                },
+                "env_var": {
+                  "type": "string",
+                  "description": "Environment variable name"
+                }
+              }
+            }
+          },
+          "tools": {
+            "type": "array",
+            "description": "Array of tools exposed by this server",
+            "minItems": 1,
+            "items": {
+              "type": "object",
+              "required": ["id", "name", "summary", "input_schema", "output_semantics"],
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "description": "Tool identifier",
+                  "pattern": "^[a-z0-9_]+$"
+                },
+                "name": {
+                  "type": "string",
+                  "description": "Display name"
+                },
+                "category": {
+                  "type": "string",
+                  "description": "Tool category (e.g., 'inspection', 'mutation', 'query')"
+                },
+                "summary": {
+                  "type": "string",
+                  "description": "1-2 sentence description of what the tool does",
+                  "minLength": 20
+                },
+                "input_schema": {
+                  "type": "object",
+                  "description": "JSON Schema describing input parameters"
+                },
+                "output_semantics": {
+                  "type": "string",
+                  "description": "Description of output structure and semantics"
+                },
+                "risks": {
+                  "type": "string",
+                  "enum": ["read_only", "mutating", "high_impact", "destructive"],
+                  "description": "Risk classification for the tool"
+                },
+                "rate_limit": {
+                  "type": "string",
+                  "description": "Rate limit description (e.g., '100 calls/minute')"
+                },
+                "best_practices_for_llms": {
+                  "type": "object",
+                  "properties": {
+                    "patterns": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    },
+                    "warnings": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                },
+                "example_usage": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  },
+                  "description": "Example prompts or usage patterns"
+                }
+              }
+            }
+          },
+          "deniz_recommended": {
+            "type": "boolean",
+            "description": "Whether this server is recommended for Deniz's workflows"
+          },
+          "deniz_use_cases": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Deniz-specific use cases and workflows"
+          },
+          "deniz_setup": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Setup instructions specific to Deniz's environment"
+          },
+          "tool_coverage": {
+            "type": "string",
+            "pattern": "^[0-9]+/[0-9]+$",
+            "description": "Documented tools vs total tools (e.g., '12/12')"
+          },
+          "doc_link": {
+            "type": "string",
+            "description": "Path to markdown documentation file"
+          },
+          "doc_status": {
+            "type": "string",
+            "enum": ["draft", "incomplete", "complete", "archived"],
+            "description": "Documentation completion status"
+          },
+          "tags": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Tags for filtering and categorization"
+          },
+          "maintainer": {
+            "type": "string",
+            "description": "Who maintains this server (e.g., 'Anthropic', 'Community')"
+          },
+          "pairs_well_with": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Server IDs that work well in combination"
+          },
+          "notes": {
+            "type": "string",
+            "description": "Additional notes or caveats"
+          }
+        }
+      }
+    }
+  }
+}
