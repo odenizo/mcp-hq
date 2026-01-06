@@ -1,0 +1,26 @@
+QUICK PROMPT FOR PERPLEXITY:
+
+Research the MCP (Model Context Protocol) server ecosystem and commit results directly to GitHub repo: odenizo/mcp-hq (branch: main)
+
+TASKS:
+1. Validate 15 servers in /catalog/inbox.yaml - find missing GitHub URLs marked [TBD] or [search-needed]
+2. For each server document: GitHub URL, transport types (stdio/HTTP/SSE), auth model, maturity, stars, last commit
+3. Discover 20+ additional production-ready MCP servers across categories: DevTools, Data, Infrastructure, Productivity, Security
+4. Focus on HTTP/SSE transport support (critical for cloud deployment)
+5. Check official sources: https://github.com/modelcontextprotocol/servers, GitHub topic: mcp-server
+
+CREATE 3 FILES using GitHub tools:
+- /catalog/research/mcp_ecosystem_analysis.md (comprehensive report)
+- /catalog/inbox_validated.yaml (validated inbox with metadata)
+- /catalog/research/http_servers_registry.yaml (HTTP/SSE servers only)
+
+COMMIT with message:
+"Research: Complete MCP server ecosystem analysis
+- Validated all 15 inbox servers with verified URLs
+- Discovered [N] additional production-ready servers
+- Identified HTTP/SSE-capable servers for cloud deployment
+Research by Perplexity AI on [DATE]"
+
+QUALITY: ✅ All inbox URLs verified ✅ 30+ servers total ✅ Transport types confirmed ✅ Sources cited ✅ Files committed to repo
+
+See full instructions: /PERPLEXITY_RESEARCH_PROMPT.md in the repo
